@@ -9,8 +9,8 @@ Gabriel A. Archilla Cintron - gabriel.archilla1@upr.edu<br>
 
 ## Database Credentials
 
-Host: 
-Database:  
-User:  
-Port:  
-Password: 
+Host:
+Database:
+User:
+Port:
+Password:
