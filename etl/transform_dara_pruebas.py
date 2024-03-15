@@ -61,8 +61,9 @@ def insert_into_database(csv_file, db_config):
 
         if not table_exists:
             # Si la tabla no existe, crea una tabla temporal con las mismas columnas del CSV
+            print(" \n")
             print(f"La tabla '{table_name}' no existe. Creando una nueva tabla...")
-            columns_def = ", ".join([f'"{col}" VARCHAR(50)' for col in header_row])
+            columns_def = ", ".join([f'"{col}" VARCHAR(50) NOT NULL' for col in header_row])
             create_table_query = f"CREATE TABLE {table_name} ({columns_def})"
             print("Query de creación de tabla:", create_table_query)
             cursor.execute(create_table_query)
@@ -86,13 +87,20 @@ def insert_into_database(csv_file, db_config):
 
         insert_query = f"""
             INSERT INTO "{table_name}" ({insert_columns}) VALUES ({placeholders})
-            ON CONFLICT DO NOTHING
-        """
+            ON CONFLICT DO NOTHING  """
 
         print("Query de inserción:", insert_query)
 
+        # Verificar si ya se notifico
+        valores_nulos = False
         # Leer los datos del archivo CSV y ejecutar la consulta INSERT
         for row in reader:
+            # Verificar si algun valor es nulo o vacio
+            if any(cell is None or cell.strip() == '' for cell in row):
+                if not valores_nulos:
+                    print("Se encontraron valores nulos y/o vacios en la fila. No seran insertados.")
+                    valores_nulos = True
+                continue
             cursor.execute(insert_query, row)
 
     conn.commit()
@@ -112,12 +120,12 @@ def main():
     csv_output_files = [os.path.splitext(f)[0].replace('\n', '') + '_output.csv' for f in
                         input_files]  # Generar nombres de archivo CSV de salida
 
-    db_config = {
+    db_config = { # Configuración de la conexión a la base de datos PostgreSQL
         'host': 'localhost',
         'database': 'test3',
         'user': 'user1',
         'password': 'user1'
-    }  # Configuración de la conexión a la base de datos PostgreSQL
+    }
 
     for input_file, csv_output_file in zip(input_files, csv_output_files):
         # Transformar el archivo de entrada a CSV
