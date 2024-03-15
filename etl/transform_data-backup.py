@@ -4,6 +4,7 @@ import pandas as pd
 import psycopg2
 import glob
 import os
+import openpyxl
 
 
 def transform_to_csv(input_file, output_file):
@@ -16,8 +17,16 @@ def transform_to_csv(input_file, output_file):
             for row in data:
                 writer.writerow(row.values())
     elif input_file.endswith('.xlsx'):
-        df = pd.read_excel(input_file)
-        df.to_csv(output_file, index=False)
+        data = openpyxl.load_workbook(input_file)
+        sheet = data.active
+        col = csv.writer(open(input_file[:-5] + "_output.csv", 'w', newline=""))
+
+        for r in sheet.rows:
+            if r[0].value is not None:
+                col.writerow([cell.value for cell in r])
+            else:
+                continue
+
     elif input_file.endswith('.csv'):
         # Si ya es un archivo CSV, simplemente lo copiamos
         #    file_out.write(file_in.read())
@@ -52,23 +61,30 @@ def insert_into_database(csv_file, db_config):
 
         # Cambiar el tipo de dato de la primera columna a SERIAL
         columns_def = ", ".join(
+
             [
+
                 f"{column_names[0]} SERIAL PRIMARY KEY"
                 if i == 0
                 else f"{column_names[i]} VARCHAR(50)"
                 for i in range(n_columns)
+
             ]
         )
 
+
+
+
         create_table_query = """
-                CREATE TABLE IF NOT EXISTS {} ({})
+                CREATE TABLE IF NOT EXISTS "{}" ({})
           """.format(table_name, columns_def)
         cursor.execute(create_table_query)
 
         placeholders = ", ".join(["%s"] * n_columns)
         insert_query = """
-           INSERT INTO {} ({}) VALUES ({})
-          """.format(table_name, ", ".join(column_names), placeholders)
+          INSERT INTO "{}" ({}) VALUES ({})
+          ON CONFLICT DO NOTHING
+        """.format(table_name, ", ".join(column_names), placeholders)
 
         for row in reader:
             cursor.execute(insert_query, row)
@@ -92,7 +108,7 @@ def main():
 
     db_config = {
         'host': 'localhost',
-        'database': 'test2',
+        'database': 'test3',
         'user': 'user1',
         'password': 'user1'
     }  # Configuración de la conexión a la base de datos PostgreSQL

@@ -1,0 +1,63 @@
+detailid,name,type,capacity,handicap
+1,Standard,Basic,1,0
+2,Standard Queen,Basic,2,0
+3,Presidential,Suite,8,1
+4,Double Queen,Basic,4,0
+5,Standard King,Premium,2,0
+6,Double Queen,Deluxe,4,1
+7,Double King,Deluxe,4,0
+8,Presidential,Suite,6,0
+9,Triple King,Suite,6,0
+10,Standard Queen,Basic,1,0
+11,Standard King,Basic,2,1
+12,Executive Family,Suite,6,0
+13,Standard Queen,Premium,2,0
+14,Presidential,Suite,4,0
+15,Standard Queen,Premium,2,1
+16,Executive Family,Suite,4,0
+17,Presidential,Suite,8,0
+18,Double King,Premium,4,0
+19,Standard Queen,Deluxe,2,0
+20,Standard,Basic,1,1
+21,Double King,Suite,4,0
+22,Standard,Premium,1,0
+23,Standard King,Basic,2,0
+24,Presidential,Suite,6,1
+25,Double Queen,Premium,4,0
+26,Triple King,Deluxe,6,0
+27,Executive Family,Deluxe,8,0
+28,Executive Family,Deluxe,4,0
+29,Triple King,Deluxe,6,1
+30,Executive Family,Deluxe,6,0
+31,Executive Family,Suite,8,0
+32,Standard Queen,Premium,1,0
+33,Standard King,Premium,2,1
+34,Double King,Basic,4,0
+35,Executive Family,Deluxe,8,1
+36,Executive Family,Deluxe,6,1
+37,Double Queen,Deluxe,4,0
+38,Double King,Suite,6,1
+39,Double King,Premium,6,0
+40,Double King,Premium,4,1
+41,Standard King,Deluxe,2,0
+42,Double Queen,Basic,4,1
+43,Double King,Deluxe,4,1
+44,Double King,Deluxe,6,1
+45,Presidential,Suite,4,1
+46,Double Queen,Premium,4,1
+47,Double King,Suite,4,1
+48,Standard,Premium,1,1
+49,Executive Family,Deluxe,4,1
+50,Standard Queen,Deluxe,2,1
+51,Double King,Basic,4,1
+52,Standard Queen,Premium,1,1
+53,Double King,Premium,6,1
+54,Executive Family,Suite,6,1
+55,Executive Family,Suite,4,1
+56,Executive Family,Suite,8,1
+57,Standard King,Deluxe,2,1
+58,Standard Queen,Basic,2,1
+59,Standard Queen,Basic,1,1
+60,Standard Queen,Deluxe,1,0
+61,Standard Queen,Deluxe,1,1
+62,Triple King,Suite,6,1

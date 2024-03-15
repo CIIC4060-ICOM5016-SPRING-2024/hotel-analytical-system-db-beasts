@@ -1,0 +1,436 @@
+[
+    {
+        "detailid": 1,
+        "name": "Standard",
+        "type": "Basic",
+        "capacity": 1,
+        "handicap": 0
+    },
+    {
+        "detailid": 2,
+        "name": "Standard Queen",
+        "type": "Basic",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 3,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 8,
+        "handicap": 1
+    },
+    {
+        "detailid": 4,
+        "name": "Double Queen",
+        "type": "Basic",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 5,
+        "name": "Standard King",
+        "type": "Premium",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 6,
+        "name": "Double Queen",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 7,
+        "name": "Double King",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 8,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 9,
+        "name": "Triple King",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 10,
+        "name": "Standard Queen",
+        "type": "Basic",
+        "capacity": 1,
+        "handicap": 0
+    },
+    {
+        "detailid": 11,
+        "name": "Standard King",
+        "type": "Basic",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 12,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 13,
+        "name": "Standard Queen",
+        "type": "Premium",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 14,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 15,
+        "name": "Standard Queen",
+        "type": "Premium",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 16,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 17,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 8,
+        "handicap": 0
+    },
+    {
+        "detailid": 18,
+        "name": "Double King",
+        "type": "Premium",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 19,
+        "name": "Standard Queen",
+        "type": "Deluxe",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 20,
+        "name": "Standard",
+        "type": "Basic",
+        "capacity": 1,
+        "handicap": 1
+    },
+    {
+        "detailid": 21,
+        "name": "Double King",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 22,
+        "name": "Standard",
+        "type": "Premium",
+        "capacity": 1,
+        "handicap": 0
+    },
+    {
+        "detailid": 23,
+        "name": "Standard King",
+        "type": "Basic",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 24,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 25,
+        "name": "Double Queen",
+        "type": "Premium",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 26,
+        "name": "Triple King",
+        "type": "Deluxe",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 27,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 8,
+        "handicap": 0
+    },
+    {
+        "detailid": 28,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 29,
+        "name": "Triple King",
+        "type": "Deluxe",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 30,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 31,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 8,
+        "handicap": 0
+    },
+    {
+        "detailid": 32,
+        "name": "Standard Queen",
+        "type": "Premium",
+        "capacity": 1,
+        "handicap": 0
+    },
+    {
+        "detailid": 33,
+        "name": "Standard King",
+        "type": "Premium",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 34,
+        "name": "Double King",
+        "type": "Basic",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 35,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 8,
+        "handicap": 1
+    },
+    {
+        "detailid": 36,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 37,
+        "name": "Double Queen",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 0
+    },
+    {
+        "detailid": 38,
+        "name": "Double King",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 39,
+        "name": "Double King",
+        "type": "Premium",
+        "capacity": 6,
+        "handicap": 0
+    },
+    {
+        "detailid": 40,
+        "name": "Double King",
+        "type": "Premium",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 41,
+        "name": "Standard King",
+        "type": "Deluxe",
+        "capacity": 2,
+        "handicap": 0
+    },
+    {
+        "detailid": 42,
+        "name": "Double Queen",
+        "type": "Basic",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 43,
+        "name": "Double King",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 44,
+        "name": "Double King",
+        "type": "Deluxe",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 45,
+        "name": "Presidential",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 46,
+        "name": "Double Queen",
+        "type": "Premium",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 47,
+        "name": "Double King",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 48,
+        "name": "Standard",
+        "type": "Premium",
+        "capacity": 1,
+        "handicap": 1
+    },
+    {
+        "detailid": 49,
+        "name": "Executive Family",
+        "type": "Deluxe",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 50,
+        "name": "Standard Queen",
+        "type": "Deluxe",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 51,
+        "name": "Double King",
+        "type": "Basic",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 52,
+        "name": "Standard Queen",
+        "type": "Premium",
+        "capacity": 1,
+        "handicap": 1
+    },
+    {
+        "detailid": 53,
+        "name": "Double King",
+        "type": "Premium",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 54,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 1
+    },
+    {
+        "detailid": 55,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 4,
+        "handicap": 1
+    },
+    {
+        "detailid": 56,
+        "name": "Executive Family",
+        "type": "Suite",
+        "capacity": 8,
+        "handicap": 1
+    },
+    {
+        "detailid": 57,
+        "name": "Standard King",
+        "type": "Deluxe",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 58,
+        "name": "Standard Queen",
+        "type": "Basic",
+        "capacity": 2,
+        "handicap": 1
+    },
+    {
+        "detailid": 59,
+        "name": "Standard Queen",
+        "type": "Basic",
+        "capacity": 1,
+        "handicap": 1
+    },
+    {
+        "detailid": 60,
+        "name": "Standard Queen",
+        "type": "Deluxe",
+        "capacity": 1,
+        "handicap": 0
+    },
+    {
+        "detailid": 61,
+        "name": "Standard Queen",
+        "type": "Deluxe",
+        "capacity": 1,
+        "handicap": 1
+    },
+    {
+        "detailid": 62,
+        "name": "Triple King",
+        "type": "Suite",
+        "capacity": 6,
+        "handicap": 1
+    }
+]
