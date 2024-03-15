@@ -1,6 +1,6 @@
 import csv
 import json
-# import pandas as pd
+import pandas as pd
 import psycopg2
 import glob
 import os
@@ -71,6 +71,9 @@ def insert_into_database(csv_file, db_config):
 
             ]
         )
+
+
+
 
         create_table_query = """
                 CREATE TABLE IF NOT EXISTS "{}" ({})
