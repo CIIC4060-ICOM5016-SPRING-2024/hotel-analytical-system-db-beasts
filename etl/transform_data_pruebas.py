@@ -20,7 +20,7 @@ def transform_to_csv(input_file, output_file):
     elif input_file.endswith('.xlsx'):
         data = openpyxl.load_workbook(input_file)
         sheet = data.active
-        col = csv.writer(open(input_file[:-5] + "_output.csv", 'w', newline=""))
+        col = csv.writer(open(output_file, 'a+', newline=""))
 
         for r in sheet.rows:
             if r[0].value is not None:
@@ -64,6 +64,9 @@ def transform_sqlite_to_csv(input_file, output_file):
 
 
 def main():
+    global dependent_files
+    for file in glob.glob("*_output.csv"):
+        os.remove(file)
     current_dir = os.getcwd()
 
     file_patterns = ["*.csv", "*.json", "*.xlsx", "*.db"]
@@ -78,16 +81,46 @@ def main():
         'user': 'user1',
         'password': 'user1'
     }
-
+    dependent_files = []
     for input_file in input_files:
-        csv_output_file = os.path.splitext(input_file)[0] + '_output.csv'
-        # Transformar el archivo de entrada a CSV
+
+        # Chequear si el archivo ya existe, de ser el caso es reemplazado
+        dot_index = input_file.find('.')
+        csv_output_file = input_file[:dot_index] + "_output.csv"
+        if os.path.exists(csv_output_file):
+            os.remove(csv_output_file)
         print("Transformando archivo:", input_file)
         print("Generando archivo CSV de salida:", csv_output_file)
         transform_to_csv(input_file, csv_output_file)
 
         # Insertar datos en la base de datos desde el archivo CSV
-        insert_into_database(csv_output_file, db_config)
+
+        dependent_files.append(insert_into_database(csv_output_file, db_config))
+    temp = dependent_files
+    for dependent_file in temp:
+        if dependent_file is not None:
+            try:
+                print(dependent_file)
+                errors = insert_into_database(dependent_file, db_config)
+            except:
+                print("Couldnt add dependent files, add manually :(")
+
+
+def updatecsv_header(csv_file, newheader):
+    global lines
+    with open(csv_file, 'r+') as file:
+        lines = file.readlines()
+        header = ''
+        for elm in newheader:
+            header += elm + ', '
+        header = header[:-2] + '\n'
+        lines[0] = header
+
+    with open(csv_file, 'w') as file:
+        for line in lines:
+            file.write(line)
+
+    return newheader
 
 
 def insert_into_database(csv_file, db_config):
@@ -121,31 +154,45 @@ def insert_into_database(csv_file, db_config):
             table_columns = [desc[0] for desc in cursor.description]
 
             # Verificar si los nombres de columna de la tabla coinciden con los del CSV
-            if table_columns != header_row:
-                print("Los nombres de las columnas en el archivo CSV no coinciden con los de la tabla existente.")
-                return
 
+            if table_columns != header_row:
+                header_row = updatecsv_header(csv_file, table_columns)
+                print(
+                    "Los nombres de las columnas en el archivo CSV no coinciden con los de la tabla existente, utilizando atributos en base de datos.")
+
+    with open(csv_file, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        header_row = next(reader)  # Obtener la fila de encabezado
+        header_row = [col.strip() for col in header_row]
         # Construir la parte de la consulta INSERT
         insert_columns = ', '.join(['"' + col + '"' for col in header_row])  # Usar nombres de columna del CSV
         placeholders = ', '.join(['%s'] * n_columns)
-
+        print(f"table_name is {table_name}")
         insert_query = f"""
             INSERT INTO "{table_name}" ({insert_columns}) VALUES ({placeholders})
             ON CONFLICT DO NOTHING  """
 
         print("Query de inserción:", insert_query)
-
         # Verificar si ya se notifico
         valores_nulos = False
         # Leer los datos del archivo CSV y ejecutar la consulta INSERT
         for row in reader:
+
             # Verificar si algun valor es nulo o vacio
             if any(cell is None or cell.strip() == '' for cell in row):
                 if not valores_nulos:
                     print("Se encontraron valores nulos y/o vacios en la fila. No seran insertados.")
                     valores_nulos = True
                 continue
-            cursor.execute(insert_query, row)
+
+            print("Query de inserción:", insert_query)  # Print the generated query
+            print("Datos a insertar:", row)  # Print the row
+
+            try:
+                cursor.execute(insert_query, row)
+            except:
+                print(f"Error en insertar datos, reintendando al final")
+                return csv_file
 
     conn.commit()
     conn.close()
