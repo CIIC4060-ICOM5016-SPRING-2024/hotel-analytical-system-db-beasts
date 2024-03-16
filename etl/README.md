@@ -1,4 +1,9 @@
-ETL (Extract, Transform, Load) Tool
+# ETL (Extract, Transform, Load) Tool
+
+> [!TIP]
+> The etl branch has all the different versions of the transform_data.<br >
+> In the one located in the main there is only the one that creates the tables in an empty database.<br >
+> The transform_data_pruebas is the last one carried out so that it will work with empty databases and also with pre-existing tables.<br >
 
 ## Table of Contents
 
@@ -44,4 +49,4 @@ These tests were created in a local container.
 >In transform_data_tests.py, when the tables have not been created, one of the 9 tables remains empty.<br >
 
 > [!CAUTION]
->In transform_data_tests.py, if the tables were prefab and filled with the already named attributes along with their domains, then two remained empty while seven were filled correctly.
+>In transform_data_pruebas.py, if the tables were prefab and filled with the already named attributes along with their domains, then two remained empty while seven were filled correctly.
