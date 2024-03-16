@@ -9,8 +9,8 @@ Gabriel A. Archilla Cintrón - gabriel.archilla1@upr.edu<br>
 
 ## Database Credentials
 
-Host: ec2-52-54-200-216.compute-1.amazonaws.com<br>  
-Database: d8dq6dov2ts8eu<br>  
-User: hgqkxhyqpkfgij<br>  
+Host: ec2-54-152-144-84.compute-1.amazonaws.com<br>  
+Database: d1brf8nquq7utk<br>  
+User: zvtlouizcmwqdp<br>  
 Port: 5432<br>  
-Password: ebed45466f2e22ef46a0ba22e71f302fb0c055491f1eb187e7a55fd051ac9bbb<br>  
+Password: 3a28954acdb4eac8b9870ea92ca4407d4d2d919bea1cd5deeb6f6e4af0e5b3b0<br>  
