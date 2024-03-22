@@ -6,8 +6,12 @@ app = Flask(__name__)
 # apply CORS
 CORS(app)
 
+"""
+-----------------------------------------------------------------------------------------------------------------------
+"""
 
-@app.route('/')
+
+@app.route('/', methods=['GET'])
 def greeting():
     return 'Hello, this is the hotel-analytical-system-db-beasts app'
 
@@ -19,8 +23,9 @@ GLOBAL STATISTICS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/revenue',
-           methods=['POST'])  # Top 3 chains with the highest total revenue.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/most/revenue',  # Top 3 chains with the highest total revenue.
+           methods=['POST'])
 def most_revenue():
     if request.method == 'POST':
         pass
@@ -28,7 +33,8 @@ def most_revenue():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/paymentmethod',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/paymentmethod',  # Total reservation percentage by payment method.
            methods=['POST'])
 def paymentmethod():
     if request.method == 'POST':
@@ -37,7 +43,8 @@ def paymentmethod():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/least/rooms',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/least/rooms',  # Top 3 chain with the least rooms.
            methods=['POST'])
 def least_rooms():
     if request.method == 'POST':
@@ -46,7 +53,8 @@ def least_rooms():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/capacity',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/most/capacity',  # Top 5 hotels with the most capacity.
            methods=['POST'])
 def most_capacity():
     if request.method == 'POST':
@@ -55,7 +63,8 @@ def most_capacity():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/reservation',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/most/reservation',  # Top 10% hotels that had the most reservations.
            methods=['POST'])
 def most_reservation():
     if request.method == 'POST':
@@ -64,7 +73,8 @@ def most_reservation():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/profitmonth',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/most/profitmonth',  # Top 3 month with the most reservation by chain.
            methods=['POST'])
 def most_profitmonth():
     if request.method == 'POST':
@@ -475,6 +485,10 @@ def clientid(client_id):
     else:
         return jsonify("Not supported"), 405
 
+
+"""
+-----------------------------------------------------------------------------------------------------------------------
+"""
 
 if __name__ == '__main__':
     app.run(debug=True)
