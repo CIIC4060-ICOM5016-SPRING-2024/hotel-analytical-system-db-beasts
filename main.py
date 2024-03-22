@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -26,6 +26,8 @@ def chains():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/chains/<int:chains_id>',
@@ -37,6 +39,8 @@ def chainsid(chains_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -53,6 +57,8 @@ def hotel():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>',
@@ -64,6 +70,8 @@ def hotelid(hotel_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -80,6 +88,8 @@ def employee():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/employee/<int:employee_id>',
@@ -91,6 +101,8 @@ def employeeid(employee_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -107,6 +119,8 @@ def login():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/login/<int:login_id>',
@@ -118,6 +132,8 @@ def loginid(login_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -134,6 +150,8 @@ def room():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/room/<int:room_id>',
@@ -145,6 +163,8 @@ def roomid(room_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -161,6 +181,8 @@ def roomdescription():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomdescription/<int:roomdescription_id>',
@@ -172,6 +194,8 @@ def roomdescriptionid(roomdescription_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -188,6 +212,8 @@ def roomunavailable():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomunavailable/<int:roomunavailable_id>',
@@ -199,6 +225,8 @@ def roomunavailableid(roomunavailable_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -215,6 +243,8 @@ def reserve():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/reserve/<int:reserve_id>',
@@ -226,6 +256,8 @@ def reserveid(reserve_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 """"
@@ -242,6 +274,8 @@ def client():
         pass
     elif request.method == 'POST':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/client/<int:client_id>',
@@ -253,6 +287,8 @@ def clientid(client_id):
         pass
     elif request.method == 'DELETE':
         pass
+    else:
+        return jsonify("Not supported"), 405
 
 
 if __name__ == '__main__':
