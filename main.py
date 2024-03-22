@@ -14,8 +14,75 @@ def greeting():
 
 """"
 -----------------------------------------------------------------------------------------------------------------------
+GLOBAL STATISTICS
+-----------------------------------------------------------------------------------------------------------------------
+"""
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/revenue',
+           methods=['POST'])  # Top 3 chains with the highest total revenue.
+def most_revenue():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/paymentmethod',
+           methods=['POST'])
+def paymentmethod():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/least/rooms',
+           methods=['POST'])
+def least_rooms():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/capacity',
+           methods=['POST'])
+def most_capacity():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/reservation',
+           methods=['POST'])
+def most_reservation():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/most/profitmonth',
+           methods=['POST'])
+def most_profitmonth():
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+""""
+-----------------------------------------------------------------------------------------------------------------------
 CHAINS
 -----------------------------------------------------------------------------------------------------------------------
+"""
+
+""""
+----------------
+CRUD OPERATIONS
+----------------
 """
 
 
@@ -49,6 +116,12 @@ HOTEL
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+""""
+----------------
+CRUD OPERATIONS
+----------------
+"""
+
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel',
            methods=['GET', 'POST'])
@@ -75,9 +148,85 @@ def hotelid(hotel_id):
 
 
 """"
+-----------------
+LOCAL STATISTICS
+-----------------
+"""
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/handicaproom',
+           methods=['POST'])  # Top 5 handicap rooms that were reserve the most.
+def handicaproom(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/leastreserve',
+           methods=['POST'])  # Top 3 rooms that were the least time unavailable.
+def leastreserve(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/mostcreditcard',
+           methods=['POST'])  # Top 5 clients under 30 that made the most reservation with a credit card.
+def mostcreditcard(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/highestpaid',
+           methods=['POST'])  # Top 3 highest paid regular employees.
+def highestpaid(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/mostdiscount',
+           methods=['POST'])  # Top 5 clients that received the most discounts.
+def mostdiscount(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/roomtype',
+           methods=['POST'])  # Total reservation by room type.
+def roomtype(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/leastguests',
+           methods=['POST'])  # Top 3 rooms that were reserved that had the least guest-to-capacity ratio.
+def leastguests(hotel_id):
+    if request.method == 'POST':
+        pass
+    else:
+        return jsonify("Not supported"), 405
+
+
+""""
 -----------------------------------------------------------------------------------------------------------------------
 EMPLOYEE
 -----------------------------------------------------------------------------------------------------------------------
+"""
+
+""""
+----------------
+CRUD OPERATIONS
+----------------
 """
 
 
@@ -111,6 +260,12 @@ LOGIN
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+""""
+----------------
+CRUD OPERATIONS
+----------------
+"""
+
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/login',
            methods=['GET', 'POST'])
@@ -140,6 +295,12 @@ def loginid(login_id):
 -----------------------------------------------------------------------------------------------------------------------
 ROOM
 -----------------------------------------------------------------------------------------------------------------------
+"""
+
+""""
+----------------
+CRUD OPERATIONS
+----------------
 """
 
 
@@ -173,6 +334,12 @@ ROOM DESCRIPTION
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+""""
+----------------
+CRUD OPERATIONS
+----------------
+"""
+
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomdescription',
            methods=['GET', 'POST'])
@@ -202,6 +369,12 @@ def roomdescriptionid(roomdescription_id):
 -----------------------------------------------------------------------------------------------------------------------
 ROOM UNAVAILABLE
 -----------------------------------------------------------------------------------------------------------------------
+"""
+
+""""
+----------------
+CRUD OPERATIONS
+----------------
 """
 
 
@@ -235,6 +408,12 @@ RESERVE
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+""""
+----------------
+CRUD OPERATIONS
+----------------
+"""
+
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/reserve',
            methods=['GET', 'POST'])
@@ -264,6 +443,12 @@ def reserveid(reserve_id):
 -----------------------------------------------------------------------------------------------------------------------
 CLIENT
 -----------------------------------------------------------------------------------------------------------------------
+"""
+
+""""
+----------------
+CRUD OPERATIONS
+----------------
 """
 
 
