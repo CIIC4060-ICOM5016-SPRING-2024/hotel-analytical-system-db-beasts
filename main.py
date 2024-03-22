@@ -96,7 +96,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/chains',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/chains',
            methods=['GET', 'POST'])
 def chains():
     if request.method == 'GET':
@@ -107,7 +108,8 @@ def chains():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/chains/<int:chains_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/chains/<int:chains_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def chainsid(chains_id):
     if request.method == 'GET':
@@ -133,7 +135,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel',
            methods=['GET', 'POST'])
 def hotel():
     if request.method == 'GET':
@@ -144,7 +147,8 @@ def hotel():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def hotelid(hotel_id):
     if request.method == 'GET':
@@ -164,8 +168,9 @@ LOCAL STATISTICS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/handicaproom',
-           methods=['POST'])  # Top 5 handicap rooms that were reserve the most.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/handicaproom',  # Top 5 handicap rooms that were reserve the most.
+           methods=['POST'])
 def handicaproom(hotel_id):
     if request.method == 'POST':
         pass
@@ -173,8 +178,9 @@ def handicaproom(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/leastreserve',
-           methods=['POST'])  # Top 3 rooms that were the least time unavailable.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/leastreserve',  # Top 3 rooms that were the least time unavailable.
+           methods=['POST'])
 def leastreserve(hotel_id):
     if request.method == 'POST':
         pass
@@ -182,8 +188,10 @@ def leastreserve(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/mostcreditcard',
-           methods=['POST'])  # Top 5 clients under 30 that made the most reservation with a credit card.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/mostcreditcard',  # Top 5 clients under 30 that
+                                                    # made the most reservation with a credit card.
+           methods=['POST'])
 def mostcreditcard(hotel_id):
     if request.method == 'POST':
         pass
@@ -191,8 +199,9 @@ def mostcreditcard(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/highestpaid',
-           methods=['POST'])  # Top 3 highest paid regular employees.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/highestpaid',  # Top 3 highest paid regular employees.
+           methods=['POST'])
 def highestpaid(hotel_id):
     if request.method == 'POST':
         pass
@@ -200,8 +209,9 @@ def highestpaid(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/mostdiscount',
-           methods=['POST'])  # Top 5 clients that received the most discounts.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/mostdiscount',  # Top 5 clients that received the most discounts.
+           methods=['POST'])
 def mostdiscount(hotel_id):
     if request.method == 'POST':
         pass
@@ -209,8 +219,9 @@ def mostdiscount(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/roomtype',
-           methods=['POST'])  # Total reservation by room type.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/roomtype',  # Total reservation by room type.
+           methods=['POST'])
 def roomtype(hotel_id):
     if request.method == 'POST':
         pass
@@ -218,8 +229,10 @@ def roomtype(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/hotel/<int:hotel_id>/leastguests',
-           methods=['POST'])  # Top 3 rooms that were reserved that had the least guest-to-capacity ratio.
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/hotel/<int:hotel_id>/leastguests',  # Top 3 rooms that were reserved
+                                                 # that had the least guest-to-capacity ratio.
+           methods=['POST'])
 def leastguests(hotel_id):
     if request.method == 'POST':
         pass
@@ -240,7 +253,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/employee',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/employee',
            methods=['GET', 'POST'])
 def employee():
     if request.method == 'GET':
@@ -251,7 +265,8 @@ def employee():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/employee/<int:employee_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/employee/<int:employee_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def employeeid(employee_id):
     if request.method == 'GET':
@@ -277,7 +292,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/login',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/login',
            methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -288,7 +304,8 @@ def login():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/login/<int:login_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/login/<int:login_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def loginid(login_id):
     if request.method == 'GET':
@@ -314,7 +331,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/room',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/room',
            methods=['GET', 'POST'])
 def room():
     if request.method == 'GET':
@@ -325,7 +343,8 @@ def room():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/room/<int:room_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/room/<int:room_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomid(room_id):
     if request.method == 'GET':
@@ -351,7 +370,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomdescription',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/roomdescription',
            methods=['GET', 'POST'])
 def roomdescription():
     if request.method == 'GET':
@@ -362,7 +382,8 @@ def roomdescription():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomdescription/<int:roomdescription_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/roomdescription/<int:roomdescription_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomdescriptionid(roomdescription_id):
     if request.method == 'GET':
@@ -388,7 +409,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomunavailable',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/roomunavailable',
            methods=['GET', 'POST'])
 def roomunavailable():
     if request.method == 'GET':
@@ -399,7 +421,8 @@ def roomunavailable():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/roomunavailable/<int:roomunavailable_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/roomunavailable/<int:roomunavailable_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomunavailableid(roomunavailable_id):
     if request.method == 'GET':
@@ -425,7 +448,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/reserve',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/reserve',
            methods=['GET', 'POST'])
 def reserve():
     if request.method == 'GET':
@@ -436,7 +460,8 @@ def reserve():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/reserve/<int:reserve_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def reserveid(reserve_id):
     if request.method == 'GET':
@@ -462,7 +487,8 @@ CRUD OPERATIONS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/client',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/client',
            methods=['GET', 'POST'])
 def client():
     if request.method == 'GET':
@@ -473,7 +499,8 @@ def client():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts/client/<int:client_id>',
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def clientid(client_id):
     if request.method == 'GET':
