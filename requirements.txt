@@ -10,6 +10,6 @@ itsdangerous==2.1.2
 pip==24.0
 psycopg2-binary==2.9.9
 gunicorn==21.2.0
-packaging==23.2
+packaging==24.0
 touch==2020.12.3
 values==2020.12.3
