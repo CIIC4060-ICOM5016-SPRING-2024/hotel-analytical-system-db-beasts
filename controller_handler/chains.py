@@ -5,7 +5,7 @@ from flask import jsonify
 class Chains_Controller_Handler:
 
     def Chains_Build(self, r):
-        c_dict = {
+        chains_dict = {
             'cid': r[0],
             'cname': r[1],
             'springmkup': r[2],
@@ -13,7 +13,7 @@ class Chains_Controller_Handler:
             'fallmkup': r[4],
             'wintermkup': r[5]
         }
-        return c_dict
+        return chains_dict
 
     def Get_All_Chains(self):
         dao = Chains_Model_Dao()
