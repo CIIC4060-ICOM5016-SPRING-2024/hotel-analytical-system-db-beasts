@@ -6,6 +6,7 @@ from controller_handler.chains import Chains_Controller_Handler
 from controller_handler.employee import Employee_Controller_Handler
 from controller_handler.login import Login_Controller_Handler
 from controller_handler.room import Room_Controller_Handler
+from controller_handler.roomdescription import RoomDescription_Controller_Handler
 
 app = Flask(__name__)
 
@@ -390,8 +391,8 @@ Region ROOM DESCRIPTION
            methods=['GET', 'POST'])
 def roomdescription():  # TODO
     if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
+        return RoomDescription_Controller_Handler().Get_All_RoomDescriptions()
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
