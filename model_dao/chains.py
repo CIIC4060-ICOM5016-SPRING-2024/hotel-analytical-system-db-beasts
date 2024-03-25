@@ -55,3 +55,17 @@ class Chains_Model_Dao:
         self.db.close()
         cur.close()
         return count
+
+    # def Delete_Chain(self, chid):
+    #     cur = self.db.docker_connection.cursor()
+    #     query = ("DELETE FROM chains "
+    #              "WHERE chid = %s")
+    #     try:
+    #         cur.execute(query, (chid,))
+    #         count = cur.rowcount
+    #         self.db.docker_connection.commit()
+    #         self.db.close()
+    #         cur.close()
+    #         return count
+    #     except:
+    #         return "Error deleting"

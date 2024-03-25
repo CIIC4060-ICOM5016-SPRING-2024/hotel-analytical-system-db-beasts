@@ -127,6 +127,7 @@ def chainid(chain_id):
         chain_data = request.json
         return Chains_Controller_Handler().Put_Chain(chain_id, chain_data)
     elif request.method == 'DELETE':
+        # return Chains_Controller_Handler().Delete_Chain(chain_id)
         pass
     else:
         return jsonify("Not supported"), 405
