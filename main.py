@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+# Controller Handler Imports
 from controller_handler.chains import Chains_Controller_Handler
+from controller_handler.employee import Employee_Controller_Handler
 
 app = Flask(__name__)
 
@@ -269,7 +271,7 @@ Region EMPLOYEE
            methods=['GET', 'POST'])
 def employee():
     if request.method == 'GET':
-        pass
+        return Employee_Controller_Handler().Get_All_Employees()
     elif request.method == 'POST':
         pass
     else:

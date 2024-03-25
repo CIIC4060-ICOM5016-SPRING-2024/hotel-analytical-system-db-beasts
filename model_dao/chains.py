@@ -8,6 +8,12 @@ class Chains_Model_Dao:
         # Initializing database connection to Docker_Database
         self.db = Docker_Database()
 
+    """
+    ------------------
+    * CRUD OPERATIONS
+    ------------------
+    """
+
     # Method to fetch all chains from the database
     def Get_All_Chains(self):
         cur = self.db.docker_connection.cursor()

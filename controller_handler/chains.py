@@ -30,12 +30,18 @@ class Chains_Controller_Handler:
         }
         return chain_build
 
+    """
+    ------------------
+    * CRUD OPERATIONS
+    ------------------
+    """
+
     # Method to retrieve all chains
     def Get_All_Chains(self):
         dao = Chains_Model_Dao()
-        chains_dict = dao.Get_All_Chains()
+        chains = dao.Get_All_Chains()
         result = []
-        for chain in chains_dict:
+        for chain in chains:
             result.append(self.Chains_Dict(chain))
         return jsonify(chains=result)
 
