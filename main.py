@@ -5,6 +5,7 @@ from flask_cors import CORS
 from controller_handler.chains import Chains_Controller_Handler
 from controller_handler.employee import Employee_Controller_Handler
 from controller_handler.login import Login_Controller_Handler
+from controller_handler.room import Room_Controller_Handler
 
 app = Flask(__name__)
 
@@ -350,8 +351,8 @@ Region ROOM
            methods=['GET', 'POST'])
 def room():  # TODO
     if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
+        return Room_Controller_Handler().Get_All_Rooms()
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405

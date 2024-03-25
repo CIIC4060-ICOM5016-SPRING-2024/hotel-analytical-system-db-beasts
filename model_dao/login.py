@@ -15,7 +15,7 @@ class Login_Model_Dao:
     """
 
     # Method to fetch all logins from the database
-    def Get_All_Login(self):
+    def Get_All_Logins(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
                  "FROM login "

@@ -24,7 +24,7 @@ class Login_Controller_Handler:
     # Method to retrieve all logins
     def Get_All_Logins(self):
         dao = Login_Model_Dao()
-        logins = dao.Get_All_Login()
+        logins = dao.Get_All_Logins()
         result = []
         for login in logins:
             result.append(self.Login_Dict(login))
