@@ -14,4 +14,3 @@ Password: 3a28954acdb4eac8b9870ea92ca4407d4d2d919bea1cd5deeb6f6e4af0e5b3b0<br>
 
 ## Domains
 Hosted REST API address: https://db-beasts-7827ce232282.herokuapp.com/<br>
-Eco Dynos : web gunicorn main:app<br>
