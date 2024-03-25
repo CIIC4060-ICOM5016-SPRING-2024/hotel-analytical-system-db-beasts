@@ -9,6 +9,7 @@ from controller_handler.room import Room_Controller_Handler
 from controller_handler.roomdescription import RoomDescription_Controller_Handler
 from controller_handler.roomunavailable import RoomUnavailable_Controller_Handler
 from controller_handler.reserve import Reserve_Controller_Handler
+from controller_handler.client import Client_Controller_Handler
 
 app = Flask(__name__)
 
@@ -510,8 +511,8 @@ Region CLIENT
            methods=['GET', 'POST'])
 def client():  # TODO
     if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
+        return Client_Controller_Handler().Get_All_Clients()
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
@@ -522,10 +523,10 @@ def client():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def clientid(client_id):  # TODO
     if request.method == 'GET':
+        return Client_Controller_Handler().Get_Client(client_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405

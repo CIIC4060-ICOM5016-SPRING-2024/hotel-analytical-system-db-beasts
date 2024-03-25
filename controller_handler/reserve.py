@@ -32,6 +32,7 @@ class Reserve_Controller_Handler:
             result.append(self.Reserve_Dict(reserve))
         return jsonify(reserves=result)
 
+    # Method to retrieve a specific reserve by its ID
     def Get_Reserve(self, reserve_id):
         dao = Reserve_Model_Dao()
         reserve = dao.Get_Reserve(reserve_id)
