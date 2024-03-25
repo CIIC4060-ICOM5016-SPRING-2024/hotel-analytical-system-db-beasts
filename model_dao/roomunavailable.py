@@ -25,3 +25,15 @@ class RoomUnavailable_Model_Dao:
         self.db.close()
         cur.close()
         return roomsunavailable_list
+
+    # Method to fetch a specific roomunavailable by its ID from the database
+    def Get_RoomUnavailable(self, ruid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM roomunavailable "
+                 "WHERE ruid = %s")
+        cur.execute(query, (ruid,))
+        roomunavailable = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return roomunavailable

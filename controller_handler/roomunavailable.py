@@ -29,3 +29,12 @@ class RoomUnavailable_Controller_Handler:
         for roomunavailable in roomsunavailable:
             result.append(self.RoomUnavailable_Dict(roomunavailable))
         return jsonify(roomsunavailable=result)
+
+    # Method to retrieve a specific RoomUnavailable by its ID
+    def Get_RoomUnavailable(self, roomunavailable_id):
+        dao = RoomUnavailable_Model_Dao()
+        roomunavailable = dao.Get_RoomUnavailable(roomunavailable_id)
+        if roomunavailable:
+            result = self.RoomUnavailable_Dict(roomunavailable)
+            return jsonify(roomunavailable=result)
+        return jsonify("Not Found"), 404

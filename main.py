@@ -443,10 +443,10 @@ def roomunavailable():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def roomunavailableid(roomunavailable_id):  # TODO
     if request.method == 'GET':
+        return RoomUnavailable_Controller_Handler().Get_RoomUnavailable(roomunavailable_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
