@@ -36,7 +36,7 @@ Region GLOBAL STATISTICS
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/revenue',  # Top 3 chains with the highest total revenue.
            methods=['POST'])
-def most_revenue():
+def most_revenue():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -46,7 +46,7 @@ def most_revenue():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/paymentmethod',  # Total reservation percentage by payment method.
            methods=['POST'])
-def paymentmethod():
+def paymentmethod():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -56,7 +56,7 @@ def paymentmethod():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/least/rooms',  # Top 3 chain with the least rooms.
            methods=['POST'])
-def least_rooms():
+def least_rooms():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -66,7 +66,7 @@ def least_rooms():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/capacity',  # Top 5 hotels with the most capacity.
            methods=['POST'])
-def most_capacity():
+def most_capacity():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -76,7 +76,7 @@ def most_capacity():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/reservation',  # Top 10% hotels that had the most reservations.
            methods=['POST'])
-def most_reservation():
+def most_reservation():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -86,7 +86,7 @@ def most_reservation():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/profitmonth',  # Top 3 month with the most reservation by chain.
            methods=['POST'])
-def most_profitmonth():
+def most_profitmonth():  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -128,7 +128,7 @@ def chainid(chain_id):
     elif request.method == 'PUT':
         chain_data = request.json
         return Chains_Controller_Handler().Put_Chain(chain_id, chain_data)
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         # return Chains_Controller_Handler().Delete_Chain(chain_id)
         return jsonify("In Process")
     else:
@@ -151,7 +151,7 @@ Region HOTEL
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel',
            methods=['GET', 'POST'])
-def hotel():
+def hotel():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -163,7 +163,7 @@ def hotel():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def hotelid(hotel_id):
+def hotelid(hotel_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -184,7 +184,7 @@ def hotelid(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/handicaproom',  # Top 5 handicap rooms that were reserve the most.
            methods=['POST'])
-def handicaproom(hotel_id):
+def handicaproom(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -194,7 +194,7 @@ def handicaproom(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/leastreserve',  # Top 3 rooms that were the least time unavailable.
            methods=['POST'])
-def leastreserve(hotel_id):
+def leastreserve(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -205,7 +205,7 @@ def leastreserve(hotel_id):
            '/hotel/<int:hotel_id>/mostcreditcard',  # Top 5 clients under 30 that
                                                     # made the most reservation with a credit card.
            methods=['POST'])
-def mostcreditcard(hotel_id):
+def mostcreditcard(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -215,7 +215,7 @@ def mostcreditcard(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/highestpaid',  # Top 3 highest paid regular employees.
            methods=['POST'])
-def highestpaid(hotel_id):
+def highestpaid(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -225,7 +225,7 @@ def highestpaid(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/mostdiscount',  # Top 5 clients that received the most discounts.
            methods=['POST'])
-def mostdiscount(hotel_id):
+def mostdiscount(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -235,7 +235,7 @@ def mostdiscount(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/roomtype',  # Total reservation by room type.
            methods=['POST'])
-def roomtype(hotel_id):
+def roomtype(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -246,7 +246,7 @@ def roomtype(hotel_id):
            '/hotel/<int:hotel_id>/leastguests',  # Top 3 rooms that were reserved
                                                  # that had the least guest-to-capacity ratio.
            methods=['POST'])
-def leastguests(hotel_id):
+def leastguests(hotel_id):  # TODO
     if request.method == 'POST':
         pass
     else:
@@ -272,7 +272,7 @@ Region EMPLOYEE
 def employee():
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_All_Employees()
-    elif request.method == 'POST':
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
@@ -284,9 +284,9 @@ def employee():
 def employeeid(employee_id):
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_Employee(employee_id)
-    elif request.method == 'PUT':
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
@@ -308,7 +308,7 @@ Region LOGIN
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login',
            methods=['GET', 'POST'])
-def login():
+def login():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -320,7 +320,7 @@ def login():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login/<int:login_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def loginid(login_id):
+def loginid(login_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -347,7 +347,7 @@ Region ROOM
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room',
            methods=['GET', 'POST'])
-def room():
+def room():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -359,7 +359,7 @@ def room():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room/<int:room_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomid(room_id):
+def roomid(room_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -386,7 +386,7 @@ Region ROOM DESCRIPTION
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomdescription',
            methods=['GET', 'POST'])
-def roomdescription():
+def roomdescription():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -398,7 +398,7 @@ def roomdescription():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomdescription/<int:roomdescription_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomdescriptionid(roomdescription_id):
+def roomdescriptionid(roomdescription_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -425,7 +425,7 @@ Region ROOM UNAVAILABLE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable',
            methods=['GET', 'POST'])
-def roomunavailable():
+def roomunavailable():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -437,7 +437,7 @@ def roomunavailable():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable/<int:roomunavailable_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomunavailableid(roomunavailable_id):
+def roomunavailableid(roomunavailable_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -464,7 +464,7 @@ Region RESERVE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve',
            methods=['GET', 'POST'])
-def reserve():
+def reserve():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -476,7 +476,7 @@ def reserve():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def reserveid(reserve_id):
+def reserveid(reserve_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
@@ -503,7 +503,7 @@ Region CLIENT
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client',
            methods=['GET', 'POST'])
-def client():
+def client():  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'POST':
@@ -515,7 +515,7 @@ def client():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def clientid(client_id):
+def clientid(client_id):  # TODO 
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':
