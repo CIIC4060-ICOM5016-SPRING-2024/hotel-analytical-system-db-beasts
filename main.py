@@ -283,7 +283,7 @@ def employee():
            methods=['GET', 'PUT', 'DELETE'])
 def employeeid(employee_id):
     if request.method == 'GET':
-        pass
+        return Employee_Controller_Handler().Get_Employee(employee_id)
     elif request.method == 'PUT':
         pass
     elif request.method == 'DELETE':

@@ -49,11 +49,10 @@ class Chains_Controller_Handler:
     def Get_Chain(self, chain_id):
         dao = Chains_Model_Dao()
         chain = dao.Get_Chain(chain_id)
-        result = self.Chains_Dict(chain)
         if chain:
+            result = self.Chains_Dict(chain)
             return jsonify(chain=result)
-        else:
-            return jsonify("Not Found"), 404
+        return jsonify("Not Found"), 404
 
     # Method to add a new chain
     def Post_Chain(self, chain_data):

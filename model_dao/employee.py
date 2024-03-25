@@ -14,11 +14,26 @@ class Employee_Model_Dao:
     ------------------
     """
 
+    # Method to fetch all employees from the database
     def Get_All_Employees(self):
         cur = self.db.docker_connection.cursor()
-        query = "SELECT * FROM employee order by eid"
+        query = ("SELECT * "
+                 "FROM employee "
+                 "order by eid")
         cur.execute(query)
         employees_list = cur.fetchall()
         self.db.close()
         cur.close()
         return employees_list
+
+    # Method to fetch a specific employee by its ID from the database
+    def Get_Employee(self, eid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM employee "
+                 "WHERE eid = %s")
+        cur.execute(query, (eid,))
+        employee = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return employee

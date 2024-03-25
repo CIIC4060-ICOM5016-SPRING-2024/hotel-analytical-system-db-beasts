@@ -24,6 +24,7 @@ class Employee_Controller_Handler:
     ------------------
     """
 
+    # Method to retrieve all employees
     def Get_All_Employees(self):
         dao = Employee_Model_Dao()
         employees = dao.Get_All_Employees()
@@ -31,3 +32,12 @@ class Employee_Controller_Handler:
         for employee in employees:
             result.append(self.Employee_Dict(employee))
         return jsonify(employees=result)
+
+    # Method to retrieve a specific employee by its ID
+    def Get_Employee(self, employee_id):
+        dao = Employee_Model_Dao()
+        employee = dao.Get_Employee(employee_id)
+        if employee:
+            result = self.Employee_Dict(employee)
+            return jsonify(employee=result)
+        return jsonify(Error="Not Found"), 404
