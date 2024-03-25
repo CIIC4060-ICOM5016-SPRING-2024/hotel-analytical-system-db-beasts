@@ -483,10 +483,10 @@ def reserve():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def reserveid(reserve_id):  # TODO
     if request.method == 'GET':
+        return Reserve_Controller_Handler().Get_Reserve(reserve_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405

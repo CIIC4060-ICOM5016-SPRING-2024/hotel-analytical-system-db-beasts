@@ -31,3 +31,11 @@ class Reserve_Controller_Handler:
         for reserve in reserves:
             result.append(self.Reserve_Dict(reserve))
         return jsonify(reserves=result)
+
+    def Get_Reserve(self, reserve_id):
+        dao = Reserve_Model_Dao()
+        reserve = dao.Get_Reserve(reserve_id)
+        if reserve:
+            result = self.Reserve_Dict(reserve)
+            return jsonify(reserve=result)
+        return jsonify("Not Found"), 404
