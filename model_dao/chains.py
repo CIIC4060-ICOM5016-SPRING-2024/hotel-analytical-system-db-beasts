@@ -15,3 +15,13 @@ class Chains_Model_Dao:
         self.db.close()
         cur.close()
         return chains_list
+
+    def Get_Chain(self, chain_id):
+        cur = self.db.docker_connection.cursor()
+        # cur = self.db.heroku_connection.cursor()
+        query = "SELECT * FROM chains WHERE chid = %s"
+        cur.execute(query, (chain_id,))
+        chain = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return chain

@@ -117,11 +117,11 @@ def chains():
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/chains/<int:chains_id>',
+           '/chains/<int:chain_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def chainsid(chains_id):
+def chainid(chain_id):
     if request.method == 'GET':
-        pass
+        return Chains_Controller_Handler().Get_Chain(chain_id)
     elif request.method == 'PUT':
         pass
     elif request.method == 'DELETE':

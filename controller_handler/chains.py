@@ -22,3 +22,11 @@ class Chains_Controller_Handler:
         for chain in chains_dict:
             result.append(self.Chains_Build(chain))
         return jsonify(result)
+
+    def Get_Chain(self, chain_id):
+        dao = Chains_Model_Dao()
+        chain = dao.Get_Chain(chain_id)
+        if chain:
+            return jsonify(self.Chains_Build(chain))
+        else:
+            return jsonify("Not Found"), 404
