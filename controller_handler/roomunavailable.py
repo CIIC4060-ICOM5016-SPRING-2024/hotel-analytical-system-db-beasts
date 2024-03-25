@@ -11,7 +11,7 @@ class RoomUnavailable_Controller_Handler:
             'ruid': r[0],
             'rid': r[1],
             'startdate': r[2],
-            'enddate': r[3],
+            'enddate': r[3]
         }
         return roomunavailable_dict
 
