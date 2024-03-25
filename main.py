@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+from controller_handler.chains import Chains_Controller_Handler
+
 app = Flask(__name__)
 
 # apply CORS
@@ -107,7 +109,7 @@ Region CHAINS
            methods=['GET', 'POST'])
 def chains():
     if request.method == 'GET':
-        pass
+        return Chains_Controller_Handler().Get_All_Chains()
     elif request.method == 'POST':
         pass
     else:
