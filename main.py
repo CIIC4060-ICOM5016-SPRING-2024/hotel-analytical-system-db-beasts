@@ -124,7 +124,8 @@ def chainid(chain_id):
     if request.method == 'GET':
         return Chains_Controller_Handler().Get_Chain(chain_id)
     elif request.method == 'PUT':
-        pass
+        chain_data = request.json
+        return Chains_Controller_Handler().Put_Chain(chain_id, chain_data)
     elif request.method == 'DELETE':
         pass
     else:
