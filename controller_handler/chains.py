@@ -2,6 +2,7 @@
 from model_dao.chains import Chains_Model_Dao
 from flask import jsonify
 
+
 # Class for handling HTTP requests related to chains
 class Chains_Controller_Handler:
 
@@ -18,8 +19,9 @@ class Chains_Controller_Handler:
         return chains_dict
 
     # Method to build a dictionary representation of chain data
-    def Chain_Build(self, cname, springmkup, summermkup, fallmkup, wintermkup):
+    def Chain_Build(self, chid, cname, springmkup, summermkup, fallmkup, wintermkup):
         chain_build = {
+            'chid': chid,
             'cname': cname,
             'springmkup': springmkup,
             'summermkup': summermkup,
@@ -57,9 +59,9 @@ class Chains_Controller_Handler:
         wintermkup = chain_data['wintermkup']
         if cname and springmkup and summermkup and fallmkup and wintermkup:
             dao = Chains_Model_Dao()
-            chain = dao.Post_Chain(cname, springmkup, summermkup, fallmkup, wintermkup)
-            result = self.Chain_Build(cname, springmkup, summermkup, fallmkup, wintermkup)
-            return jsonify(result), 201
+            chain_id = dao.Post_Chain(cname, springmkup, summermkup, fallmkup, wintermkup)
+            result = self.Chain_Build(chain_id, cname, springmkup, summermkup, fallmkup, wintermkup)
+            return jsonify(chain=result), 201
         else:
             return jsonify("Unexpected attribute values."), 400
 
@@ -75,8 +77,9 @@ class Chains_Controller_Handler:
         if (chid or chid == 0) and cname and springmkup and summermkup and fallmkup and wintermkup:
             dao = Chains_Model_Dao()
             chain = dao.Put_Chain(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
+            result = self.Chain_Build(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
             if chain:
-                return jsonify(chain_data), 201
+                return jsonify(chain=result), 201
             else:
                 return jsonify("Not Found"), 404
         else:
