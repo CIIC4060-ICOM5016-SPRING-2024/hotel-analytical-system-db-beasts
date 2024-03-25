@@ -4,6 +4,7 @@ from flask_cors import CORS
 # Controller Handler Imports
 from controller_handler.chains import Chains_Controller_Handler
 from controller_handler.employee import Employee_Controller_Handler
+from controller_handler.login import Login_Controller_Handler
 
 app = Flask(__name__)
 
@@ -122,7 +123,7 @@ def chains():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/chains/<int:chain_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def chainid(chain_id):
+def chainid(chain_id):  # TODO
     if request.method == 'GET':
         return Chains_Controller_Handler().Get_Chain(chain_id)
     elif request.method == 'PUT':
@@ -269,7 +270,7 @@ Region EMPLOYEE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee',
            methods=['GET', 'POST'])
-def employee():
+def employee():  # TODO
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_All_Employees()
     elif request.method == 'POST':  # TODO
@@ -281,7 +282,7 @@ def employee():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee/<int:employee_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def employeeid(employee_id):
+def employeeid(employee_id):  # TODO
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_Employee(employee_id)
     elif request.method == 'PUT':  # TODO
@@ -310,8 +311,8 @@ Region LOGIN
            methods=['GET', 'POST'])
 def login():  # TODO
     if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
+        return Login_Controller_Handler().Get_All_Logins()
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
@@ -515,7 +516,7 @@ def client():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def clientid(client_id):  # TODO 
+def clientid(client_id):  # TODO
     if request.method == 'GET':
         pass
     elif request.method == 'PUT':

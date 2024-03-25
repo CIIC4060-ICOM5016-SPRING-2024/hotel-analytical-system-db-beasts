@@ -5,7 +5,7 @@ from flask import jsonify
 
 # Class for handling HTTP requests related to employee
 class Employee_Controller_Handler:
-    # Method to create a dictionary representation of chain data
+    # Method to create a dictionary representation of employee data
     def Employee_Dict(self, r):
         employee_dict = {
             'eid': r[0],
