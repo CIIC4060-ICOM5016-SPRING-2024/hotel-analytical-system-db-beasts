@@ -7,6 +7,7 @@ from controller_handler.employee import Employee_Controller_Handler
 from controller_handler.login import Login_Controller_Handler
 from controller_handler.room import Room_Controller_Handler
 from controller_handler.roomdescription import RoomDescription_Controller_Handler
+from controller_handler.roomunavailable import RoomUnavailable_Controller_Handler
 
 app = Flask(__name__)
 
@@ -430,8 +431,8 @@ Region ROOM UNAVAILABLE
            methods=['GET', 'POST'])
 def roomunavailable():  # TODO
     if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
+        return RoomUnavailable_Controller_Handler().Get_All_RoomsUnavailable()
+    elif request.method == 'POST':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
