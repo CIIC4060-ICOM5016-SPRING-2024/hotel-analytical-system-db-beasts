@@ -40,4 +40,4 @@ class Employee_Controller_Handler:
         if employee:
             result = self.Employee_Dict(employee)
             return jsonify(employee=result)
-        return jsonify(Error="Not Found"), 404
+        return jsonify("Not Found"), 404
