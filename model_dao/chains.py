@@ -1,14 +1,16 @@
-from db import Docker_Database  # , Heroku_Database
+# Importing Docker_Database from db module
+from db import Docker_Database
 
 
+# Class for handling database operations related to chains model
 class Chains_Model_Dao:
     def __init__(self):
+        # Initializing database connection to Docker_Database
         self.db = Docker_Database()
-        # self.db = Heroku_Database()
 
+    # Method to fetch all chains from the database
     def Get_All_Chains(self):
         cur = self.db.docker_connection.cursor()
-        # cur = self.db.heroku_connection.cursor()
         query = "SELECT * FROM chains order by chid"
         cur.execute(query)
         chains_list = cur.fetchall()
@@ -16,9 +18,9 @@ class Chains_Model_Dao:
         cur.close()
         return chains_list
 
+    # Method to fetch a specific chain by its ID from the database
     def Get_Chain(self, chid):
         cur = self.db.docker_connection.cursor()
-        # cur = self.db.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM chains "
                  "WHERE chid = %s")
@@ -28,6 +30,7 @@ class Chains_Model_Dao:
         cur.close()
         return chain
 
+    # Method to add a new chain to the database
     def Post_Chain(self, cname, springmkup, summermkup, fallmkup, wintermkup):
         cur = self.db.docker_connection.cursor()
         query = ("INSERT INTO chains (cname, springmkup, summermkup, fallmkup, wintermkup) "
@@ -40,6 +43,7 @@ class Chains_Model_Dao:
         cur.close()
         return result
 
+    # Method to update an existing chain in the database
     def Put_Chain(self, chid, cname, springmkup, summermkup, fallmkup, wintermkup):
         cur = self.db.docker_connection.cursor()
         query = ("UPDATE chains "
