@@ -363,10 +363,10 @@ def room():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def roomid(room_id):  # TODO
     if request.method == 'GET':
+        return Room_Controller_Handler().Get_Room(room_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405

@@ -25,3 +25,15 @@ class ROOM_Model_Dao:
         self.db.close()
         cur.close()
         return room_list
+
+    # Method to fetch a specific room by its ID from the database
+    def Get_Room(self, rid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM room "
+                 "WHERE rid = %s")
+        cur.execute(query, (rid,))
+        room = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return room
