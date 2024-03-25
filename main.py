@@ -323,10 +323,10 @@ def login():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def loginid(login_id):  # TODO
     if request.method == 'GET':
+        return Login_Controller_Handler().Get_Login(login_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405

@@ -25,3 +25,15 @@ class Login_Model_Dao:
         self.db.close()
         cur.close()
         return login_list
+
+    # Method to fetch a specific login by its ID from the database
+    def Get_Login(self, lid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM login "
+                 "WHERE lid = %s")
+        cur.execute(query, (lid,))
+        login = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return login
