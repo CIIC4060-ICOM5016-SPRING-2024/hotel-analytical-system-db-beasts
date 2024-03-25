@@ -25,3 +25,14 @@ class Chains_Model_Dao:
         self.db.close()
         cur.close()
         return chain
+
+    def Post_Chain(self, cname, springmkup, summermkup, fallmkup, wintermkup):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO chains (cname, springmkup, summermkup, fallmkup, wintermkup) "
+                 "VALUES (%s, %s, %s, %s, %s) returning chid")
+        cur.execute(query, (cname, springmkup, summermkup, fallmkup, wintermkup))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result

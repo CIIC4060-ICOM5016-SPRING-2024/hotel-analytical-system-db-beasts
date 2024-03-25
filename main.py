@@ -111,7 +111,8 @@ def chains():
     if request.method == 'GET':
         return Chains_Controller_Handler().Get_All_Chains()
     elif request.method == 'POST':
-        pass
+        chain_data = request.json
+        return Chains_Controller_Handler().Post_Chain(chain_data)
     else:
         return jsonify("Not supported"), 405
 
