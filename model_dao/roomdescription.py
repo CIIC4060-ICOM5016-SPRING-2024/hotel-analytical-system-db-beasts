@@ -25,3 +25,15 @@ class RoomDescription_Model_Dao:
         self.db.close()
         cur.close()
         return roomdescription_list
+
+    # Method to fetch a specific RoomDescription by its ID from the database
+    def Get_RoomDescription(self, rdid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT *  "
+                 "FROM roomdescription  "
+                 "WHERE rdid = %s")
+        cur.execute(query, (rdid,))
+        roomdescription = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return roomdescription

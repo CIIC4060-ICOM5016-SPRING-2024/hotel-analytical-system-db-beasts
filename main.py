@@ -403,10 +403,10 @@ def roomdescription():  # TODO
            methods=['GET', 'PUT', 'DELETE'])
 def roomdescriptionid(roomdescription_id):  # TODO
     if request.method == 'GET':
+        return RoomDescription_Controller_Handler().Get_RoomDescription(roomdescription_id)
+    elif request.method == 'PUT':  # TODO
         pass
-    elif request.method == 'PUT':
-        pass
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE':  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
