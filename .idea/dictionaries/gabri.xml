@@ -3,10 +3,23 @@
     <words>
       <w>chainid</w>
       <w>chid</w>
+      <w>enddate</w>
       <w>fallmkup</w>
+      <w>fname</w>
+      <w>ishandicap</w>
+      <w>lname</w>
+      <w>memberyear</w>
+      <w>nquq</w>
+      <w>rdid</w>
+      <w>roomdescriptions</w>
+      <w>roomsunavailable</w>
+      <w>rprice</w>
+      <w>ruid</w>
       <w>springmkup</w>
+      <w>startdate</w>
       <w>summermkup</w>
       <w>wintermkup</w>
+      <w>zvtlouizcmwqdp</w>
     </words>
   </dictionary>
 </component>
