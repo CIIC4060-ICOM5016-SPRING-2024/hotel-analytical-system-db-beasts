@@ -1,11 +1,11 @@
-# Importing Docker_Database from db module
+# ** Importing Docker_Database from db module
 from db import Docker_Database
 
 
-# Class for handling database operations related to room model
+# ** Class for handling database operations related to room model
 class ROOM_Model_Dao:
     def __init__(self):
-        # Initializing database connection to Docker_Database
+        # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
 
     """
@@ -14,7 +14,7 @@ class ROOM_Model_Dao:
     ------------------
     """
 
-    # Method to fetch all rooms from the database
+    # ** Method to fetch all rooms from the database
     def Get_All_Rooms(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
@@ -26,7 +26,7 @@ class ROOM_Model_Dao:
         cur.close()
         return room_list
 
-    # Method to fetch a specific room by its ID from the database
+    # ** Method to fetch a specific room by its ID from the database
     def Get_Room(self, rid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "

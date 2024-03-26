@@ -1,11 +1,11 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.roomunavailable import RoomUnavailable_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to RoomUnavailable
+# ** Class for handling HTTP requests related to RoomUnavailable
 class RoomUnavailable_Controller_Handler:
-    # Method to create a dictionary representation of RoomUnavailable data
+    # ** Method to create a dictionary representation of RoomUnavailable data
     def RoomUnavailable_Dict(self, r):
         roomunavailable_dict = {
             'ruid': r[0],
@@ -21,7 +21,7 @@ class RoomUnavailable_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all RoomsUnavailable
+    # ** Method to retrieve all RoomsUnavailable
     def Get_All_RoomsUnavailable(self):
         dao = RoomUnavailable_Model_Dao()
         roomsunavailable = dao.Get_All_RoomsUnavailable()
@@ -30,7 +30,7 @@ class RoomUnavailable_Controller_Handler:
             result.append(self.RoomUnavailable_Dict(roomunavailable))
         return jsonify(roomsunavailable=result)
 
-    # Method to retrieve a specific RoomUnavailable by its ID
+    # ** Method to retrieve a specific RoomUnavailable by its ID
     def Get_RoomUnavailable(self, roomunavailable_id):
         dao = RoomUnavailable_Model_Dao()
         roomunavailable = dao.Get_RoomUnavailable(roomunavailable_id)

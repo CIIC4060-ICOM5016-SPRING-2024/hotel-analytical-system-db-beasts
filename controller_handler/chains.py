@@ -1,12 +1,12 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.chains import Chains_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to chains
+# ** Class for handling HTTP requests related to chains
 class Chains_Controller_Handler:
 
-    # Method to create a dictionary representation of chain data
+    # ** Method to create a dictionary representation of chain data
     def Chains_Dict(self, r):
         chains_dict = {
             'cid': r[0],
@@ -18,7 +18,7 @@ class Chains_Controller_Handler:
         }
         return chains_dict
 
-    # Method to build a dictionary representation of chain data
+    # ** Method to build a dictionary representation of chain data
     def Chain_Build(self, chid, cname, springmkup, summermkup, fallmkup, wintermkup):
         chain_build = {
             'chid': chid,
@@ -36,7 +36,7 @@ class Chains_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all chains
+    # ** Method to retrieve all chains
     def Get_All_Chains(self):
         dao = Chains_Model_Dao()
         chains = dao.Get_All_Chains()
@@ -45,7 +45,7 @@ class Chains_Controller_Handler:
             result.append(self.Chains_Dict(chain))
         return jsonify(chains=result)
 
-    # Method to retrieve a specific chain by its ID
+    # ** Method to retrieve a specific chain by its ID
     def Get_Chain(self, chain_id):
         dao = Chains_Model_Dao()
         chain = dao.Get_Chain(chain_id)
@@ -54,7 +54,7 @@ class Chains_Controller_Handler:
             return jsonify(chain=result)
         return jsonify("Not Found"), 404
 
-    # Method to add a new chain
+    # ** Method to add a new chain
     def Post_Chain(self, chain_data):
         if len(chain_data) != 5:
             return jsonify(Error="Invalid Data"), 400
@@ -71,7 +71,7 @@ class Chains_Controller_Handler:
         else:
             return jsonify("Unexpected attribute values."), 400
 
-    # Method to update an existing chain
+    # ** Method to update an existing chain
     def Put_Chain(self, chid, chain_data):
         if len(chain_data) != 5:
             return jsonify("Invalid Data"), 400

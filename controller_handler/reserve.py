@@ -1,11 +1,11 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.reserve import Reserve_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to reserve
+# ** Class for handling HTTP requests related to reserve
 class Reserve_Controller_Handler:
-    # Method to create a dictionary representation of reserve data
+    # ** Method to create a dictionary representation of reserve data
     def Reserve_Dict(self, r):
         reserve_dict = {
             'reid': r[0],
@@ -23,7 +23,7 @@ class Reserve_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all reserves
+    # ** Method to retrieve all reserves
     def Get_All_Reserves(self):
         data = Reserve_Model_Dao()
         reserves = data.Get_All_Reserves()
@@ -32,7 +32,7 @@ class Reserve_Controller_Handler:
             result.append(self.Reserve_Dict(reserve))
         return jsonify(reserves=result)
 
-    # Method to retrieve a specific reserve by its ID
+    # ** Method to retrieve a specific reserve by its ID
     def Get_Reserve(self, reserve_id):
         dao = Reserve_Model_Dao()
         reserve = dao.Get_Reserve(reserve_id)

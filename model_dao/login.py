@@ -1,11 +1,11 @@
-# Importing Docker_Database from db module
+# ** Importing Docker_Database from db module
 from db import Docker_Database
 
 
-# Class for handling database operations related to login model
+# ** Class for handling database operations related to login model
 class Login_Model_Dao:
     def __init__(self):
-        # Initializing database connection to Docker_Database
+        # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
 
     """
@@ -14,7 +14,7 @@ class Login_Model_Dao:
     ------------------
     """
 
-    # Method to fetch all logins from the database
+    # ** Method to fetch all logins from the database
     def Get_All_Logins(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
@@ -26,7 +26,7 @@ class Login_Model_Dao:
         cur.close()
         return login_list
 
-    # Method to fetch a specific login by its ID from the database
+    # ** Method to fetch a specific login by its ID from the database
     def Get_Login(self, lid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "

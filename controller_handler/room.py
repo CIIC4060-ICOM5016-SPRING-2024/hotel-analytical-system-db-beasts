@@ -1,11 +1,11 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.room import ROOM_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to room
+# ** Class for handling HTTP requests related to room
 class Room_Controller_Handler:
-    # Method to create a dictionary representation of room data
+    # ** Method to create a dictionary representation of room data
     def Room_Dict(self, r):
         room_dict = {
             'rid': r[0],
@@ -21,7 +21,7 @@ class Room_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all rooms
+    # ** Method to retrieve all rooms
     def Get_All_Rooms(self):
         dao = ROOM_Model_Dao()
         rooms = dao.Get_All_Rooms()
@@ -30,7 +30,7 @@ class Room_Controller_Handler:
             result.append(self.Room_Dict(room))
         return jsonify(rooms=result)
 
-    # Method to retrieve a specific room by its ID
+    # ** Method to retrieve a specific room by its ID
     def Get_Room(self, room_id):
         dao = ROOM_Model_Dao()
         room = dao.Get_Room(room_id)

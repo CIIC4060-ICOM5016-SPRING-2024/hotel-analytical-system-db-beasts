@@ -1,7 +1,8 @@
+# ** Flask Import
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-# Controller Handler Imports
+# ** Controller Handler Imports
 from controller_handler.chains import Chains_Controller_Handler
 from controller_handler.employee import Employee_Controller_Handler
 from controller_handler.login import Login_Controller_Handler
@@ -13,7 +14,7 @@ from controller_handler.client import Client_Controller_Handler
 
 app = Flask(__name__)
 
-# apply CORS
+# ** apply CORS
 CORS(app)
 
 """
@@ -40,7 +41,7 @@ Region GLOBAL STATISTICS
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/most/revenue',  # Top 3 chains with the highest total revenue.
+           '/most/revenue',  # ** Top 3 chains with the highest total revenue.
            methods=['POST'])
 def most_revenue():  # TODO
     if request.method == 'POST':
@@ -50,7 +51,7 @@ def most_revenue():  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/paymentmethod',  # Total reservation percentage by payment method.
+           '/paymentmethod',  # ** Total reservation percentage by payment method.
            methods=['POST'])
 def paymentmethod():  # TODO
     if request.method == 'POST':
@@ -60,7 +61,7 @@ def paymentmethod():  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/least/rooms',  # Top 3 chain with the least rooms.
+           '/least/rooms',  # ** Top 3 chain with the least rooms.
            methods=['POST'])
 def least_rooms():  # TODO
     if request.method == 'POST':
@@ -70,7 +71,7 @@ def least_rooms():  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/most/capacity',  # Top 5 hotels with the most capacity.
+           '/most/capacity',  # ** Top 5 hotels with the most capacity.
            methods=['POST'])
 def most_capacity():  # TODO
     if request.method == 'POST':
@@ -80,7 +81,7 @@ def most_capacity():  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/most/reservation',  # Top 10% hotels that had the most reservations.
+           '/most/reservation',  # ** Top 10% hotels that had the most reservations.
            methods=['POST'])
 def most_reservation():  # TODO
     if request.method == 'POST':
@@ -90,7 +91,7 @@ def most_reservation():  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/most/profitmonth',  # Top 3 month with the most reservation by chain.
+           '/most/profitmonth',  # ** Top 3 month with the most reservation by chain.
            methods=['POST'])
 def most_profitmonth():  # TODO
     if request.method == 'POST':
@@ -188,7 +189,7 @@ def hotelid(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/handicaproom',  # Top 5 handicap rooms that were reserve the most.
+           '/hotel/<int:hotel_id>/handicaproom',  # ** Top 5 handicap rooms that were reserve the most.
            methods=['POST'])
 def handicaproom(hotel_id):  # TODO
     if request.method == 'POST':
@@ -198,7 +199,7 @@ def handicaproom(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/leastreserve',  # Top 3 rooms that were the least time unavailable.
+           '/hotel/<int:hotel_id>/leastreserve',  # ** Top 3 rooms that were the least time unavailable.
            methods=['POST'])
 def leastreserve(hotel_id):  # TODO
     if request.method == 'POST':
@@ -208,8 +209,8 @@ def leastreserve(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/mostcreditcard',  # Top 5 clients under 30 that
-                                                    # made the most reservation with a credit card.
+           '/hotel/<int:hotel_id>/mostcreditcard',  # ** Top 5 clients under 30 that
+                                                    # ** made the most reservation with a credit card.
            methods=['POST'])
 def mostcreditcard(hotel_id):  # TODO
     if request.method == 'POST':
@@ -219,7 +220,7 @@ def mostcreditcard(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/highestpaid',  # Top 3 highest paid regular employees.
+           '/hotel/<int:hotel_id>/highestpaid',  # ** Top 3 highest paid regular employees.
            methods=['POST'])
 def highestpaid(hotel_id):  # TODO
     if request.method == 'POST':
@@ -229,7 +230,7 @@ def highestpaid(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/mostdiscount',  # Top 5 clients that received the most discounts.
+           '/hotel/<int:hotel_id>/mostdiscount',  # ** Top 5 clients that received the most discounts.
            methods=['POST'])
 def mostdiscount(hotel_id):  # TODO
     if request.method == 'POST':
@@ -239,7 +240,7 @@ def mostdiscount(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/roomtype',  # Total reservation by room type.
+           '/hotel/<int:hotel_id>/roomtype',  # ** Total reservation by room type.
            methods=['POST'])
 def roomtype(hotel_id):  # TODO
     if request.method == 'POST':
@@ -249,8 +250,8 @@ def roomtype(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/leastguests',  # Top 3 rooms that were reserved
-                                                 # that had the least guest-to-capacity ratio.
+           '/hotel/<int:hotel_id>/leastguests',  # ** Top 3 rooms that were reserved
+                                                 # ** that had the least guest-to-capacity ratio.
            methods=['POST'])
 def leastguests(hotel_id):  # TODO
     if request.method == 'POST':

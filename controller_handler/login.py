@@ -1,11 +1,11 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.login import Login_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to login
+# ** Class for handling HTTP requests related to login
 class Login_Controller_Handler:
-    # Method to create a dictionary representation of login data
+    # ** Method to create a dictionary representation of login data
     def Login_Dict(self, r):
         login_dict = {
             'lid': r[0],
@@ -21,7 +21,7 @@ class Login_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all logins
+    # ** Method to retrieve all logins
     def Get_All_Logins(self):
         dao = Login_Model_Dao()
         logins = dao.Get_All_Logins()
@@ -30,7 +30,7 @@ class Login_Controller_Handler:
             result.append(self.Login_Dict(login))
         return jsonify(logins=result)
 
-    # Method to retrieve a specific login by its ID
+    # ** Method to retrieve a specific login by its ID
     def Get_Login(self, login_id):
         dao = Login_Model_Dao()
         login = dao.Get_Login(login_id)

@@ -1,11 +1,11 @@
-# Importing Docker_Database from db module
+# ** Importing Docker_Database from db module
 from db import Docker_Database
 
 
-# Class for handling database operations related to employee model
+# ** Class for handling database operations related to employee model
 class Employee_Model_Dao:
     def __init__(self):
-        # Initializing database connection to Docker_Database
+        # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
 
     """
@@ -14,7 +14,7 @@ class Employee_Model_Dao:
     ------------------
     """
 
-    # Method to fetch all employees from the database
+    # ** Method to fetch all employees from the database
     def Get_All_Employees(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
@@ -26,7 +26,7 @@ class Employee_Model_Dao:
         cur.close()
         return employees_list
 
-    # Method to fetch a specific employee by its ID from the database
+    # ** Method to fetch a specific employee by its ID from the database
     def Get_Employee(self, eid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "

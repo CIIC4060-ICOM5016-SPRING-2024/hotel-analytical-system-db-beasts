@@ -1,11 +1,11 @@
-# Importing necessary modules
+# ** Importing necessary modules
 from model_dao.employee import Employee_Model_Dao
 from flask import jsonify
 
 
-# Class for handling HTTP requests related to employee
+# ** Class for handling HTTP requests related to employee
 class Employee_Controller_Handler:
-    # Method to create a dictionary representation of employee data
+    # ** Method to create a dictionary representation of employee data
     def Employee_Dict(self, r):
         employee_dict = {
             'eid': r[0],
@@ -24,7 +24,7 @@ class Employee_Controller_Handler:
     ------------------
     """
 
-    # Method to retrieve all employees
+    # ** Method to retrieve all employees
     def Get_All_Employees(self):
         dao = Employee_Model_Dao()
         employees = dao.Get_All_Employees()
@@ -33,7 +33,7 @@ class Employee_Controller_Handler:
             result.append(self.Employee_Dict(employee))
         return jsonify(employees=result)
 
-    # Method to retrieve a specific employee by its ID
+    # ** Method to retrieve a specific employee by its ID
     def Get_Employee(self, employee_id):
         dao = Employee_Model_Dao()
         employee = dao.Get_Employee(employee_id)

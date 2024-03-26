@@ -1,11 +1,11 @@
-# Importing Docker_Database from db module
+# ** Importing Docker_Database from db module
 from db import Docker_Database
 
 
-# Class for handling database operations related to reserve model
+# ** Class for handling database operations related to reserve model
 class Reserve_Model_Dao:
     def __init__(self):
-        # Initializing database connection to Docker_Database
+        # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
 
     """
@@ -14,7 +14,7 @@ class Reserve_Model_Dao:
     ------------------
     """
 
-    # Method to fetch all reserves from the database
+    # ** Method to fetch all reserves from the database
     def Get_All_Reserves(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
@@ -26,7 +26,7 @@ class Reserve_Model_Dao:
         cur.close()
         return reserve_list
 
-    # Method to fetch a specific reserve by its ID from the database
+    # ** Method to fetch a specific reserve by its ID from the database
     def Get_Reserve(self, reid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
