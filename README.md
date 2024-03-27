@@ -6,11 +6,11 @@ Yanishka Ruiz Nazario - yanishka.ruiz@upr.edu<br>
 Gabriel A. Archilla Cintrón - gabriel.archilla1@upr.edu<br>     
 
 ## Database Credentials
-Host: ec2-54-152-144-84.compute-1.amazonaws.com<br> 
-Database: d1brf8nquq7utk<br> 
-User: zvtlouizcmwqdp<br> 
+Host: ec2-44-194-65-158.compute-1.amazonaws.com<br> 
+Database: d8e72jptcgd4rm<br> 
+User: hkvwkxakpcyzxr<br> 
 Port: 5432<br> 
-Password: 3a28954acdb4eac8b9870ea92ca4407d4d2d919bea1cd5deeb6f6e4af0e5b3b0<br>  
+Password: 197ca7bdb19cc0b28a45ecff234ed8f5dce0d2cfb352aa28d6c8fdae06760250<br>  
 
 ## Domains
 Hosted REST API address: https://db-beasts-7827ce232282.herokuapp.com/<br>
