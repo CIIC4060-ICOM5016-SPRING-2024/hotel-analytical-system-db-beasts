@@ -1,5 +1,5 @@
 # ** Importing Docker_Database from db module
-from db import Docker_Database
+from db import Docker_Database  # , Heroku_Database
 
 
 # ** Class for handling database operations related to chains model
@@ -7,6 +7,7 @@ class Chains_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
+        # self.dbh = Heroku_Database()
 
     """
     ------------------
@@ -17,12 +18,14 @@ class Chains_Model_Dao:
     # ** Method to fetch all chains from the database
     def Get_All_Chains(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM chains "
                  "order by chid")
         cur.execute(query)
         chains_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return chains_list
 
