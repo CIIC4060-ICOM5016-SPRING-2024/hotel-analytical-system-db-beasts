@@ -11,6 +11,7 @@ from controller_handler.roomdescription import RoomDescription_Controller_Handle
 from controller_handler.roomunavailable import RoomUnavailable_Controller_Handler
 from controller_handler.reserve import Reserve_Controller_Handler
 from controller_handler.client import Client_Controller_Handler
+from controller_handler.hotel import Hotel_Controller_Handler
 
 app = Flask(__name__)
 
@@ -157,11 +158,12 @@ Region HOTEL
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel',
            methods=['GET', 'POST'])
-def hotel():  # TODO
+def hotel():
     if request.method == 'GET':
-        pass
+        return Hotel_Controller_Handler().Get_All_Hotels()
     elif request.method == 'POST':
-        pass
+        data = request.json
+        return Hotel_Controller_Handler().Post_Hotel(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -169,13 +171,14 @@ def hotel():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def hotelid(hotel_id):  # TODO
+def hotelid(hotel_id):
     if request.method == 'GET':
-        pass
+        return Hotel_Controller_Handler().Get_Hotel(hotel_id)
     elif request.method == 'PUT':
-        pass
+        data = request.json
+        return Hotel_Controller_Handler().Put_Hotel(hotel_id, data)
     elif request.method == 'DELETE':
-        pass
+        return Hotel_Controller_Handler().Delete_Hotel(hotel_id)
     else:
         return jsonify("Not supported"), 405
 
