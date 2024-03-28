@@ -38,13 +38,13 @@ class Reserve_Model_Dao:
         cur.close()
         return reserve
     
-    def Post_Reserve(self, reid, ruid, clid, total_cost, payment, guests):
-        
+    def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
+        # ** Method to add a new reserve to the database
         with self.db.docker_connection.cursor() as cur:
-            query = ("INSERT INTO reserve (reid, ruid, clid, total_cost, payment, guests)"
-                    "VALUES (%s, %s, %s, %s, %s, %s)"
+            query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
+                    "VALUES (%s, %s, %s, %s, %s)"
                     "returning reid")
-            cur.execute(query, (reid, ruid, clid, total_cost, payment, guests))
+            cur.execute(query, (ruid, clid, total_cost, payment, guests))
             result = cur.fetchone()[0]
             self.db.docker_connection.commit()
             self.db.close()
@@ -52,6 +52,7 @@ class Reserve_Model_Dao:
             return result
             
     def Put_Reserve(self, ruid, clid, total_cost, payment, guests,reid):
+        # ** Method to update an existing reserve in the database
         cur = self.db.docker_connection.cursor()
         query = ("UPDATE reserve "
                  "SET ruid = %s, clid = %s, total_cost = %s, payment = %s, guests = %s "
@@ -63,16 +64,15 @@ class Reserve_Model_Dao:
         cur.close()
         return count
     
+    
     def Delete_Reserve(self, reid):
+        # ** Method to delete an existing reserve in the database
         cur = self.db.docker_connection.cursor()
         query = ("DELETE FROM reserve "
                  "WHERE reid = %s")
-        try:
-            cur.execute(query, (reid,))
-            count = cur.rowcount
-            self.db.docker_connection.commit()
-            self.db.close()
-            cur.close()
-            return count
-        except Exception as e:
-            return e
+        cur.execute(query, (reid,))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count

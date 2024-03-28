@@ -1,5 +1,7 @@
 # ** Importing necessary modules
 from model_dao.reserve import Reserve_Model_Dao
+from model_dao.client import Client_Model_Dao
+from model_dao.roomunavailable import RoomUnavailable_Model_Dao
 from flask import jsonify
 
 
@@ -53,21 +55,26 @@ class Reserve_Controller_Handler:
         return jsonify("Not Found"), 404
     
     def Post_Reserve(self, reserve_data):
-        if len(reserve_data) != 6:
+        if len(reserve_data) != 5:
             return jsonify(Error="Invalid Data"), 400
         dao = Reserve_Model_Dao()
-        
-        reid = reserve_data['reid']
+        daoc = Client_Model_Dao()
+        daor = RoomUnavailable_Model_Dao()
         ruid = reserve_data['ruid']
         clid = reserve_data['clid']
         total_cost = reserve_data['total_cost']
         payment = reserve_data['payment']
         guests = reserve_data['guests']
         #Check for none values
-        if any(v is None for v in (reid, ruid, clid, total_cost, payment, guests)):
+        if not daor.Get_RoomUnavailable(ruid):
+            return jsonify(Error="Room is unavailable."), 404
+        elif daoc.Get_Client(clid) is None:
+            return jsonify(Error="Client not found."), 404
+        
+        if any(v is None for v in (ruid, clid, total_cost, payment, guests)):
             return jsonify("Unexpected attribute values."), 400
         else:
-            reserve_id = dao.Post_Reserve(reid, ruid, clid, total_cost, payment, guests)
+            reserve_id = dao.Post_Reserve(ruid, clid, total_cost, payment, guests)
             result = self.Reserve_Build(reserve_id, ruid, clid, total_cost, payment, guests) 
             return jsonify(reserve=result),201
         
@@ -96,6 +103,7 @@ class Reserve_Controller_Handler:
     
     
     def Delete_Reserve(self, reserve_id):
+        # Delete reserve
         if reserve_id or reserve_id == 0:
             dao = Reserve_Model_Dao()
             result = dao.Delete_Reserve(reserve_id)
