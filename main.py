@@ -379,6 +379,14 @@ def roomid(room_id):  # TODO
         return jsonify("Not supported"), 405
 
 
+# @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+#            '/roomInfo/<int:rid>/<int:hid>',
+#            methods=['GET'])
+# def roomInfo(rid, hid):
+#     if request.method == 'GET':
+#         return Room_Controller_Handler().Get_Room_Info(rid, hid)
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region ROOM DESCRIPTION
@@ -473,13 +481,13 @@ Region RESERVE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve',
            methods=['GET', 'POST'])
-def reserve():  # TODO
+def reserve():
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_All_Reserves()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':  # TODO Total Cost Automatic
         data = request.json
         return Reserve_Controller_Handler().Post_Reserve(data)
-        
+
     else:
         return jsonify("Not supported"), 405
 
@@ -487,14 +495,13 @@ def reserve():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def reserveid(reserve_id):  # TODO
+def reserveid(reserve_id):
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_Reserve(reserve_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':  # TODO Check Over
         data = request.json
         return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
-    
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':  # TODO Check Over
         return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
         return jsonify("Not supported"), 405

@@ -37,3 +37,26 @@ class RoomUnavailable_Model_Dao:
         self.db.close()
         cur.close()
         return roomunavailable
+
+    def Post_RoomUnavailable(self, rid, startdate, enddate):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO roomunavailable (rid, startdate, enddate) "
+                 "VALUES (%s, %s, %s)"
+                 "returning ruid")
+        cur.execute(query, (rid, startdate, enddate))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result
+
+    def RoomUnavailable_Time(self, rid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT max(enddate) as enddate "
+                 "FROM roomunavailable "
+                 "where rid = %s")
+        cur.execute(query, (rid,))
+        roomunavailable_time = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return roomunavailable_time

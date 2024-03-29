@@ -37,3 +37,15 @@ class ROOM_Model_Dao:
         self.db.close()
         cur.close()
         return room
+
+    def Get_Room_Info(self, rid, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select rid, hid, rdid, capacity, rprice "
+                 "from room "
+                 "natural inner join roomdescription "
+                 "where rid = %s and hid = %s")
+        cur.execute(query, (rid, hid,))
+        room_info = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return room_info

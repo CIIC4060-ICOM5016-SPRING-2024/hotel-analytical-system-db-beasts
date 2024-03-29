@@ -15,6 +15,16 @@ class Room_Controller_Handler:
         }
         return room_dict
 
+    def Room_Inform(self, r):
+        room_inform = {
+            'rid': r[0],
+            'hid': r[1],
+            'rdid': r[2],
+            'capacity': r[3],
+            'rprice': r[4]
+        }
+        return room_inform
+
     """
     ------------------
     * CRUD OPERATIONS
@@ -38,3 +48,11 @@ class Room_Controller_Handler:
             result = self.Room_Dict(room)
             return jsonify(room=result)
         return jsonify("Not Found"), 404
+
+    # def Get_Room_Info(self, rid, hid):
+    #     dao = ROOM_Model_Dao()
+    #     room_info = dao.Get_Room_Info(rid, hid)
+    #     if room_info:
+    #         result = self.Room_Inform(room_info)
+    #         return jsonify(room_info=result)
+    #     return jsonify("Not Found"), 404

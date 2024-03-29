@@ -15,6 +15,15 @@ class RoomUnavailable_Controller_Handler:
         }
         return roomunavailable_dict
 
+    def RoomUnavailable_Build(self, ruid, rid, startdate, enddate):
+        roomunavailable_build = {
+            'ruid': ruid,
+            'rid': rid,
+            'startdate': startdate,
+            'enddate': enddate
+        }
+        return roomunavailable_build
+
     """
     ------------------
     * CRUD OPERATIONS
