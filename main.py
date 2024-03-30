@@ -12,6 +12,7 @@ from controller_handler.roomunavailable import RoomUnavailable_Controller_Handle
 from controller_handler.reserve import Reserve_Controller_Handler
 from controller_handler.client import Client_Controller_Handler
 from controller_handler.hotel import Hotel_Controller_Handler
+from controller_handler.LocalStatistics import LocalStatistics_Controller_Handler
 
 app = Flask(__name__)
 
@@ -211,8 +212,9 @@ def leastreserve(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/mostcreditcard',  # ** Top 5 clients under 30 that
-                                                    # ** made the most reservation with a credit card.
+           '/hotel/<int:hotel_id>/mostcreditcard',
+           # ** Top 5 clients under 30 that
+           # ** made the most reservation with a credit card.
            methods=['POST'])
 def mostcreditcard(hotel_id):  # TODO
     if request.method == 'POST':
@@ -244,16 +246,19 @@ def mostdiscount(hotel_id):  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/roomtype',  # ** Total reservation by room type.
            methods=['POST'])
-def roomtype(hotel_id):  # TODO
+def roomtype(hotel_id):
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return (LocalStatistics_Controller_Handler()
+                .Get_post_RoomType(hotel_id, employee_id))
     else:
         return jsonify("Not supported"), 405
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/leastguests',  # ** Top 3 rooms that were reserved
-                                                 # ** that had the least guest-to-capacity ratio.
+           '/hotel/<int:hotel_id>/leastguests',
+           # ** Top 3 rooms that were reserved
+           # ** that had the least guest-to-capacity ratio.
            methods=['POST'])
 def leastguests(hotel_id):  # TODO
     if request.method == 'POST':
