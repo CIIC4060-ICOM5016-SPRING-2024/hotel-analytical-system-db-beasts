@@ -211,8 +211,9 @@ def leastreserve(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/mostcreditcard',  # ** Top 5 clients under 30 that
-                                                    # ** made the most reservation with a credit card.
+           '/hotel/<int:hotel_id>/mostcreditcard',
+           # ** Top 5 clients under 30 that
+           # ** made the most reservation with a credit card.
            methods=['POST'])
 def mostcreditcard(hotel_id):  # TODO
     if request.method == 'POST':
@@ -252,8 +253,9 @@ def roomtype(hotel_id):  # TODO
 
 
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-           '/hotel/<int:hotel_id>/leastguests',  # ** Top 3 rooms that were reserved
-                                                 # ** that had the least guest-to-capacity ratio.
+           '/hotel/<int:hotel_id>/leastguests',
+           # ** Top 3 rooms that were reserved
+           # ** that had the least guest-to-capacity ratio.
            methods=['POST'])
 def leastguests(hotel_id):  # TODO
     if request.method == 'POST':
@@ -377,14 +379,6 @@ def roomid(room_id):  # TODO
         pass
     else:
         return jsonify("Not supported"), 405
-
-
-# @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
-#            '/roomInfo/<int:rid>/<int:hid>',
-#            methods=['GET'])
-# def roomInfo(rid, hid):
-#     if request.method == 'GET':
-#         return Room_Controller_Handler().Get_Room_Info(rid, hid)
 
 
 """
