@@ -38,6 +38,13 @@ class ROOM_Model_Dao:
         cur.close()
         return room
 
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    # ** Looking for room information based on the supposed hotel.
     def Get_Room_Info(self, rid, hid):
         cur = self.db.docker_connection.cursor()
         query = ("select rid, hid, rdid, capacity, rprice "
