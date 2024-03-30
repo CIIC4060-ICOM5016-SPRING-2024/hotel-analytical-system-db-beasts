@@ -59,34 +59,32 @@ class Reserve_Controller_Handler:
         return jsonify("Not Found"), 404
 
     def Post_Reserve(self, reserve_data):
+        # ** Checking if all data was entered.
         if len(reserve_data) != 8:
             return jsonify(Error="Invalid Data"), 400
-
+        # ** Checking employee information
         eid = reserve_data['eid']
         daoEmployee = Employee_Model_Dao()
         employee = daoEmployee.Get_Employee(eid)
-
         if not employee:
             return jsonify(Error="Employee not found."), 404
-
         if employee[5] != "Regular":
             return jsonify(Error="The employee position is not Regular"), 401
-
+        # ** Checking room based on the hotel where the employee works
         rid = reserve_data['rid']
         daoRoom = ROOM_Model_Dao()
         room = daoRoom.Get_Room_Info(rid, employee[1])
         if not room:
             return jsonify(Error=f"Room not found in the hotel = {employee[1]}."), 404
-
         guests = reserve_data['guests']
         if room[3] < guests:
             return jsonify(Error=f"Insufficient capacity = {room[3]}")
-
+        # ** Checking length of stay
         startdate = reserve_data['startdate']
         enddate = reserve_data['enddate']
         if enddate <= startdate:
             return jsonify(Error="End date must be greater than start date"), 400
-
+        # ** Checking disponibility
         daoRU1 = RoomUnavailable_Model_Dao()
         not_disponibility = daoRU1.RoomUnavailable_Time(rid)
         startdate_date = datetime.strptime(startdate, '%Y-%m-%d').date()
@@ -94,7 +92,7 @@ class Reserve_Controller_Handler:
             return jsonify(Error=f"Room is not available during the selected dates. "
                                  f"not_disponibility={not_disponibility[0]} vs "
                                  f"startdate={startdate}"), 400
-
+        # ** Checking existence of the client
         clid = reserve_data['clid']
         daoClient = Client_Model_Dao()
         if not daoClient.Get_Client(clid):
@@ -103,19 +101,18 @@ class Reserve_Controller_Handler:
         total_cost = reserve_data['total_cost']
         payment = reserve_data['payment']
 
-        dao = Reserve_Model_Dao()
-
         # Check for none values
         if total_cost >= 0 and payment:
-
+            # ** Creating new room unavailability for the indicated dates
             daoRU2 = RoomUnavailable_Model_Dao()
             ruid = daoRU2.Post_RoomUnavailable(rid, startdate, enddate)
             controller_handler_ruid = RoomUnavailable_Controller_Handler()
             roomunavailable_result = controller_handler_ruid.RoomUnavailable_Build(ruid, rid, startdate, enddate)
             if not ruid:
                 return jsonify(Error="The room could not be separated."), 404
-
-            reserve_id = dao.Post_Reserve(ruid, clid, total_cost, payment, guests)
+            # ** Creating reservation based on the new room unavailability
+            daoRU = Reserve_Model_Dao()
+            reserve_id = daoRU.Post_Reserve(ruid, clid, total_cost, payment, guests)
             reserve_result = self.Reserve_Build(reserve_id, ruid, clid, total_cost, payment, guests)
             return jsonify(reserve=reserve_result, roomunavailable=roomunavailable_result), 201
         else:
