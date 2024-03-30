@@ -50,6 +50,13 @@ class RoomUnavailable_Model_Dao:
         cur.close()
         return result
 
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    # ** Searching for the last date where the room is not available
     def RoomUnavailable_Time(self, rid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT max(enddate) as enddate "
