@@ -13,6 +13,7 @@ from controller_handler.reserve import Reserve_Controller_Handler
 from controller_handler.client import Client_Controller_Handler
 from controller_handler.hotel import Hotel_Controller_Handler
 from controller_handler.LocalStatistics import LocalStatistics_Controller_Handler
+from controller_handler.GlobalStatistics import GlobalStatistics_Controller_Handler
 
 app = Flask(__name__)
 
@@ -55,9 +56,10 @@ def most_revenue():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/paymentmethod',  # ** Total reservation percentage by payment method.
            methods=['POST'])
-def paymentmethod():  # TODO
+def paymentmethod():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_PaymentMethod(data)
     else:
         return jsonify("Not supported"), 405
 
