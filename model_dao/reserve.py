@@ -75,3 +75,25 @@ class Reserve_Model_Dao:
         self.db.close()
         cur.close()
         return count
+
+    def Get_Total_Cost(self, rid, clid, startdate, enddate):
+        cur = self.db.docker_connection.cursor()
+        query = ("""SELECT calculate_reservation_cost(
+                                rprice,
+                                (date(%s) - date(%s)),
+                                chid,
+                                %s,
+                                memberyear
+                            )
+                    FROM reserve 
+                    NATURAL INNER JOIN client
+                    NATURAL INNER JOIN roomunavailable
+                    NATURAL INNER JOIN room
+                    NATURAL INNER JOIN hotel
+                    NATURAL INNER JOIN chains
+                    WHERE rid = %s AND clid = %s""")
+        cur.execute(query, (enddate, startdate, startdate, rid, clid))
+        total_cost = cur.fetchone()[0]
+        self.db.close()
+        cur.close()
+        return total_cost
