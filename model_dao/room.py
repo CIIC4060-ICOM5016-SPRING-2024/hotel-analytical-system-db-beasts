@@ -3,7 +3,7 @@ from db import Docker_Database
 
 
 # ** Class for handling database operations related to room model
-class ROOM_Model_Dao:
+class Room_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
