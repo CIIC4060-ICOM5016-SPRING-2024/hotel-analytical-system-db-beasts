@@ -37,3 +37,59 @@ class RoomUnavailable_Model_Dao:
         self.db.close()
         cur.close()
         return roomunavailable
+
+    def Post_RoomUnavailable(self, rid, startdate, enddate):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO roomunavailable (rid, startdate, enddate) "
+                 "VALUES (%s, %s, %s)"
+                 "returning ruid")
+        cur.execute(query, (rid, startdate, enddate))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result
+
+    def Put_RoomUnavailable(self, ruid, rid, startdate, enddate):
+        cur = self.db.docker_connection.cursor()
+        query = ("UPDATE roomunavailable "
+                 "SET rid = %s, startdate = %s, enddate = %s "
+                 "WHERE ruid = %s")
+        cur.execute(query, (rid, startdate, enddate, ruid))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
+
+    def Delete_RoomUnavailable(self, ruid):
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM roomunavailable "
+                 "WHERE ruid = %s")
+        try:
+            cur.execute(query, (ruid,))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "Error deleting"
+
+    """
+        ------------------
+        * TOOL OPERATIONS
+        ------------------
+        """
+
+    # ** Searching for the last date where the room is not available
+    def RoomUnavailable_Time(self, rid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT max(enddate) as enddate "
+                 "FROM roomunavailable "
+                 "where rid = %s")
+        cur.execute(query, (rid,))
+        roomunavailable_time = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return roomunavailable_time
