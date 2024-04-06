@@ -69,9 +69,12 @@ class Room_Model_Dao:
         cur = self.db.docker_connection.cursor()
         query = ("DELETE FROM room "
                  "WHERE rid = %s")
-        cur.execute(query, (rid,))
-        count = cur.rowcount
-        self.db.docker_connection.commit()
-        self.db.close()
-        cur.close()
-        return count
+        try:
+            cur.execute(query, (rid,))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "Error deleting"
