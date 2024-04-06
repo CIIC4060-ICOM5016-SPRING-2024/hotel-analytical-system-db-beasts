@@ -48,6 +48,7 @@ class Hotel_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        cur.close()
         return result
 
     # ** Method to update an existing hotel in the database
