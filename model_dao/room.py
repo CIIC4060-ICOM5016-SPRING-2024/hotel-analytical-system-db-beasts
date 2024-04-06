@@ -37,3 +37,41 @@ class ROOM_Model_Dao:
         self.db.close()
         cur.close()
         return room
+
+    # ** Method to add a new room to the database
+    def Post_Room(self, hid, rdid, rprice):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO room (hid, rdid, rprice) "
+                 "VALUES (%s, %s, %s)"
+                 "returning rid")
+        cur.execute(query, (hid, rdid, rprice))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result
+
+    # ** Method to update an existing room in the database
+    def Put_Room(self, rid, hid, rdid, rprice):
+        cur = self.db.docker_connection.cursor()
+        query = ("UPDATE room "
+                 "SET hid = %s, rdid = %s, rprice = %s "
+                 "WHERE rid = %s")
+        cur.execute(query, (hid, rdid, rprice, rid))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
+
+    # ** Method to delete an existing room in the database
+    def Delete_Room(self, rid):
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM room "
+                 "WHERE rid = %s")
+        cur.execute(query, (rid,))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
