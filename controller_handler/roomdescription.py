@@ -57,6 +57,7 @@ class RoomDescription_Controller_Handler:
             return jsonify(Roomdescription=result)
         return jsonify(Error="Not Found"), 404
 
+    # ** Method to add a new RoomDescription
     def Post_RoomDescription(self, roomdescription_data):
         if len(roomdescription_data) != 4:
             return jsonify(Error="Invalid Data"), 400
@@ -82,6 +83,53 @@ class RoomDescription_Controller_Handler:
         roomdescription_id = dao.Post_RoomDescription(rname, rtype, capacity, ishandicap)
         result = self.RoomDescription_Build(roomdescription_id, rname, rtype, capacity, ishandicap)
         return jsonify(RoomDescription=result), 201
+
+    # ** Method to update an existing RoomDescription
+    def Put_RoomDescription(self, rdid, roomdescription_data):
+        if len(roomdescription_data) != 4:
+            return jsonify(Error="Invalid Data"), 400
+
+        daoRD = RoomDescription_Model_Dao()
+        roomdescription = daoRD.Get_RoomDescription(rdid)
+        if not roomdescription:
+            return jsonify(Error="Room Description not found"), 404
+
+        rname = roomdescription_data['rname']
+        if rname not in ROOM_NAMES:
+            return jsonify(
+                Error=f"Invalid Room Name. Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
+
+        capacity = roomdescription_data['capacity']
+        if not self.is_valid_capacity(rname, capacity):
+            return jsonify(Error="Invalid Capacity"), 400
+
+        rtype = roomdescription_data['rtype']
+        if not self.is_valid_room_type(rname, rtype):
+            return jsonify(Error="Invalid Room Type"), 400
+
+        ishandicap = roomdescription_data['ishandicap']
+        if ishandicap is None:
+            return jsonify(Error="Invalid Ishandicap"), 400
+
+        daoRD1 = RoomDescription_Model_Dao()
+        roomdescription = daoRD1.Put_RoomDescription(rdid, rname, rtype, capacity, ishandicap)
+        result = self.RoomDescription_Build(rdid, rname, rtype, capacity, ishandicap)
+        return jsonify(RoomDescription=result), 200
+
+    # ** Method to delete an existing Room Description
+    def Delete_RoomDescription(self, roomdescription_id):
+        daoRD = RoomDescription_Model_Dao()
+        roomdescription = daoRD.Get_RoomDescription(roomdescription_id)
+        if not roomdescription:
+            return jsonify(Error="Room Description not found"), 404
+        daoRD1 = RoomDescription_Model_Dao()
+        result = daoRD1.Delete_RoomDescription(roomdescription_id)
+        if result == "Error deleting":
+            return jsonify(Error="Room Description is referenced"), 400
+        elif result:
+            return jsonify(OK="Room Description Deleted"), 200
+        else:
+            return jsonify(Error="Delete Failed"), 500
 
     """
     ------------------
