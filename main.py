@@ -421,9 +421,10 @@ def roomdescriptionid(roomdescription_id):  # TODO
     if request.method == 'GET':
         return RoomDescription_Controller_Handler().Get_RoomDescription(roomdescription_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return RoomDescription_Controller_Handler().Put_RoomDescription(roomdescription_id, data)
     elif request.method == 'DELETE':  # TODO
-        pass
+        return RoomDescription_Controller_Handler().Delete_RoomDescription(roomdescription_id)
     else:
         return jsonify("Not supported"), 405
 
