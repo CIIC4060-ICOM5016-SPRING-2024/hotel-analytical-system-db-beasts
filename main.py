@@ -445,11 +445,12 @@ Region ROOM UNAVAILABLE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable',
            methods=['GET', 'POST'])
-def roomunavailable():  # TODO
+def roomunavailable():
     if request.method == 'GET':
         return RoomUnavailable_Controller_Handler().Get_All_RoomsUnavailable()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Post_RoomUnavailable(data)
     else:
         return jsonify("Not supported"), 405
 
