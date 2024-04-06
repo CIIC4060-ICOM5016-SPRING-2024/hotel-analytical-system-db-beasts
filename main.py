@@ -363,11 +363,12 @@ Region ROOM
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room',
            methods=['GET', 'POST'])
-def room():  # TODO
+def room():
     if request.method == 'GET':
         return Room_Controller_Handler().Get_All_Rooms()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':
+        data = request.json
+        return Room_Controller_Handler().Post_Room(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -375,13 +376,14 @@ def room():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room/<int:room_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomid(room_id):  # TODO
+def roomid(room_id):
     if request.method == 'GET':
         return Room_Controller_Handler().Get_Room(room_id)
-    elif request.method == 'PUT':  # TODO
-        pass
-    elif request.method == 'DELETE':  # TODO
-        pass
+    elif request.method == 'PUT':
+        data = request.json
+        return Room_Controller_Handler().Put_Room(room_id, data)
+    elif request.method == 'DELETE':
+        return Room_Controller_Handler().Delete_Room(room_id)
     else:
         return jsonify("Not supported"), 405
 
