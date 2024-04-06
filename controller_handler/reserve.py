@@ -30,7 +30,7 @@ class Reserve_Controller_Handler:
         result = []
         for reserve in reserves:
             result.append(self.Reserve_Dict(reserve))
-        return jsonify(reserves=result)
+        return jsonify(Reserves=result)
 
     # ** Method to retrieve a specific reserve by its ID
     def Get_Reserve(self, reserve_id):
@@ -38,5 +38,5 @@ class Reserve_Controller_Handler:
         reserve = dao.Get_Reserve(reserve_id)
         if reserve:
             result = self.Reserve_Dict(reserve)
-            return jsonify(reserve=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Reserve=result)
+        return jsonify(Error="Not Found"), 404

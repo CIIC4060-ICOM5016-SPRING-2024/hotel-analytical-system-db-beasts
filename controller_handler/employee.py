@@ -31,7 +31,7 @@ class Employee_Controller_Handler:
         result = []
         for employee in employees:
             result.append(self.Employee_Dict(employee))
-        return jsonify(employees=result)
+        return jsonify(Employees=result)
 
     # ** Method to retrieve a specific employee by its ID
     def Get_Employee(self, employee_id):
@@ -39,5 +39,5 @@ class Employee_Controller_Handler:
         employee = dao.Get_Employee(employee_id)
         if employee:
             result = self.Employee_Dict(employee)
-            return jsonify(employee=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Employee=result)
+        return jsonify(Error="Not Found"), 404

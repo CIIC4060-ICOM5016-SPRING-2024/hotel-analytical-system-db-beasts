@@ -43,7 +43,7 @@ class Chains_Controller_Handler:
         result = []
         for chain in chains:
             result.append(self.Chains_Dict(chain))
-        return jsonify(chains=result)
+        return jsonify(Chains=result)
 
     # ** Method to retrieve a specific chain by its ID
     def Get_Chain(self, chain_id):
@@ -51,8 +51,8 @@ class Chains_Controller_Handler:
         chain = dao.Get_Chain(chain_id)
         if chain:
             result = self.Chains_Dict(chain)
-            return jsonify(chain=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Chain=result)
+        return jsonify(Error="Not Found"), 404
 
     # ** Method to add a new chain
     def Post_Chain(self, chain_data):
@@ -67,14 +67,14 @@ class Chains_Controller_Handler:
             dao = Chains_Model_Dao()
             chain_id = dao.Post_Chain(cname, springmkup, summermkup, fallmkup, wintermkup)
             result = self.Chain_Build(chain_id, cname, springmkup, summermkup, fallmkup, wintermkup)
-            return jsonify(chain=result), 201
+            return jsonify(Chain=result), 201
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     # ** Method to update an existing chain
     def Put_Chain(self, chid, chain_data):
         if len(chain_data) != 5:
-            return jsonify("Invalid Data"), 400
+            return jsonify(Error="Invalid Data"), 400
         cname = chain_data['cname']
         springmkup = chain_data['springmkup']
         summermkup = chain_data['summermkup']
@@ -85,21 +85,21 @@ class Chains_Controller_Handler:
             chain = dao.Put_Chain(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
             result = self.Chain_Build(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
             if chain:
-                return jsonify(chain=result), 201
+                return jsonify(Chain=result), 201
             else:
-                return jsonify("Not Found"), 404
+                return jsonify(Error="Not Found"), 404
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     def Delete_Chain(self, chid):
         if chid or chid == 0:
             dao = Chains_Model_Dao()
             result = dao.Delete_Chain(chid)
             if result == "Error deleting":
-                return jsonify("Chain is referenced"), 400
+                return jsonify(Error="Chain is referenced"), 400
             elif result:
-                return jsonify("Deleted"), 200
+                return jsonify(OK="Deleted"), 200
             else:
-                return jsonify("Not Found"), 404
+                return jsonify(Error="Not Found"), 404
         else:
-            return jsonify("Error deleting"), 400
+            return jsonify(Error="Error deleting"), 400

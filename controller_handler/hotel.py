@@ -40,7 +40,7 @@ class Hotel_Controller_Handler:
         result = []
         for hotel in hotels:
             result.append(self.Hotel_Dict(hotel))
-        return jsonify(hotels=result)
+        return jsonify(Hotels=result)
 
     # ** Method to retrieve a specific hotel by its ID
     def Get_Hotel(self, hotel_id):
@@ -48,8 +48,8 @@ class Hotel_Controller_Handler:
         hotel = dao.Get_Hotel(hotel_id)
         if hotel:
             result = self.Hotel_Dict(hotel)
-            return jsonify(hotel=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Hotel=result)
+        return jsonify(Error="Not Found"), 404
 
     # ** Method to add a new hotel
     def Post_Hotel(self, hotel_data):
@@ -68,9 +68,9 @@ class Hotel_Controller_Handler:
         if hname and hcity:
             hotel_id = daoh.Post_Hotel(chid, hname, hcity)
             result = self.Hotel_Build(hotel_id, chid, hname, hcity)
-            return jsonify(hotel=result), 201
+            return jsonify(Hotel=result), 201
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     # ** Method to update an existing hotel
     def Put_Hotel(self, hid, hotel_data):
@@ -90,11 +90,11 @@ class Hotel_Controller_Handler:
             hotel = daoh.Put_Hotel(hid, chid, hname, hcity)
             result = self.Hotel_Build(hid, chid, hname, hcity)
             if hotel:
-                return jsonify(hotel=result), 200
+                return jsonify(Hotel=result), 200
             else:
                 return jsonify(Error="Hotel not found"), 404
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     # ** Method to delete an existing hotel
     def Delete_Hotel(self, hid):
@@ -102,10 +102,10 @@ class Hotel_Controller_Handler:
             dao = Hotel_Model_Dao()
             result = dao.Delete_Hotel(hid)
             if result == "Error deleting":
-                return jsonify("Hotel is referenced"), 400
+                return jsonify(Error="Hotel is referenced"), 400
             elif result:
-                return jsonify("Deleted"), 200
+                return jsonify(OK="Deleted"), 200
             else:
-                return jsonify("Not Found"), 404
+                return jsonify(Error="Not Found"), 404
         else:
-            return jsonify("Error deleting"), 400
+            return jsonify(Error="Error deleting"), 400

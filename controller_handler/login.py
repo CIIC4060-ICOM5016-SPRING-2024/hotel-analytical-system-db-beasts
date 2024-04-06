@@ -28,7 +28,7 @@ class Login_Controller_Handler:
         result = []
         for login in logins:
             result.append(self.Login_Dict(login))
-        return jsonify(logins=result)
+        return jsonify(Logins=result)
 
     # ** Method to retrieve a specific login by its ID
     def Get_Login(self, login_id):
@@ -36,5 +36,5 @@ class Login_Controller_Handler:
         login = dao.Get_Login(login_id)
         if login:
             result = self.Login_Dict(login)
-            return jsonify(login=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Login=result)
+        return jsonify(Error="Not Found"), 404

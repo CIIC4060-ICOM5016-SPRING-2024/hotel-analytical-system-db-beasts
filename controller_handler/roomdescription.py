@@ -29,7 +29,7 @@ class RoomDescription_Controller_Handler:
         result = []
         for roomdescription in roomdescriptions:
             result.append(self.RoomDescription_Dict(roomdescription))
-        return jsonify(roomdescriptions=result)
+        return jsonify(Roomdescriptions=result)
 
     # ** Method to retrieve a specific RoomDescription by its ID
     def Get_RoomDescription(self, roomdescription_id):
@@ -37,5 +37,5 @@ class RoomDescription_Controller_Handler:
         roomdescription = dao.Get_RoomDescription(roomdescription_id)
         if roomdescription:
             result = self.RoomDescription_Dict(roomdescription)
-            return jsonify(roomdescription=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Roomdescription=result)
+        return jsonify(Error="Not Found"), 404

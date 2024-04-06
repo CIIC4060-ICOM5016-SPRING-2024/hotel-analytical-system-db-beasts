@@ -28,7 +28,7 @@ class RoomUnavailable_Controller_Handler:
         result = []
         for roomunavailable in roomsunavailable:
             result.append(self.RoomUnavailable_Dict(roomunavailable))
-        return jsonify(roomsunavailable=result)
+        return jsonify(Roomsunavailable=result)
 
     # ** Method to retrieve a specific RoomUnavailable by its ID
     def Get_RoomUnavailable(self, roomunavailable_id):
@@ -36,5 +36,5 @@ class RoomUnavailable_Controller_Handler:
         roomunavailable = dao.Get_RoomUnavailable(roomunavailable_id)
         if roomunavailable:
             result = self.RoomUnavailable_Dict(roomunavailable)
-            return jsonify(roomunavailable=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Roomunavailable=result)
+        return jsonify(Error="Not Found"), 404

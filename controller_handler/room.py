@@ -28,7 +28,7 @@ class Room_Controller_Handler:
         result = []
         for room in rooms:
             result.append(self.Room_Dict(room))
-        return jsonify(rooms=result)
+        return jsonify(Rooms=result)
 
     # ** Method to retrieve a specific room by its ID
     def Get_Room(self, room_id):
@@ -36,5 +36,5 @@ class Room_Controller_Handler:
         room = dao.Get_Room(room_id)
         if room:
             result = self.Room_Dict(room)
-            return jsonify(room=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Room=result)
+        return jsonify(Error="Not Found"), 404

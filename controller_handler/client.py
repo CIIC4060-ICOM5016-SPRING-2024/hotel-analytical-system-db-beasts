@@ -29,7 +29,7 @@ class Client_Controller_Handler:
         result = []
         for client in clients:
             result.append(self.Client_Dict(client))
-        return jsonify(clients=result)
+        return jsonify(Clients=result)
 
     # ** Method to retrieve a specific client by its ID
     def Get_Client(self, client_id):
@@ -37,5 +37,5 @@ class Client_Controller_Handler:
         client = dao.Get_Client(client_id)
         if client:
             result = self.Client_Dict(client)
-            return jsonify(client=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Client=result)
+        return jsonify(Error="Not Found"), 404
