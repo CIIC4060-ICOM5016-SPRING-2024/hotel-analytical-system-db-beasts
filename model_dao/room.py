@@ -78,3 +78,22 @@ class Room_Model_Dao:
             return count
         except:
             return "Error deleting"
+
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    # ** Looking for room information based on the supposed hotel.
+    def Get_Room_Info(self, rid, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select rid, hid, rdid, capacity, rprice "
+                 "from room "
+                 "natural inner join roomdescription "
+                 "where rid = %s and hid = %s")
+        cur.execute(query, (rid, hid,))
+        room_info = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return room_info
