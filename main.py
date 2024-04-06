@@ -408,7 +408,8 @@ def roomdescription():  # TODO
     if request.method == 'GET':
         return RoomDescription_Controller_Handler().Get_All_RoomDescriptions()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return RoomDescription_Controller_Handler().Post_RoomDescription(data)
     else:
         return jsonify("Not supported"), 405
 
