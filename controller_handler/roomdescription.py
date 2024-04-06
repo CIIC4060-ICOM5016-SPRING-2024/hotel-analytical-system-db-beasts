@@ -2,9 +2,15 @@
 from model_dao.roomdescription import RoomDescription_Model_Dao
 from flask import jsonify
 
+# ** Define the constants for room types and names
+ROOM_TYPES = ["Basic", "Premium", "Deluxe", "Suite"]
+ROOM_NAMES = ["Standard", "Standard Queen", "Standard King", "Double Queen", "Double King", "Triple King",
+              "Executive Family", "Presidential"]
+
 
 # ** Class for handling HTTP requests related to RoomDescription
 class RoomDescription_Controller_Handler:
+
     # ** Method to create a dictionary representation of RoomDescription data
     def RoomDescription_Dict(self, r):
         roomdescription_dict = {
@@ -15,6 +21,17 @@ class RoomDescription_Controller_Handler:
             'ishandicap': r[4]
         }
         return roomdescription_dict
+
+    # ** Method to build a dictionary representation of RoomDescription data
+    def RoomDescription_Build(self, rdid, rname, rtype, capacity, ishandicap):
+        roomdescription_build = {
+            'rdid': rdid,
+            'rname': rname,
+            'rtype': rtype,
+            'capacity': capacity,
+            'ishandicap': ishandicap
+        }
+        return roomdescription_build
 
     """
     ------------------
@@ -39,3 +56,57 @@ class RoomDescription_Controller_Handler:
             result = self.RoomDescription_Dict(roomdescription)
             return jsonify(Roomdescription=result)
         return jsonify(Error="Not Found"), 404
+
+    def Post_RoomDescription(self, roomdescription_data):
+        if len(roomdescription_data) != 4:
+            return jsonify(Error="Invalid Data"), 400
+
+        rname = roomdescription_data['rname']
+        if rname not in ROOM_NAMES:
+            return jsonify(
+                Error=f"Invalid Room Name. Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
+
+        capacity = roomdescription_data['capacity']
+        if not self.is_valid_capacity(rname, capacity):
+            return jsonify(Error="Invalid Capacity"), 400
+
+        rtype = roomdescription_data['rtype']
+        if not self.is_valid_room_type(rname, rtype):
+            return jsonify(Error="Invalid Room Type"), 400
+
+        ishandicap = roomdescription_data['ishandicap']
+        if ishandicap is None:
+            return jsonify(Error="Invalid Ishandicap"), 400
+
+        dao = RoomDescription_Model_Dao()
+        roomdescription_id = dao.Post_RoomDescription(rname, rtype, capacity, ishandicap)
+        result = self.RoomDescription_Build(roomdescription_id, rname, rtype, capacity, ishandicap)
+        return jsonify(RoomDescription=result), 201
+
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    def is_valid_capacity(self, room_name, capacity):
+        valid_capacity = {'Standard': [1],
+                          'Standard Queen': [1, 2],
+                          'Standard King': [2],
+                          'Double Queen': [4],
+                          'Double King': [4, 6],
+                          'Triple King': [6],
+                          'Executive Family': [4, 6, 8],
+                          'Presidential': [4, 6, 8]}
+        return capacity in valid_capacity.get(room_name, [])
+
+    def is_valid_room_type(self, room_name, room_type):
+        valid_room_type = {'Standard': ["Basic", "Premium"],
+                           'Standard Queen': ["Basic", "Premium", "Deluxe"],
+                           'Standard King': ["Basic", "Premium", "Deluxe"],
+                           'Double Queen': ["Basic", "Premium", "Deluxe"],
+                           'Double King': ["Basic", "Premium", "Deluxe", "Suite"],
+                           'Triple King': ["Deluxe", "Suite"],
+                           'Executive Family': ["Deluxe", "Suite"],
+                           'Presidential': ["Suite"]}
+        return room_type in valid_room_type.get(room_name, [])
