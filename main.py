@@ -462,7 +462,8 @@ def roomunavailableid(roomunavailable_id):  # TODO
     if request.method == 'GET':
         return RoomUnavailable_Controller_Handler().Get_RoomUnavailable(roomunavailable_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Put_RoomUnavailable(roomunavailable_id, data)
     elif request.method == 'DELETE':  # TODO
         pass
     else:
