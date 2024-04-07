@@ -6,8 +6,10 @@ from model_dao.employee import Employee_Model_Dao
 from flask import jsonify
 from datetime import datetime
 
+
 # ** Class for handling HTTP requests related to RoomUnavailable
 class RoomUnavailable_Controller_Handler:
+
     # ** Method to create a dictionary representation of RoomUnavailable data
     def RoomUnavailable_Dict(self, r):
         roomunavailable_dict = {
@@ -138,3 +140,35 @@ class RoomUnavailable_Controller_Handler:
         roomunavailable = daoRU2.Put_RoomUnavailable(ruid, rid, startdate, enddate)
         result = self.RoomUnavailable_Build(ruid, rid, startdate, enddate)
         return jsonify(RoomUnavailable=result)
+
+    def Delete_RoomUnavailable(self, ruid, roomunavailable_data):
+        if len(roomunavailable_data) != 1:
+            return jsonify(Error="Invalid Data"), 400
+
+        # ** Checking employee information
+        eid = roomunavailable_data['eid']
+        daoEmployee = Employee_Model_Dao()
+        employee = daoEmployee.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found."), 404
+        if employee[5] != "Supervisor":
+            return jsonify(Error="The employee position is not Supervisor"), 401
+
+        daoRU = RoomUnavailable_Model_Dao()
+        ruid1 = daoRU.Get_RoomUnavailable(ruid)
+        if not ruid1:
+            return jsonify(Error="RoomUnavailable not found."), 404
+
+        daoRoom = Room_Model_Dao()
+        room = daoRoom.Get_Room_Info(ruid1[1], employee[1])
+        if not room:
+            return jsonify(Error=f"Employee not work in the hotel."), 404
+
+        daoRU1 = RoomUnavailable_Model_Dao()
+        result = daoRU1.Delete_RoomUnavailable(ruid)
+        if result == "Error deleting":
+            return jsonify(Error="Room Unavailable is referenced"), 400
+        elif result:
+            return jsonify(OK="Room Unavailable Deleted"), 200
+        else:
+            return jsonify(Error="Delete Failed"), 500
