@@ -464,8 +464,9 @@ def roomunavailableid(roomunavailable_id):  # TODO
     elif request.method == 'PUT':  # TODO
         data = request.json
         return RoomUnavailable_Controller_Handler().Put_RoomUnavailable(roomunavailable_id, data)
-    elif request.method == 'DELETE':  # TODO
-        pass
+    elif request.method == 'DELETE':
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Delete_RoomUnavailable(roomunavailable_id, data)
     else:
         return jsonify("Not supported"), 405
 
