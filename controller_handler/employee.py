@@ -2,6 +2,8 @@
 from model_dao.employee import Employee_Model_Dao
 from flask import jsonify
 
+from model_dao.hotel import Hotel_Model_Dao
+
 
 # ** Class for handling HTTP requests related to employee
 class Employee_Controller_Handler:
@@ -17,6 +19,19 @@ class Employee_Controller_Handler:
             'salary': r[6]
         }
         return employee_dict
+
+    # ** Method to build an Employee data holder
+
+    def Employee_Build(self, employee_id, hid, fname, lname, age, position, salary):
+        employee_build = {
+            'hid': hid,
+            'fname': fname,
+            'lname': lname,
+            'age': age,
+            'position': position,
+            'salary': salary
+        }
+        return employee_build
 
     """
     ------------------
@@ -41,3 +56,30 @@ class Employee_Controller_Handler:
             result = self.Employee_Dict(employee)
             return jsonify(employee=result)
         return jsonify("Not Found"), 404
+
+    # ** Method to add a new employee
+    def Post_Employee(self, employee_data):
+        if len(employee_data) != 6:
+            return jsonify(Error="Invalid Data"), 400
+
+        # ** Models/Daos to use
+        daoh = Hotel_Model_Dao()
+        daoe = Employee_Model_Dao()
+
+        # ** Data received
+        hid = employee_data['hid']
+        fname = employee_data['fname']
+        lname = employee_data['lname']
+        age = employee_data['age']
+        position = employee_data['position']
+        salary = employee_data['salary']
+
+        # ** Search hid if it's a valid hotel
+        if not daoh.Get_Hotel(hid):
+            return jsonify(Error="Hotel not found"), 404
+       #if position and salary:
+        employee_id = daoe.Post_Employee(hid, fname, lname, age, position, salary)
+        result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
+        return jsonify(employee=result), 201
+        #else:
+          #  return jsonify(Error="Unexpected attribute values."), 400
