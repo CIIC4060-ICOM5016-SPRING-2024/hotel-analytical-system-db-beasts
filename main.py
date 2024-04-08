@@ -330,7 +330,8 @@ def login():  # TODO
     if request.method == 'GET':
         return Login_Controller_Handler().Get_All_Logins()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Login_Controller_Handler().Post_Login(data)
     else:
         return jsonify("Not supported"), 405
 
