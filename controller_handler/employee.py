@@ -77,9 +77,52 @@ class Employee_Controller_Handler:
         # ** Search hid if it's a valid hotel
         if not daoh.Get_Hotel(hid):
             return jsonify(Error="Hotel not found"), 404
-       #if position and salary:
         employee_id = daoe.Post_Employee(hid, fname, lname, age, position, salary)
         result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
         return jsonify(employee=result), 201
-        #else:
-          #  return jsonify(Error="Unexpected attribute values."), 400
+
+    # ** Method to update an existing employee
+
+    def Put_Employee(self, eid, employee_data):
+        if len(employee_data) != 6:
+            return jsonify(Error="Invalid Data"), 400
+
+        # ** Models/Daos to use
+        daoh = Hotel_Model_Dao()
+        daoe = Employee_Model_Dao()
+
+        # ** Data received
+        hid = employee_data['hid']
+        fname = employee_data['fname']
+        lname = employee_data['lname']
+        age = employee_data['age']
+        position = employee_data['position']
+        salary = employee_data['salary']
+
+        # ** Search hid if it's a valid hotel
+        if not daoh.Get_Hotel(hid):
+            return jsonify(Error="Hotel not found"), 404
+        if (eid or hid == 0) and fname and lname and age and position and salary:
+            count = daoe.Put_Employee(eid, hid, fname, lname, age, position, salary)
+            if count > 0:
+                return jsonify(Message="Employee updated successfully"), 200
+            else:
+                return jsonify(Error="Employee not found"), 404
+        else:
+            return jsonify(Error="Unexpected attribute values."), 400
+
+
+ # ** Method to fire an employee (Delete)
+    def Delete_Employee(self, eid):
+        if eid or eid == 0:
+            dao = Employee_Model_Dao()
+            result = dao.Delete_Employee(eid)
+            if result == "Error deleting the employee":
+                return jsonify("This employee has connections, it's untouchable."), 400
+            elif result:
+                return jsonify("Fired"), 200
+            else:
+                return jsonify("Not an Employee"), 404
+        else:
+            return jsonify("Unable to fire this employee."), 400
+

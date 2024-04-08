@@ -55,9 +55,9 @@ class Employee_Model_Dao:
     def Put_Employee(self, eid, hid, fname, lname, age, position, salary):
         cur = self.db.docker_connection.cursor()
         query = ("UPDATE employee "
-                 "SET hid = %s, fname = %s, lname = %s, age = %s, position = %s "
+                 "SET hid = %s, fname = %s, lname = %s, age = %s, position = %s, salary = %s "
                  "WHERE eid = %s")
-        cur.execute(query, (hid, fname, lname, age, position, salary))
+        cur.execute(query, (hid, fname, lname, age, position, salary, eid))
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
