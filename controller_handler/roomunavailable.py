@@ -14,6 +14,15 @@ class RoomUnavailable_Controller_Handler:
             'enddate': r[3]
         }
         return roomunavailable_dict
+    
+    def RoomUnavailable_Build(self, ruid, rid, startdate, enddate):
+        roomunavailable_build = {
+            'ruid': ruid,
+            'rid': rid,
+            'startdate': startdate,
+            'enddate': enddate
+        }
+        return roomunavailable_build
 
     """
     ------------------
@@ -38,3 +47,7 @@ class RoomUnavailable_Controller_Handler:
             result = self.RoomUnavailable_Dict(roomunavailable)
             return jsonify(roomunavailable=result)
         return jsonify("Not Found"), 404
+
+
+    
+    

@@ -520,7 +520,8 @@ def client():  # TODO
     if request.method == 'GET':
         return Client_Controller_Handler().Get_All_Clients()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Client_Controller_Handler().Post_Client(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -545,3 +546,4 @@ def clientid(client_id):  # TODO
 
 if __name__ == '__main__':
     app.run(debug=True)
+ 

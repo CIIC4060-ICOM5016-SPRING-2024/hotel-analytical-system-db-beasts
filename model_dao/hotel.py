@@ -77,3 +77,12 @@ class Hotel_Model_Dao:
             return count
         except:
             return "Error deleting"
+        
+    def Get_Hotels_Chain(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("""SELECT chid FROM hotel WHERE hid = %s""")
+        cur.execute(query, (hid,))
+        chid = cur.fetchone()[0]
+        self.db.close()
+        cur.close()
+        return chid
