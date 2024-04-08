@@ -75,11 +75,11 @@ class Employee_Controller_Handler:
             fname = employee_data['fname']
             lname = employee_data['lname']
             age = employee_data['age']
-            if fname is str and lname is str and age is int:
+            if fname and lname and age:
 
                 username = employee_data['username']
                 password = employee_data['password']
-                if username is str and password is str:
+                if username and password:
 
                     daoE = Employee_Model_Dao()
                     employee_id = daoE.Post_Employee(hid, fname, lname, age, position, salary)
@@ -137,12 +137,19 @@ class Employee_Controller_Handler:
         daoE = Employee_Model_Dao()
         if not daoE.Get_Employee(employee_id):
             return jsonify(Error="Employee Not Found"), 404
+
+        daoL = Login_Model_Dao()
+        login_id = daoL.Get_Login_ByEmployee(employee_id)
+
+        daoL = Login_Model_Dao()
+        login_result = daoL.Delete_Login(login_id)
+
         daoE1 = Employee_Model_Dao()
-        result = daoE1.Delete_Employee(employee_id)
-        if result == "Error":
-            return jsonify(Error="Employee is referenced"), 400
-        elif result:
-            return jsonify(OK="Employee Deleted"), 200
+        employee_result = daoE1.Delete_Employee(employee_id)
+        # if employee_result == "Error":
+        #     return jsonify(Error="Employee is referenced"), 400
+        if employee_result:
+            return jsonify(OK=f"Employee {employee_id} and Login {login_id[0]} Deleted"), 200
         else:
             return jsonify(Error="Delete Failed"), 500
 
