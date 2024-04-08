@@ -1,6 +1,9 @@
 # ** Importing necessary modules
-from model_dao.login import Login_Model_Dao
 from flask import jsonify
+
+from model_dao.login import Login_Model_Dao
+from model_dao.employee import Employee_Model_Dao
+# from controller_handler.employee import Employee_Controller_Handler
 
 
 # ** Class for handling HTTP requests related to login
@@ -47,3 +50,30 @@ class Login_Controller_Handler:
             result = self.Login_Dict(login)
             return jsonify(Login=result)
         return jsonify(Error="Not Found"), 404
+
+    def Post_Login(self, login_data):
+        if len(login_data) != 3:
+            return jsonify(Error="Invalid Data"), 400
+
+        eid = login_data['eid']
+        daoE = Employee_Model_Dao()
+        employee_info = daoE.Get_Employee(eid)
+        if not employee_info:
+            return jsonify(Error="Employee not found"), 404
+        # controller_handler_employee = Employee_Controller_Handler()
+        # employee_result = controller_handler_employee.Employee_Dict(employee_info)
+
+        daoL = Login_Model_Dao()
+        login_id_employee = daoL.Get_Login_ByEmployee(eid)
+        if not login_id_employee:
+            username = login_data['username']
+            password = login_data['password']
+            if username and password:
+                daoL1 = Login_Model_Dao()
+                login_id = daoL1.Post_Login(eid, username, password)
+                login_result = self.Login_Build(login_id, eid, username, password)
+                return jsonify(Login=login_result, OK="Loin Posted Successfully"), 201
+            else:
+                return jsonify(Error="Unexpected attribute values."), 400
+        else:
+            return jsonify(Error="Employee have login account"), 404
