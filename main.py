@@ -289,7 +289,8 @@ def employee():  # TODO
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_All_Employees()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Employee_Controller_Handler().Post_Employee(data)
     else:
         return jsonify("Not supported"), 405
 
