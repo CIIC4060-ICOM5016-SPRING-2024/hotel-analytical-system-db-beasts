@@ -302,9 +302,10 @@ def employeeid(employee_id):  # TODO
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_Employee(employee_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Employee_Controller_Handler().Put_Employee(employee_id, data)
     elif request.method == 'DELETE':  # TODO
-        pass
+        return Employee_Controller_Handler().Delete_employee(employee_id)
     else:
         return jsonify("Not supported"), 405
 
