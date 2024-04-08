@@ -81,4 +81,4 @@ class Employee_Model_Dao:
             cur.close()
             return count
         except:
-            return "Error deleting the employee"
+            return "Error"
