@@ -75,19 +75,26 @@ class Employee_Controller_Handler:
             fname = employee_data['fname']
             lname = employee_data['lname']
             age = employee_data['age']
+            if fname is str and lname is str and age is int:
 
-            daoE = Employee_Model_Dao()
-            employee_id = daoE.Post_Employee(hid, fname, lname, age, position, salary)
-            employee_result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
+                username = employee_data['username']
+                password = employee_data['password']
+                if username is str and password is str:
 
-            username = employee_data['username']
-            password = employee_data['password']
-            daoL = Login_Model_Dao()
-            login_id = daoL.Post_Login(employee_id, username, password)
-            controller_handler_login = Login_Controller_Handler()
-            login_result = controller_handler_login.Login_Build(login_id, employee_id, username, password)
+                    daoE = Employee_Model_Dao()
+                    employee_id = daoE.Post_Employee(hid, fname, lname, age, position, salary)
+                    employee_result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
 
-            return jsonify(Employee=employee_result, Login=login_result), 201
+                    daoL = Login_Model_Dao()
+                    login_id = daoL.Post_Login(employee_id, username, password)
+                    controller_handler_login = Login_Controller_Handler()
+                    login_result = controller_handler_login.Login_Build(login_id, employee_id, username, password)
+
+                    return jsonify(OK="Employee Posted", Employee=employee_result, Login=login_result), 201
+                else:
+                    return jsonify(Error="Unexpected attribute values."), 400
+            else:
+                return jsonify(Error="Unexpected attribute values."), 400
 
         elif position in self.SALARY_CONSTRAINTS:
             return jsonify(Error="Invalid Salary Range"), 400
