@@ -77,3 +77,24 @@ class Login_Controller_Handler:
                 return jsonify(Error="Unexpected attribute values."), 400
         else:
             return jsonify(Error="Employee have login account"), 404
+
+    def Put_Login(self, lid, login_data):
+        if len(login_data) != 2:
+            return jsonify(Error="Invalid Data"), 400
+
+        daoL = Login_Model_Dao()
+        login_info = daoL.Get_Login(lid)
+        if not login_info:
+            return jsonify(Error="Login not found"), 404
+
+        eid = login_info[1]
+
+        username = login_data['username']
+        password = login_data['password']
+        if username and password:
+            daoL1 = Login_Model_Dao()
+            login = daoL1.Put_Login(lid, eid, username, password)
+            login_result = self.Login_Build(lid, eid, username, password)
+            return jsonify(Login=login_result, OK="Login Updated Successfully"), 200
+        else:
+            return jsonify(Error="Unexpected attribute values."), 400
