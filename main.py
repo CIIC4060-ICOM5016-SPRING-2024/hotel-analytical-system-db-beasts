@@ -298,7 +298,7 @@ def employee():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee/<int:employee_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def employeeid(employee_id):  # TODO
+def employeeid(employee_id):
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_Employee(employee_id)
     elif request.method == 'PUT':
@@ -330,8 +330,9 @@ Region LOGIN
 def login():  # TODO
     if request.method == 'GET':
         return Login_Controller_Handler().Get_All_Logins()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':
+        data = request.json
+        return Login_Controller_Handler().Post_Login(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -342,8 +343,9 @@ def login():  # TODO
 def loginid(login_id):  # TODO
     if request.method == 'GET':
         return Login_Controller_Handler().Get_Login(login_id)
-    elif request.method == 'PUT':  # TODO
-        pass
+    elif request.method == 'PUT':
+        data = request.json
+        return Login_Controller_Handler().Put_Login(login_id, data)
     elif request.method == 'DELETE':  # TODO
         pass
     else:

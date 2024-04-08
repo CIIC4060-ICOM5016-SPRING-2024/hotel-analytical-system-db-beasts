@@ -1,4 +1,5 @@
 # ** Importing necessary modules
+from model_dao.employee import Employee_Model_Dao
 from model_dao.login import Login_Model_Dao
 from flask import jsonify
 
@@ -14,6 +15,16 @@ class Login_Controller_Handler:
             'password': r[3]
         }
         return login_dict
+
+    # ** Method to build a Login data holder
+
+    def Login_Build(self, login_id, eid, username, password):
+        login_build = {
+            'eid': eid,
+            'username': username,
+            'password': password
+            }
+        return login_build
 
     """
     ------------------
@@ -38,3 +49,45 @@ class Login_Controller_Handler:
             result = self.Login_Dict(login)
             return jsonify(login=result)
         return jsonify("Not Found"), 404
+
+    def Post_Login(self, login_data):
+        if len(login_data) != 3:
+            return jsonify(Error="Invalid Data"), 400
+        # ** Models/Daos to use
+        daoe = Employee_Model_Dao()
+        daol = Login_Model_Dao()
+        # ** Data received
+        eid = login_data['eid']
+        username = login_data['username']
+        password = login_data['password']
+        # ** Search chid if exists
+        if not daoe.Get_Employee(eid):
+            return jsonify(Error="Employee doesn't work with us."), 404
+        if username and password:
+            login_id = daol.Post_Login(eid, username, password)
+            result = self.Login_Build(login_id, eid, username, password)
+            return jsonify(hotel=result), 201
+        else:
+            return jsonify("Unexpected attribute values."), 400
+
+    def Put_Login(self, lid, login_data):
+        if len(login_data) != 3:
+            return jsonify(Error="Invalid Data"), 400
+            # ** Models/Daos to use
+        daoe = Employee_Model_Dao()
+        daol = Login_Model_Dao()
+        # ** Data received
+        eid = login_data['eid']
+        username = login_data['username']
+        password = login_data['password']
+        # ** Search chid if exists
+        if not daoe.Get_Employee(eid):
+            return jsonify(Error="Employee doesn't work with us."), 404
+        if (lid or eid == 0) and username and password:
+            count = daol.Put_Login(lid, eid, username, password)
+            if count > 0:
+                return jsonify(Message="Your login info has been successfully changed!"), 200
+            else:
+                return jsonify(Error="Username or Password are incorrect. Try again."), 404
+        else:
+            return jsonify(Error="Incorrect field. Try again."), 400
