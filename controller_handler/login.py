@@ -15,6 +15,15 @@ class Login_Controller_Handler:
         }
         return login_dict
 
+    def Login_Build(self, lid, eid, username, password):
+        login_build = {
+            'lid': lid,
+            'eid': eid,
+            'username': username,
+            'password': password
+        }
+        return login_build
+
     """
     ------------------
     * CRUD OPERATIONS
