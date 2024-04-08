@@ -343,7 +343,8 @@ def loginid(login_id):  # TODO
     if request.method == 'GET':
         return Login_Controller_Handler().Get_Login(login_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Login_Controller_Handler().Put_Login(login_id, data)
     elif request.method == 'DELETE':  # TODO
         pass
     else:
