@@ -42,17 +42,17 @@ class Reserve_Model_Dao:
         # ** Method to add a new reserve to the database
         with self.db.docker_connection.cursor() as cur:
             
-            tempquery = "SELECT MAX(reid) FROM reserve"
-            cur.execute(tempquery)
+            # tempquery = "SELECT MAX(reid) FROM reserve"
+            # cur.execute(tempquery)
             reid = cur.fetchone()[0]
             
             reid = reid + 1
             
             #Change to query after testing
-            tempquery = ("Alter sequence reserve_reid_seq restart with %s;"
-                    "INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
-                    "VALUES (%s, %s, %s, %s, %s)"
-                    "returning reid")
+            # tempquery = ("Alter sequence reserve_reid_seq restart with %s;"
+            #         "INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
+            #         "VALUES (%s, %s, %s, %s, %s)"
+            #         "returning reid")
             
             query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
                     "VALUES (%s, %s, %s, %s, %s)"
@@ -60,7 +60,7 @@ class Reserve_Model_Dao:
             
             #cur.execute(query, (ruid, clid, total_cost, payment, guests))
             
-            cur.execute(tempquery, (reid, ruid, clid, total_cost, payment, guests))
+            cur.execute(query, (reid, ruid, clid, total_cost, payment, guests))
             result = cur.fetchone()[0]
             self.db.docker_connection.commit()
             self.db.close()
