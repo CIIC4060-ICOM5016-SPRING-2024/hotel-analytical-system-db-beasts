@@ -140,7 +140,10 @@ class Employee_Controller_Handler:
 
         daoL = Login_Model_Dao()
         login_id = daoL.Get_Login_ByEmployee(employee_id)
-
+        if not login_id:
+            login_id = "None"
+        else:
+            login_id = login_id[0]
         daoL1 = Login_Model_Dao()
         login_result = daoL1.Delete_Login(login_id)
 
@@ -149,7 +152,7 @@ class Employee_Controller_Handler:
         # if employee_result == "Error":
         #     return jsonify(Error="Employee is referenced"), 400
         if employee_result:
-            return jsonify(OK=f"Employee {employee_id} and Login {login_id[0]} Deleted"), 200
+            return jsonify(OK=f"Employee {employee_id} and Login {login_id} Deleted"), 200
         else:
             return jsonify(Error="Delete Failed"), 500
 
