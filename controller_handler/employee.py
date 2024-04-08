@@ -141,8 +141,8 @@ class Employee_Controller_Handler:
         daoL = Login_Model_Dao()
         login_id = daoL.Get_Login_ByEmployee(employee_id)
 
-        daoL = Login_Model_Dao()
-        login_result = daoL.Delete_Login(login_id)
+        daoL1 = Login_Model_Dao()
+        login_result = daoL1.Delete_Login(login_id)
 
         daoE1 = Employee_Model_Dao()
         employee_result = daoE1.Delete_Employee(employee_id)
