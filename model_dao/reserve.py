@@ -44,9 +44,9 @@ class Reserve_Model_Dao:
             
             # tempquery = "SELECT MAX(reid) FROM reserve"
             # cur.execute(tempquery)
-            reid = cur.fetchone()[0]
+            # reid = cur.fetchone()[0]
             
-            reid = reid + 1
+            # reid = reid + 1
             
             #Change to query after testing
             # tempquery = ("Alter sequence reserve_reid_seq restart with %s;"
@@ -60,7 +60,7 @@ class Reserve_Model_Dao:
             
             #cur.execute(query, (ruid, clid, total_cost, payment, guests))
             
-            cur.execute(query, (reid, ruid, clid, total_cost, payment, guests))
+            cur.execute(query, (ruid, clid, total_cost, payment, guests))
             result = cur.fetchone()[0]
             self.db.docker_connection.commit()
             self.db.close()
@@ -154,9 +154,13 @@ class Reserve_Model_Dao:
                  "FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
-        ruid = cur.fetchone()[0]
-        self.db.close()
-        cur.close()
-        return ruid
+        result = cur.fetchone()
+        if type(result) == type(None):
+            return None
+        else: 
+            ruid = result[0]
+            self.db.close()
+            cur.close()
+            return ruid
     
     

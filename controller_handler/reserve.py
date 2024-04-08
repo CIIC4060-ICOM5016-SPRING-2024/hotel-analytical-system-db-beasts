@@ -105,11 +105,13 @@ class Reserve_Controller_Handler:
         if room[3] <guests:
             return jsonify(Error="Not enough rooms for guests."), 404
         
-        
-        if type(startdate) != datetime.date:
-                startdate = datetime.datetime.strptime(startdate, "%Y-%m-%d").date()
-        if type(enddate) != datetime.date:
-                enddate = datetime.datetime.strptime(enddate, "%Y-%m-%d").date()
+        try:
+            if type(startdate) != datetime.date:
+                    startdate = datetime.datetime.strptime(startdate, "%Y-%m-%d").date()
+            if type(enddate) != datetime.date:
+                    enddate = datetime.datetime.strptime(enddate, "%Y-%m-%d").date()
+        except:
+            return jsonify(Error="Invalid date format."), 400
                 
         if enddate <= startdate:
             return jsonify(Error="End date is before start date."), 404
@@ -265,8 +267,16 @@ class Reserve_Controller_Handler:
     def Delete_Reserve(self, reserve_id):
         # Delete reserve
         if reserve_id or reserve_id == 0:
+            
+            daotemp = Reserve_Model_Dao()
+            result = daotemp.Get_Reserve(reserve_id)
+            
+            if result is None:
+                return jsonify("Not Found"), 404
+            
             dao2 = Reserve_Model_Dao()
             ruid = dao2.Get_RUID(reserve_id)
+            
             dao = Reserve_Model_Dao()
             dao_result = dao.Delete_Reserve(reserve_id)
             
