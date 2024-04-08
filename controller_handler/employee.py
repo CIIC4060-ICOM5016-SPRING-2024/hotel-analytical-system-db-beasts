@@ -1,8 +1,10 @@
 # ** Importing necessary modules
-from model_dao.employee import Employee_Model_Dao
 from flask import jsonify
 
+from model_dao.employee import Employee_Model_Dao
 from model_dao.hotel import Hotel_Model_Dao
+from model_dao.login import Login_Model_Dao
+from controller_handler.login import Login_Controller_Handler
 
 
 # ** Class for handling HTTP requests related to employee
@@ -57,7 +59,7 @@ class Employee_Controller_Handler:
         return jsonify(Error="Not Found"), 404
 
     def Post_Employee(self, employee_data):
-        if len(employee_data) != 6:
+        if len(employee_data) != 8:
             return jsonify(Error="Invalid Data"), 400
 
         hid = employee_data['hid']
@@ -76,8 +78,16 @@ class Employee_Controller_Handler:
 
             daoE = Employee_Model_Dao()
             employee_id = daoE.Post_Employee(hid, fname, lname, age, position, salary)
-            result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
-            return jsonify(Employee=result), 201
+            employee_result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
+
+            username = employee_data['username']
+            password = employee_data['password']
+            daoL = Login_Model_Dao()
+            login_id = daoL.Post_Login(employee_id, username, password)
+            controller_handler_login = Login_Controller_Handler()
+            login_result = controller_handler_login.Login_Build(login_id, employee_id, username, password)
+
+            return jsonify(Employee=employee_result, Login=login_result), 201
 
         elif position in self.SALARY_CONSTRAINTS:
             return jsonify(Error="Invalid Salary Range"), 400
