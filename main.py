@@ -285,10 +285,10 @@ Region EMPLOYEE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee',
            methods=['GET', 'POST'])
-def employee():  # TODO
+def employee():
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_All_Employees()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':
         data = request.json
         return Employee_Controller_Handler().Post_Employee(data)
     else:
@@ -298,13 +298,13 @@ def employee():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee/<int:employee_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def employeeid(employee_id):  # TODO
+def employeeid(employee_id):
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_Employee(employee_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':
         data = request.json
         return Employee_Controller_Handler().Put_Employee(employee_id, data)
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':
         return Employee_Controller_Handler().Delete_employee(employee_id)
     else:
         return jsonify("Not supported"), 405
@@ -326,10 +326,10 @@ Region LOGIN
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login',
            methods=['GET', 'POST'])
-def login():  # TODO
+def login():
     if request.method == 'GET':
         return Login_Controller_Handler().Get_All_Logins()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':
         data = request.json
         return Login_Controller_Handler().Post_Login(data)
     else:
@@ -339,13 +339,13 @@ def login():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login/<int:login_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def loginid(login_id):  # TODO
+def loginid(login_id):
     if request.method == 'GET':
         return Login_Controller_Handler().Get_Login(login_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':
         data = request.json
         return Login_Controller_Handler().Put_Login(login_id, data)
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':
         return Login_Controller_Handler().Delete_Login(login_id)
     else:
         return jsonify("Not supported"), 405
@@ -462,10 +462,10 @@ def roomunavailable():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable/<int:roomunavailable_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomunavailableid(roomunavailable_id):  # TODO
+def roomunavailableid(roomunavailable_id):
     if request.method == 'GET':
         return RoomUnavailable_Controller_Handler().Get_RoomUnavailable(roomunavailable_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':
         data = request.json
         return RoomUnavailable_Controller_Handler().Put_RoomUnavailable(roomunavailable_id, data)
     elif request.method == 'DELETE':
@@ -491,10 +491,10 @@ Region RESERVE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve',
            methods=['GET', 'POST'])
-def reserve():  # TODO
+def reserve():
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_All_Reserves()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':
         data = request.json
         return Reserve_Controller_Handler().Post_Reserve(data)
     else:
@@ -504,13 +504,13 @@ def reserve():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def reserveid(reserve_id):  # TODO
+def reserveid(reserve_id):
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_Reserve(reserve_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':
         data = request.json
         return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':
         return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
         return jsonify("Not supported"), 405
@@ -532,10 +532,10 @@ Region CLIENT
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client',
            methods=['GET', 'POST'])
-def client():  # TODO
+def client():
     if request.method == 'GET':
         return Client_Controller_Handler().Get_All_Clients()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':
         data = request.json
         return Client_Controller_Handler().Post_Client(data)
     else:
@@ -545,13 +545,13 @@ def client():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def clientid(client_id):  # TODO
+def clientid(client_id):
     if request.method == 'GET':
         return Client_Controller_Handler().Get_Client(client_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':
         data = request.json
         return Client_Controller_Handler().Put_Client(client_id, data)
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':
         return Client_Controller_Handler().Delete_Client(client_id)
     else:
         return jsonify("Not supported"), 405
