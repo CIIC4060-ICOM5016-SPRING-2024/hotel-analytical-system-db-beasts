@@ -94,4 +94,13 @@ class RoomUnavailable_Model_Dao:
         cur.close()
         return roomunavailable_time
 
-    # def RoomUnavailable_Time_put(self, rid, ruid):
+    def RoomUnavailable_Time_put(self, rid, ruid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT max(enddate) as enddate "
+                 "FROM roomunavailable "
+                 "WHERE rid = %s and ruid != %s")
+        cur.execute(query, (rid, ruid))
+        roomunavailable_time = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return roomunavailable_time
