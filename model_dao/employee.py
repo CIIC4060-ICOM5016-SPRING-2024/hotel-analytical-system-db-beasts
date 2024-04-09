@@ -29,6 +29,7 @@ class Employee_Model_Dao:
     # ** Method to fetch a specific employee by its ID from the database
     def Get_Employee(self, eid):
         cur = self.db.docker_connection.cursor()
+        cur = self.db.docker_connection.cursor()
         query = ("SELECT * "
                  "FROM employee "
                  "WHERE eid = %s")
@@ -81,4 +82,3 @@ class Employee_Model_Dao:
         except:
             return "Error deleting the employee"
 
-        #Main > Handler > Model

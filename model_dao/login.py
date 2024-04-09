@@ -76,3 +76,22 @@ class Login_Model_Dao:
             return count
         except:
             return "We couldn't delete your information, sorry!"
+
+    """
+
+       ------------------
+       * TOOLS OPERATIONS 
+       ------------------
+
+    """
+
+    def Get_ID_Login(self, eid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT lid "
+                 "FROM login "
+                 "WHERE eid = %s")
+        cur.execute(query, (eid,))
+        login = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return login

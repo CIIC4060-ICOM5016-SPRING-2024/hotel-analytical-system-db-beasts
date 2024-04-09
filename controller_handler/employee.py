@@ -3,6 +3,7 @@ from model_dao.employee import Employee_Model_Dao
 from flask import jsonify
 
 from model_dao.hotel import Hotel_Model_Dao
+from model_dao.login import Login_Model_Dao
 
 
 # ** Class for handling HTTP requests related to employee
@@ -24,6 +25,7 @@ class Employee_Controller_Handler:
 
     def Employee_Build(self, employee_id, hid, fname, lname, age, position, salary):
         employee_build = {
+            'eid' : employee_id,
             'hid': hid,
             'fname': fname,
             'lname': lname,
@@ -146,17 +148,28 @@ class Employee_Controller_Handler:
             return jsonify(Error="Unexpected attribute values."), 400
 
 
- # ** Method to fire an employee (Delete)
+    # ** Method to fire an employee (Delete)
     def Delete_Employee(self, eid):
-        if eid or eid == 0:
-            dao = Employee_Model_Dao()
-            result = dao.Delete_Employee(eid)
-            if result == "Error deleting the employee":
-                return jsonify("This employee has connections, it's untouchable."), 400
-            elif result:
-                return jsonify("Fired"), 200
-            else:
-                return jsonify("Not an Employee"), 404
-        else:
-            return jsonify("Unable to fire this employee."), 400
 
+        daoe = Employee_Model_Dao()
+        if daoe.Get_Employee(eid):
+            daol = Login_Model_Dao()
+            daolid = Login_Model_Dao()
+            daoed = Employee_Model_Dao()
+
+            # Search for the account linked to the employee ID (eid)
+            login_id = daolid.Get_ID_Login(eid)
+
+            if login_id is not None:
+                # Delete the account
+                daol.Delete_Login(login_id)
+
+            # Delete the employee entry
+            result = daoed.Delete_Employee(eid)
+
+            if result:
+                return jsonify("This employee has been removed with it's account from the database"), 200
+            else:
+                return jsonify("Not an employee"), 404
+        else:
+            return jsonify("Unable to find and delete this employee."), 400
