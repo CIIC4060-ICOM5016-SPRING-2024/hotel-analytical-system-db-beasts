@@ -83,6 +83,7 @@ class Employee_Controller_Handler:
 
                 username = employee_data['username']
                 password = employee_data['password']
+
                 if username and password:
 
                     daoE = Employee_Model_Dao()
@@ -122,6 +123,10 @@ class Employee_Controller_Handler:
 
         position = employee_data['position']
         salary = employee_data['salary']
+
+        if (hid == -1 and position != "Administrator") or (position == "Administrator" and hid != -1):
+            return jsonify(Error="Invalid Position with Hotel"), 400
+
         if self.is_valid_salary(position, salary):
 
             fname = employee_data['fname']
