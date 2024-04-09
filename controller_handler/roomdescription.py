@@ -119,9 +119,9 @@ class RoomDescription_Controller_Handler:
     # ** Method to delete an existing Room Description
     def Delete_RoomDescription(self, roomdescription_id):
         daoRD = RoomDescription_Model_Dao()
-        roomdescription = daoRD.Get_RoomDescription(roomdescription_id)
-        if not roomdescription:
+        if not daoRD.Get_RoomDescription(roomdescription_id):
             return jsonify(Error="Room Description not found"), 404
+
         daoRD1 = RoomDescription_Model_Dao()
         result = daoRD1.Delete_RoomDescription(roomdescription_id)
         if result == "Error deleting":
