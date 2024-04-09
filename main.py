@@ -367,6 +367,8 @@ def room():  # TODO
     if request.method == 'GET':
         return Room_Controller_Handler().Get_All_Rooms()
     elif request.method == 'POST':  # TODO
+        data = request.json
+        return Room_Controller_Handler().Post_Room(data)
         pass
     else:
         return jsonify("Not supported"), 405

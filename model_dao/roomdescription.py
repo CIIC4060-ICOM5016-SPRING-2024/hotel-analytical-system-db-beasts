@@ -37,3 +37,43 @@ class RoomDescription_Model_Dao:
         self.db.close()
         cur.close()
         return roomdescription
+
+    # ** Method to add a new RoomDescription to the database
+    def Post_RoomDescription(self, rname, rtype, capacity, ishandicap):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO roomdescription (rname, rtype, capacity, ishandicap) "
+                 "VALUES (%s, %s, %s, %s)"
+                 "returning rdid")
+        cur.execute(query, (rname, rtype, capacity, ishandicap))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result
+
+    # ** Method to update an existing RoomDescription in the database
+    def Put_RoomDescription(self, rdid, rname, rtype, capacity, ishandicap):
+        cur = self.db.docker_connection.cursor()
+        query = ("UPDATE roomdescription "
+                 "SET rname = %s, rtype = %s, capacity = %s, ishandicap = %s "
+                 "WHERE rdid = %s")
+        cur.execute(query, (rname, rtype, capacity, ishandicap, rdid))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
+
+    def Delete_RoomDescription(self, rdid):
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM roomdescription "
+                 "WHERE rdid = %s")
+        try:
+            cur.execute(query, (rdid,))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "Error deleting"

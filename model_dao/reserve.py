@@ -37,3 +37,79 @@ class Reserve_Model_Dao:
         self.db.close()
         cur.close()
         return reserve
+
+    def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
+        # ** Method to add a new reserve to the database
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
+                 "VALUES (%s, %s, %s, %s, %s)"
+                 "returning reid")
+        cur.execute(query, (ruid, clid, total_cost, payment, guests))
+        result = cur.fetchone()[0]
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return result
+
+    def Put_Reserve(self, ruid, clid, total_cost, payment, guests, reid):
+        # ** Method to update an existing reserve in the database
+        cur = self.db.docker_connection.cursor()
+        query = ("UPDATE reserve "
+                 "SET ruid = %s, clid = %s, total_cost = %s, payment = %s, guests = %s "
+                 "WHERE reid = %s")
+        cur.execute(query, (ruid, clid, total_cost, payment, guests, reid))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
+
+    def Delete_Reserve(self, reid):
+        # ** Method to delete an existing reserve in the database
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM reserve "
+                 "WHERE reid = %s")
+        cur.execute(query, (reid,))
+        count = cur.rowcount
+        self.db.docker_connection.commit()
+        self.db.close()
+        cur.close()
+        return count
+
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    def Get_Total_Cost(self, rid, clid, startdate, enddate):
+        cur = self.db.docker_connection.cursor()
+        query = (" SELECT calculate_reservation_cost( "
+                 "          rprice, "
+                 "          (date(%s) - date(%s)), "
+                 "          chid, "
+                 "          %s, "
+                 "          memberyear) "
+                 "  FROM reserve "
+                 "  NATURAL INNER JOIN client "
+                 "  NATURAL INNER JOIN roomunavailable "
+                 "  NATURAL INNER JOIN room "
+                 "  NATURAL INNER JOIN hotel "
+                 "  NATURAL INNER JOIN chains "
+                 "  WHERE rid = %s AND clid = %s ")
+        cur.execute(query, (enddate, startdate, startdate, rid, clid))
+        total_cost = cur.fetchone()[0]
+        self.db.close()
+        cur.close()
+        return total_cost
+
+    def Get_Reserve_ByRoomUnavailable(self, ruid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT reid"
+                 " FROM reserve "
+                 "WHERE ruid = %s")
+        cur.execute(query, (ruid,))
+        reserve = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return reserve
