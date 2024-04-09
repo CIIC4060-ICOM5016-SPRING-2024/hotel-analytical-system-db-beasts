@@ -2,6 +2,7 @@
 from model_dao.roomunavailable import RoomUnavailable_Model_Dao
 from model_dao.room import Room_Model_Dao
 from model_dao.employee import Employee_Model_Dao
+from model_dao.reserve import Reserve_Model_Dao
 
 from flask import jsonify
 from datetime import datetime
@@ -113,6 +114,12 @@ class RoomUnavailable_Controller_Handler:
         ruid1 = daoRU.Get_RoomUnavailable(ruid)
         if not ruid1:
             return jsonify(Error="RoomUnavailable not found."), 404
+
+        daoRE = Reserve_Model_Dao()
+        reserve_id = daoRE.Get_Reserve_ByRoomUnavailable(ruid)
+        if reserve_id:
+            return jsonify(Error="The unavailable room is referenced to a reservation. "
+                                 "To upgrade the unavailable room, use the upgrade reservation."), 404
 
         # ** Checking room based on the hotel where the employee works
         rid = roomunavailable_data['rid']
