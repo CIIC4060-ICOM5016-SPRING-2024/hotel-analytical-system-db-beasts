@@ -43,12 +43,15 @@ class Login_Model_Dao:
         query = ("INSERT INTO login (eid, username, password) "
                  "VALUES (%s, %s, %s)"
                  "returning lid")
-        cur.execute(query, (eid, username, password))
-        result = cur.fetchone()[0]
-        self.db.docker_connection.commit()
-        self.db.close()
-        cur.close()
-        return result
+        try:
+            cur.execute(query, (eid, username, password))
+            result = cur.fetchone()[0]
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return result
+        except:
+            return "Error"
 
     def Put_Login(self, lid, eid, username, password):
         cur = self.db.docker_connection.cursor()
@@ -57,12 +60,15 @@ class Login_Model_Dao:
                  "username = %s, "
                  "password = %s "
                  "WHERE lid = %s")
-        cur.execute(query, (eid, username, password, lid))
-        count = cur.rowcount
-        self.db.docker_connection.commit()
-        self.db.close()
-        cur.close()
-        return count
+        try:
+            cur.execute(query, (eid, username, password, lid))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "Error"
 
     def Delete_Login(self, lid):
         cur = self.db.docker_connection.cursor()
