@@ -19,3 +19,21 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+
+    # * MOST_REVENUE
+    def Get_post_MostRevenue(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT chid, round(cast(sum(total_cost) as numeric), 2) as total_revenue "
+                 "FROM chains "
+                 "NATURAL INNER JOIN hotel "
+                 "NATURAL INNER JOIN room "
+                 "NATURAL INNER JOIN roomunavailable "
+                 "NATURAL INNER JOIN reserve "
+                 "GROUP BY chid "
+                 "ORDER BY total_revenue desc "
+                 "limit 3")
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result
