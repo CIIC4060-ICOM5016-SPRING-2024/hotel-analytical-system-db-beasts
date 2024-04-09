@@ -92,6 +92,12 @@ class Employee_Controller_Handler:
 
                     daoL = Login_Model_Dao()
                     login_id = daoL.Post_Login(employee_id, username, password)
+                    if login_id == "Error":
+                        daoE1 = Employee_Model_Dao()
+                        employee_deleted = daoE1.Delete_Employee(employee_id)
+                        return jsonify(Error="The employee was not created because the "
+                                             "Login username exist."), 404
+
                     controller_handler_login = Login_Controller_Handler()
                     login_result = controller_handler_login.Login_Build(login_id, employee_id, username, password)
 
