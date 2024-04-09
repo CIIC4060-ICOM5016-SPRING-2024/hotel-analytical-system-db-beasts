@@ -75,19 +75,21 @@ class Chains_Controller_Handler:
     def Put_Chain(self, chid, chain_data):
         if len(chain_data) != 5:
             return jsonify(Error="Invalid Data"), 400
+
+        daoC = Chains_Model_Dao()
+        if not daoC.Get_Chain(chid):
+            return jsonify(Error="Chain Not Found"), 404
+
         cname = chain_data['cname']
         springmkup = chain_data['springmkup']
         summermkup = chain_data['summermkup']
         fallmkup = chain_data['fallmkup']
         wintermkup = chain_data['wintermkup']
-        if (chid or chid == 0) and cname and springmkup and summermkup and fallmkup and wintermkup:
+        if cname and springmkup and summermkup and fallmkup and wintermkup:
             dao = Chains_Model_Dao()
             chain = dao.Put_Chain(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
             result = self.Chain_Build(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
-            if chain:
-                return jsonify(Chain=result), 201
-            else:
-                return jsonify(Error="Not Found"), 404
+            return jsonify(Chain=result), 201
         else:
             return jsonify(Error="Unexpected attribute values."), 400
 
