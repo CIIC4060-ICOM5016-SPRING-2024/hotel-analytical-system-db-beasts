@@ -536,7 +536,8 @@ def client():  # TODO
     if request.method == 'GET':
         return Client_Controller_Handler().Get_All_Clients()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Client_Controller_Handler().Post_Client(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -548,9 +549,10 @@ def clientid(client_id):  # TODO
     if request.method == 'GET':
         return Client_Controller_Handler().Get_Client(client_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Client_Controller_Handler().Put_Client(client_id, data)
     elif request.method == 'DELETE':  # TODO
-        pass
+        return Client_Controller_Handler().Delete_Client(client_id)
     else:
         return jsonify("Not supported"), 405
 
