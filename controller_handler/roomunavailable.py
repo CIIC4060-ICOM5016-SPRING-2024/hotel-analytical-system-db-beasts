@@ -129,7 +129,7 @@ class RoomUnavailable_Controller_Handler:
 
         # ** Checking unavailable
         daoRU1 = RoomUnavailable_Model_Dao()
-        not_disponibility = daoRU1.RoomUnavailable_Time(rid)
+        not_disponibility = daoRU1.RoomUnavailable_Time_put(rid, ruid)
         startdate_date = datetime.strptime(startdate, '%Y-%m-%d').date()
         if not_disponibility[0] >= startdate_date:
             return jsonify(Error=f"Room is not available during the selected dates. "
