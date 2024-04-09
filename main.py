@@ -218,9 +218,10 @@ def leastreserve(hotel_id):  # TODO
            # ** Top 5 clients under 30 that
            # ** made the most reservation with a credit card.
            methods=['POST'])
-def mostcreditcard(hotel_id):  # TODO
+def mostcreditcard(hotel_id):
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return LocalStatistics_Controller_Handler().Get_post_MostCreditCard(hotel_id, employee_id)
     else:
         return jsonify("Not supported"), 405
 
