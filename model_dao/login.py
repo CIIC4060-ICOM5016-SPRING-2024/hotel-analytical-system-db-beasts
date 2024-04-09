@@ -62,3 +62,17 @@ class Login_Model_Dao:
         self.db.close()
         cur.close()
         return count
+
+    def Delete_Login(self, lid):
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM login "
+                 "WHERE lid = %s")
+        try:
+            cur.execute(query, (lid,))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "We couldn't delete your information, sorry!"

@@ -91,3 +91,16 @@ class Login_Controller_Handler:
                 return jsonify(Error="Username or Password are incorrect. Try again."), 404
         else:
             return jsonify(Error="Incorrect field. Try again."), 400
+
+    def Delete_Login(self, lid):
+        if lid or lid == 0:
+             dao = Login_Model_Dao()
+             result = dao.Delete_Login(lid)
+             if result == "We couldn't delete your information, sorry!":
+                 return jsonify("Something went wrong, please try again."), 400
+             elif result:
+                 return jsonify("Deleted!"), 200
+             else:
+                 return jsonify("This account doesn't exist."), 404
+        else:
+             return jsonify("Oops, something went wrong! Try again."), 400

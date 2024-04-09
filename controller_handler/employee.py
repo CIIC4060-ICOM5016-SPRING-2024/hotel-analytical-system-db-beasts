@@ -74,12 +74,46 @@ class Employee_Controller_Handler:
         position = employee_data['position']
         salary = employee_data['salary']
 
-        # ** Search hid if it's a valid hotel
+       # if hid == -1:
+       #     position = "Administrator"
+
+       # if position == "Administrator":
+        #    hid = -1
+
+
+        error_messages = []
+
+        # Check if hid is valid for the position
+        if hid == -1 and position != "Administrator":
+            error_messages.append("Incorrect position for the hotel id.")
+        elif hid != -1 and position == "Administrator":
+            error_messages.append("Incorrect position for the hotel id.")
+
+            # ** Search hid if it's a valid hotel
         if not daoh.Get_Hotel(hid):
-            return jsonify(Error="Hotel not found"), 404
+            error_messages.append("Hotel not found")
+
+        # Validate salary based on position
+        if position == "Regular" and not (18000 <= salary <= 49999):
+            error_messages.append("Invalid salary range for Regular position")
+        elif position == "Supervisor" and not (50000 <= salary <= 79999):
+            error_messages.append("Invalid salary range for Supervisor position")
+        elif position == "Administrator" and not (80000 <= salary <= 120000):
+            error_messages.append("Invalid salary range for Administrator position")
+
+
+
+
+
+    # Check if any errors occurred
+        if error_messages:
+            return jsonify(Error=error_messages), 400
+
         employee_id = daoe.Post_Employee(hid, fname, lname, age, position, salary)
         result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
         return jsonify(employee=result), 201
+
+
 
     # ** Method to update an existing employee
 

@@ -346,8 +346,8 @@ def loginid(login_id):  # TODO
     elif request.method == 'PUT':
         data = request.json
         return Login_Controller_Handler().Put_Login(login_id, data)
-    elif request.method == 'DELETE':  # TODO
-        pass
+    elif request.method == 'DELETE':
+        return Login_Controller_Handler().Delete_Login(login_id)
     else:
         return jsonify("Not supported"), 405
 
