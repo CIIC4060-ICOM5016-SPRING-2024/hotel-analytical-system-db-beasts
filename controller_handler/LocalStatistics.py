@@ -18,13 +18,13 @@ class LocalStatistics_Controller_Handler:
     
     def Top5_HandicapRoom_Dict(self, r):
         top5_handicaproom_dict = {
-            'hotel_id': r[0][0],
             'rooms': []  # Placeholder for top 5 room information
         }
 
         # Add room information to the 'rooms' list
         for room in r:
             top5_handicaproom_dict['rooms'].append({
+                'hotel_id': room[0],
                 'room_id': room[1],
                 'room_type': room[2],
                 'total_reserves': room[3],
@@ -32,6 +32,20 @@ class LocalStatistics_Controller_Handler:
             })
 
         return top5_handicaproom_dict 
+    
+    def least_reserved_room_Dict(self, r):
+        least_reserved_room_dict = {
+            'rooms': []  # Placeholder for top 5 room information
+        }
+
+        # Add room information to the 'rooms' list
+        for room in r:
+            least_reserved_room_dict['rooms'].append({
+                'rid': room[0],
+                'days_reserved': room[1],
+            })
+            
+        return least_reserved_room_dict
 
     # * ROOMTYPE
     def Get_post_RoomType(self, hid, employee_id):
@@ -83,7 +97,7 @@ class LocalStatistics_Controller_Handler:
     
     #Hotel
     #Top 5 handicap rooms that were reserve the most.
-    def Get_post_HandicapRoom(self, hid, employee_id):
+    def Get_post_top5_HandicapRoom(self, hid, employee_id):
         """Retrieves a list of the top 5 most reserved handicap rooms for a hotel.
 
         Args:
@@ -111,16 +125,43 @@ class LocalStatistics_Controller_Handler:
         employee = daoE.Get_Employee(eid)
         if not employee:
             return jsonify(Error="Employee not found"), 404
-
+        
+        
+        #Role 1:employee, 2:supervisor, 3:admin
+        role = -1 
+        
         # ** Check employee position
         if employee[5] == "Regular":
+            role = 1
             # ** Check if the employee works at the hotel that are looking for
             if employee[1] != hid:
                 return jsonify(Error="Employee is not part of the hotel."), 404
-
-        # ** Get handicap room reservation data
+        elif employee[5] == "Supervisor":
+            role = 2
+            
+        elif employee[5] == "Administrator":
+            role = 3
+        
+        else:
+            return jsonify(Error="Invalid Employee role"), 404
+            
         daoLS = LocalStatistics_Model_Dao()
-        room_data = daoLS.Get_post_HandicapRoom(hid)
+        match role:
+        
+            case 1:
+                # ** Get handicap room reservation data
+                
+                room_data = daoLS.Get_post_top5_HandicapRoom_Reg(hid)
+                
+            case 2:
+                # ** Get handicap room reservation data
+                
+                room_data = daoLS.Get_post_top5_HandicapRoom_Sup(hid)
+                
+            case 3:
+                # ** Get handicap room reservation data
+                
+                room_data = daoLS.Get_post_top5_HandicapRoom_Admin(hid)
 
         # **Process and return top 5 rooms**
         if type(room_data) != type(None):
@@ -131,5 +172,77 @@ class LocalStatistics_Controller_Handler:
             return jsonify(top_rooms=top_5_dict), 200
         else:
             return jsonify(Error="No handicap room reservation data found"), 404 
+        
+    
+    def Get_leastreserve_HandicapRoom(self, hid, employee_id):
+
+        # ** Check if there is a credential
+        if not isinstance(employee_id, dict) or 'eid' not in employee_id:
+            return jsonify(Error="Invalid employee data"), 400
+
+        # ** Check if the searched hotel exists
+        daoH = Hotel_Model_Dao()
+        hotel = daoH.Get_Hotel(hid)
+        if not hotel:
+            return jsonify(Error="Hotel not found"), 404
+
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+
+        #Role 1:employee, 2:supervisor, 3:admin
+        role = -1
+        # ** Check employee position
+        if employee[5] == "Regular":
+            role = 1
+            # ** Check if the employee works at the hotel that are looking for
+            if employee[1] != hid:
+                return jsonify(Error="Employee is not part of the hotel."), 404
+
+
+        elif employee[5] == "Supervisor":
+            role = 2
+            
+        elif employee[5] == "Administrator":
+            role = 3
+            
+        else:
+            return jsonify(Error="Invalid Employee role"), 404
+            
+        daoLS = LocalStatistics_Model_Dao()
+        match role:
+            
+            case 1:
+                room_data = daoLS.Get_room_availability_Reg(hid)
+
+            case 2:
+                room_data = daoLS.Get_room_availability_Sup(hid)
+
+            case 3:
+                room_data = daoLS.Get_room_availability_Admin(hid)
+
+        if room_data:
+            room_reservations = {}
+            for reservation in room_data:
+                room_id = reservation[1]
+                days_reserved = (reservation[3] - reservation[2]).days + 1  
+                if room_id in room_reservations:
+                    
+                    room_reservations[room_id] += days_reserved
+                else:
+                    room_reservations[room_id] = days_reserved
+
+            least_reserved = sorted(room_reservations.items(), key=lambda item: item[1])[:3]
+            least_reserved_dict = self.least_reserved_room_Dict(least_reserved)
+            
+            
+            return jsonify(least_rooms=least_reserved_dict), 200
+        else:
+            return jsonify(Error="No handicap room unavailability data found"), 404 
+        
+        
   
             
