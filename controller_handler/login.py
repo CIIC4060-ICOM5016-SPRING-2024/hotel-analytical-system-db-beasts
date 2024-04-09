@@ -98,3 +98,15 @@ class Login_Controller_Handler:
             return jsonify(Login=login_result, OK="Login Updated Successfully"), 200
         else:
             return jsonify(Error="Unexpected attribute values."), 400
+
+    def Delete_Login(self, login_id):
+        daoL = Login_Model_Dao()
+        login_info = daoL.Get_Login(login_id)
+        if not login_info:
+            return jsonify(Error="Login not found"), 404
+        daoL1 = Login_Model_Dao()
+        login_result = daoL1.Delete_Login(login_id)
+        if login_result == "Error":
+            return jsonify(Error="Delete Failed"), 500
+        else:
+            return jsonify(OK="Login Deleted Successfully"), 200
