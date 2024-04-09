@@ -12,6 +12,7 @@ from controller_handler.roomunavailable import RoomUnavailable_Controller_Handle
 from controller_handler.reserve import Reserve_Controller_Handler
 from controller_handler.client import Client_Controller_Handler
 from controller_handler.hotel import Hotel_Controller_Handler
+from controller_handler.LocalStatistics import LocalStatistics_Controller_Handler
 
 app = Flask(__name__)
 
@@ -195,7 +196,8 @@ def hotelid(hotel_id):
            methods=['POST'])
 def handicaproom(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return LocalStatistics_Controller_Handler().Get_post_HandicapRoom(hotel_id, employee_id)    
     else:
         return jsonify("Not supported"), 405
 
