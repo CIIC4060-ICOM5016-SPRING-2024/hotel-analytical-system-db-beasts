@@ -495,7 +495,8 @@ def reserve():  # TODO
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_All_Reserves()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Reserve_Controller_Handler().Post_Reserve(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -507,9 +508,10 @@ def reserveid(reserve_id):  # TODO
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_Reserve(reserve_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
     elif request.method == 'DELETE':  # TODO
-        pass
+        return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
         return jsonify("Not supported"), 405
 
