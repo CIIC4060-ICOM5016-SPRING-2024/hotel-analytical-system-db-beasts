@@ -71,6 +71,8 @@ class Login_Controller_Handler:
             if username and password:
                 daoL1 = Login_Model_Dao()
                 login_id = daoL1.Post_Login(eid, username, password)
+                if login_id == "Error":
+                    return jsonify(Error="Login could not be post because the username exist."), 404
                 login_result = self.Login_Build(login_id, eid, username, password)
                 return jsonify(Login=login_result, OK="Loin Posted Successfully"), 201
             else:
@@ -94,6 +96,8 @@ class Login_Controller_Handler:
         if username and password:
             daoL1 = Login_Model_Dao()
             login = daoL1.Put_Login(lid, eid, username, password)
+            if login == "Error":
+                return jsonify(Error="Login could not be put because the username exist."), 404
             login_result = self.Login_Build(lid, eid, username, password)
             return jsonify(Login=login_result, OK="Login Updated Successfully"), 200
         else:
