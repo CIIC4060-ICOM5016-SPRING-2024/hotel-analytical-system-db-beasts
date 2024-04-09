@@ -101,9 +101,9 @@ class Login_Controller_Handler:
 
     def Delete_Login(self, login_id):
         daoL = Login_Model_Dao()
-        login_info = daoL.Get_Login(login_id)
-        if not login_info:
+        if not daoL.Get_Login(login_id):
             return jsonify(Error="Login not found"), 404
+
         daoL1 = Login_Model_Dao()
         login_result = daoL1.Delete_Login(login_id)
         if login_result == "Error":
