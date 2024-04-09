@@ -46,9 +46,10 @@ Region GLOBAL STATISTICS
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/revenue',  # ** Top 3 chains with the highest total revenue.
            methods=['POST'])
-def most_revenue():  # TODO
+def most_revenue():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_MostRevenue(data)
     else:
         return jsonify("Not supported"), 405
 
