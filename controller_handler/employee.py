@@ -70,6 +70,13 @@ class Employee_Controller_Handler:
 
         position = employee_data['position']
         salary = employee_data['salary']
+
+        if hid == -1 and position != "Administrator":
+            return jsonify(Error="Invalid Position"), 400
+
+        if position == "Administrator" and hid != -1:
+            return jsonify(Error="Invalid Hotel"), 404
+
         if self.is_valid_salary(position, salary):
 
             fname = employee_data['fname']
