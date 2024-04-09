@@ -71,26 +71,21 @@ class Login_Controller_Handler:
             return jsonify("Unexpected attribute values."), 400
 
     def Put_Login(self, lid, login_data):
-        if len(login_data) != 3:
-            return jsonify(Error="Invalid Data"), 400
-            # ** Models/Daos to use
-        daoe = Employee_Model_Dao()
+        if len(login_data) != 2:
+            return jsonify(Error="Invalid Data entered."), 400
+
         daol = Login_Model_Dao()
-        # ** Data received
-        eid = login_data['eid']
-        username = login_data['username']
-        password = login_data['password']
-        # ** Search chid if exists
-        if not daoe.Get_Employee(eid):
-            return jsonify(Error="Employee doesn't work with us."), 404
-        if (lid or eid == 0) and username and password:
-            count = daol.Put_Login(lid, eid, username, password)
+        username = login_data.get('username')
+        password = login_data.get('password')
+
+        if username and password:
+            count = daol.Put_Login(lid, username, password)  # Pass lid, username, and password as parameters
             if count > 0:
                 return jsonify(Message="Your login info has been successfully changed!"), 200
             else:
-                return jsonify(Error="Username or Password are incorrect. Try again."), 404
+                return jsonify(Error="This account doesn't exist. Please create it first!"), 404
         else:
-            return jsonify(Error="Incorrect field. Try again."), 400
+            return jsonify(Error="Username or Password is incorrect. Try again."), 400
 
     def Delete_Login(self, lid):
         if lid or lid == 0:

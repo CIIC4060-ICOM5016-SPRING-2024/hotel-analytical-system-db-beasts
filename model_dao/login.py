@@ -51,12 +51,12 @@ class Login_Model_Dao:
         cur.close()
         return result
 
-    def Put_Login(self, lid, eid, username, password):
+    def Put_Login(self, lid, username, password):
         cur = self.db.docker_connection.cursor()
         query = ("UPDATE login "
-                 "SET eid = %s, username = %s, password = %s "
+                 "SET username = %s, password = %s "
                  "WHERE lid = %s")
-        cur.execute(query, (eid, username, password, lid))
+        cur.execute(query, (username, password, lid))
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
