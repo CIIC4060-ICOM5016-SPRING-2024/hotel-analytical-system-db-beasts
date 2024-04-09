@@ -111,8 +111,7 @@ class Room_Controller_Handler:
     # ** Method to delete an existing room
     def Delete_Room(self, rid):
         daoR = Room_Model_Dao()
-        room = daoR.Get_Room(rid)
-        if not room:
+        if not daoR.Get_Room(rid):
             return jsonify(Error="Room Not Found"), 404
         daoR1 = Room_Model_Dao()
         result = daoR1.Delete_Room(rid)
