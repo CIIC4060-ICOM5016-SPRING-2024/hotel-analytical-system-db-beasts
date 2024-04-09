@@ -57,15 +57,16 @@ class Client_Controller_Handler:
         lname = client_data['lname']
         age = client_data['age']
         memberyear = client_data['memberyear']
-        if any(elm for elm in [fname, lname, age, memberyear] if elm is not None):
+        if any(elm is None or elm == ' ' or elm == '' for elm in [fname, lname, age, memberyear]):
+            return jsonify(Error="Unexpected attribute values"), 400
+        else:
             dao = Client_Model_Dao()
             clid = dao.Post_Client(fname, lname, age, memberyear)
             client_result = self.Client_Build(clid, fname,lname, age, memberyear)
             
             return jsonify(client=client_result),201
-        
-        else:
-            return jsonify(Error="Unexpected attribute values"), 400
+
+            
         
     
     def Put_Client(self, client_id, client_data):
@@ -85,18 +86,14 @@ class Client_Controller_Handler:
         age = client_data['age']
         memberyear = client_data['memberyear']
         
-        if any(elm for elm in [fname, lname, age, memberyear] if elm is not None):
-            dao = Client_Model_Dao()
-            dao.Put_Client(client_id, fname, lname, age, memberyear)
-            client_result = self.Client_Build(client_id, fname, lname, age, memberyear)
-            
-            if client_result is None:
-                return jsonify(Error="Could not build client model"), 400
-            
-            return jsonify(client=client_result), 200
-        
-        else:
+        if any(elm is None or elm == ' ' or elm == '' for elm in [fname, lname, age, memberyear]):
             return jsonify(Error="Unexpected attribute values"), 400
+        else:
+            dao = Client_Model_Dao()
+            clid = dao.Post_Client(fname, lname, age, memberyear)
+            client_result = self.Client_Build(clid, fname,lname, age, memberyear)
+            
+            return jsonify(client=client_result),201
     
     def Delete_Client(self, client_id):
         if client_id is None:

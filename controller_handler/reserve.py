@@ -78,7 +78,7 @@ class Reserve_Controller_Handler:
         
         payment = reserve_data['payment']
         
-        if any(v is None for v in (eid, rid, guests, startdate, enddate, clid, payment)):
+        if any(v is None or v == ' ' or v == '' for v in (eid, rid, guests, startdate, enddate, clid, payment)):
             return jsonify("Unexpected attribute values."), 400
         
         #Importing Daos
@@ -178,8 +178,10 @@ class Reserve_Controller_Handler:
         clid = reserve_data['clid']
         payment = reserve_data['payment']
         
-        if any(v is None for v in (eid, rid, guests, startdate, enddate, clid, payment)):
+        if any(v is None or v == ' ' or v == '' for v in (eid, rid, guests, startdate, enddate, clid, payment)):
             return jsonify("Unexpected attribute values."), 400
+    
+        
 
         #Importing Daos
         dao = Reserve_Model_Dao()
