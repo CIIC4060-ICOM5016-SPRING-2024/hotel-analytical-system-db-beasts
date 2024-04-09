@@ -61,12 +61,13 @@ class Employee_Controller_Handler:
 
     # ** Method to add a new employee
     def Post_Employee(self, employee_data):
-        if len(employee_data) != 6:
+        if len(employee_data) != 8:
             return jsonify(Error="Invalid Data"), 400
 
         # ** Models/Daos to use
         daoh = Hotel_Model_Dao()
         daoe = Employee_Model_Dao()
+        daol = Login_Model_Dao()
 
         # ** Data received
         hid = employee_data['hid']
@@ -75,13 +76,14 @@ class Employee_Controller_Handler:
         age = employee_data['age']
         position = employee_data['position']
         salary = employee_data['salary']
+        username = employee_data['username']
+        password = employee_data['password']
 
-       # if hid == -1:
-       #     position = "Administrator"
+        # if hid == -1:
+        #     position = "Administrator"
 
-       # if position == "Administrator":
+        # if position == "Administrator":
         #    hid = -1
-
 
         error_messages = []
 
@@ -103,17 +105,25 @@ class Employee_Controller_Handler:
         elif position == "Administrator" and not (80000 <= salary <= 120000):
             error_messages.append("Invalid salary range for Administrator position")
 
-
-
-
-
-    # Check if any errors occurred
+        # Check if any errors occurred
         if error_messages:
             return jsonify(Error=error_messages), 400
 
+        # Create the employee entry
         employee_id = daoe.Post_Employee(hid, fname, lname, age, position, salary)
+
+        # Create the account for the employee
+        account_id = daol.Post_Login(employee_id, username,
+                                     password)  # Call the Post_Login method to create the account
+
         result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
+        result['username'] = username
+        result['password'] = password
+
         return jsonify(employee=result), 201
+
+
+
 
 
 
