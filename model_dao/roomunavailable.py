@@ -77,10 +77,10 @@ class RoomUnavailable_Model_Dao:
             return "Error deleting"
 
     """
-        ------------------
-        * TOOL OPERATIONS
-        ------------------
-        """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
 
     # ** Searching for the last date where the room is not available
     def RoomUnavailable_Time(self, rid):
@@ -93,3 +93,5 @@ class RoomUnavailable_Model_Dao:
         self.db.close()
         cur.close()
         return roomunavailable_time
+
+    # def RoomUnavailable_Time_put(self, rid, ruid):
