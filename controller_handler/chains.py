@@ -94,14 +94,16 @@ class Chains_Controller_Handler:
             return jsonify(Error="Unexpected attribute values."), 400
 
     def Delete_Chain(self, chid):
-        if chid or chid == 0:
-            dao = Chains_Model_Dao()
-            result = dao.Delete_Chain(chid)
-            if result == "Error deleting":
-                return jsonify(Error="Chain is referenced"), 400
-            elif result:
-                return jsonify(OK="Deleted"), 200
-            else:
-                return jsonify(Error="Not Found"), 404
+
+        daoC = Chains_Model_Dao()
+        if not daoC.Get_Chain(chid):
+            return jsonify(Error="Chain Not Found"), 404
+
+        daoC1 = Chains_Model_Dao()
+        result = daoC1.Delete_Chain(chid)
+        if result == "Error deleting":
+            return jsonify(Error="Chain is referenced"), 400
+        elif result:
+            return jsonify(OK="Deleted"), 200
         else:
-            return jsonify(Error="Error deleting"), 400
+            return jsonify(Error="Delete Failed"), 500
