@@ -37,3 +37,67 @@ class Login_Model_Dao:
         self.db.close()
         cur.close()
         return login
+
+        # ** Method to add a new employee to the database
+    def Post_Login(self, eid, username, password):
+        cur = self.db.docker_connection.cursor()
+        query = ("INSERT INTO login (eid, username, password)"
+                 "VALUES (%s, %s, %s)"
+                 "returning lid")
+        try:
+            cur.execute(query, (eid, username, password))
+            result = cur.fetchone()[0]
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return result
+        except:
+            return "Error"
+
+    def Put_Login(self, lid, username, password):
+        cur = self.db.docker_connection.cursor()
+        query = ("UPDATE login "
+                 "SET username = %s, password = %s "
+                 "WHERE lid = %s")
+        try:
+            cur.execute(query, (username, password, lid))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "Error"
+
+    def Delete_Login(self, lid):
+        cur = self.db.docker_connection.cursor()
+        query = ("DELETE FROM login "
+                 "WHERE lid = %s")
+        try:
+            cur.execute(query, (lid,))
+            count = cur.rowcount
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return count
+        except:
+            return "We couldn't delete your information, sorry!"
+
+    """
+
+       ------------------
+       * TOOLS OPERATIONS 
+       ------------------
+
+    """
+
+    def Get_ID_Login(self, eid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT lid "
+                 "FROM login "
+                 "WHERE eid = %s")
+        cur.execute(query, (eid,))
+        login = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return login
