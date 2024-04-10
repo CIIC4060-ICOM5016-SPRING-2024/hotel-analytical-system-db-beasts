@@ -69,3 +69,21 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+
+    # * MOST_RESERVATION
+    def Get_post_MostReservation(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT hid, hname, count(reid) as total_reserves "
+                 "FROM hotel "
+                 "NATURAL INNER JOIN room "
+                 "NATURAL INNER JOIN roomunavailable "
+                 "NATURAL INNER JOIN reserve "
+                 "GROUP BY hid, hname "
+                 "ORDER BY total_reserves desc "
+                 "limit (SELECT ceil(0.1 * (SELECT count(hid)-1 "
+                 "FROM hotel)))")
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result
