@@ -81,7 +81,28 @@ class GlobalStatistics_Model_Dao:
                  "GROUP BY hid, hname "
                  "ORDER BY total_reserves desc "
                  "limit (SELECT ceil(0.1 * (SELECT count(hid)-1 "
-                 "FROM hotel)))")
+                 "       FROM hotel)))")
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result
+
+    # * MOST_PROFITMONTH
+    def Get_post_MostProfitMonth(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT chid, "
+                 "       cname, "
+                 "       (SELECT EXTRACT(MONTH FROM startdate)) AS month, "
+                 "       count(reid) as total_reserves "
+                 "FROM reserve "
+                 "NATURAL INNER JOIN roomunavailable "
+                 "NATURAL INNER JOIN room "
+                 "NATURAL INNER JOIN hotel "
+                 "NATURAL INNER JOIN chains "
+                 "GROUP BY chid, cname, month "
+                 "ORDER BY total_reserves desc "
+                 "LIMIT 3 ")
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
