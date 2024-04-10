@@ -101,3 +101,35 @@ class GlobalStatistics_Controller_Handler:
         for leastroom in leastrooms:
             result.append(self.LeastRooms_Dict(leastroom))
         return jsonify(Least_Rooms=result), 200
+
+    # * MOST_CAPACITY
+    def MostCapacity_Dict(self, r):
+        mostcapacity_dict = {
+            'hid': r[0],
+            'hname': r[1],
+            'total capacity': r[2]
+        }
+        return mostcapacity_dict
+
+    # * MOST_CAPACITY
+    def Get_post_MostCapacity(self, employee_id):
+        # ** Check if there is a credential
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # if type(employee_id) is not int:
+        #     return jsonify(Error="Invalid Data"), 400
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        # ** Check employee position
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        daoGS = GlobalStatistics_Model_Dao()
+        mostcapacities = daoGS.Get_post_MostCapacity()
+        result = []
+        for mostcapacity in mostcapacities:
+            result.append(self.MostCapacity_Dict(mostcapacity))
+        return jsonify(Most_Capacities=result), 200
