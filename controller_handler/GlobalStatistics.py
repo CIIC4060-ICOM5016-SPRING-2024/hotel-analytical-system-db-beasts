@@ -30,7 +30,7 @@ class GlobalStatistics_Controller_Handler:
         }
         return chains_dict
 
-    # ** TOP 5 CLIENTS WITH DISCOUNTS
+    # ** TOP 5 HOTELS
     def Hotels_Dict(self, hotel):
         hotel_dict = {
             'hotel_id': hotel[0],
@@ -112,5 +112,5 @@ class GlobalStatistics_Controller_Handler:
         for hotels in hotel:
             result.append(self.Hotels_Dict(hotels,))
 
-        return jsonify(Top_Three_Chains=result), 200
+        return jsonify(Top_Five_Hotels_With_Most_Capacity=result), 200
 
