@@ -90,9 +90,10 @@ def most_capacity():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/reservation',  # ** Top 10% hotels that had the most reservations.
            methods=['POST'])
-def most_reservation():  # TODO
+def most_reservation():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_MostReservation(data)
     else:
         return jsonify("Not supported"), 405
 
