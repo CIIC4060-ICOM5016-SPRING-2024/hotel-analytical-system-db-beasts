@@ -37,3 +37,20 @@ class Reserve_Model_Dao:
         self.db.close()
         cur.close()
         return reserve
+
+    """
+    ------------------
+    * TOOL OPERATIONS
+    ------------------
+    """
+
+    def Get_Reserve_ByRoomUnavailable(self, ruid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT reid"
+                 " FROM reserve "
+                 "WHERE ruid = %s")
+        cur.execute(query, (ruid,))
+        reserve = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return reserve
