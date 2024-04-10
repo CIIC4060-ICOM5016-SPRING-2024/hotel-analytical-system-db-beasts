@@ -37,3 +37,19 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+
+    # * LEAST_ROOMS
+    def Get_post_LeastRooms(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT chid, cname, count(rid) as total_rooms "
+                 "FROM chains "
+                 "NATURAL INNER JOIN hotel "
+                 "NATURAL INNER JOIN room "
+                 "GROUP BY chid, cname "
+                 "ORDER BY total_rooms asc "
+                 "LIMIT 3")
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result
