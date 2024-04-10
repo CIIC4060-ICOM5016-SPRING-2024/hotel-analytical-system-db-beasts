@@ -201,9 +201,10 @@ def hotelid(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/handicaproom',  # ** Top 5 handicap rooms that were reserve the most.
            methods=['POST'])
-def handicaproom(hotel_id):  # TODO
+def handicaproom(hotel_id):
     if request.method == 'POST':
-        pass
+        data = request.json
+        return LocalStatistics_Controller_Handler().Get_post_HandicapRoom(hotel_id, data)
     else:
         return jsonify("Not supported"), 405
 
