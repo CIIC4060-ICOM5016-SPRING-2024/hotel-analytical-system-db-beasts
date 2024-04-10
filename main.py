@@ -89,7 +89,9 @@ def most_capacity():  # TODO
            methods=['POST'])
 def most_reservation():  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return GlobalStatistics_Controller_Handler().Get_top_10_hotelreservation(employee_id)
+
     else:
         return jsonify("Not supported"), 405
 
@@ -99,7 +101,9 @@ def most_reservation():  # TODO
            methods=['POST'])
 def most_profitmonth():  # TODO
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_top_3_monthly_reservation(data)
+    
     else:
         return jsonify("Not supported"), 405
 
@@ -198,7 +202,8 @@ def hotelid(hotel_id):
            methods=['POST'])
 def handicaproom(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return LocalStatistics_Controller_Handler().Get_post_HandicapRoom(hotel_id, employee_id)    
     else:
         return jsonify("Not supported"), 405
 
@@ -208,7 +213,8 @@ def handicaproom(hotel_id):  # TODO
            methods=['POST'])
 def leastreserve(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return LocalStatistics_Controller_Handler().Get_leastreserve_HandicapRoom(hotel_id, employee_id)
     else:
         return jsonify("Not supported"), 405
 
@@ -484,7 +490,9 @@ def reserve():  # TODO
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_All_Reserves()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Reserve_Controller_Handler().Post_Reserve(data)
+        
     else:
         return jsonify("Not supported"), 405
 
@@ -496,9 +504,11 @@ def reserveid(reserve_id):  # TODO
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_Reserve(reserve_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
+    
     elif request.method == 'DELETE':  # TODO
-        pass
+        return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
         return jsonify("Not supported"), 405
 
@@ -523,7 +533,8 @@ def client():  # TODO
     if request.method == 'GET':
         return Client_Controller_Handler().Get_All_Clients()
     elif request.method == 'POST':  # TODO
-        pass
+        data = request.json
+        return Client_Controller_Handler().Post_Client(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -535,9 +546,10 @@ def clientid(client_id):  # TODO
     if request.method == 'GET':
         return Client_Controller_Handler().Get_Client(client_id)
     elif request.method == 'PUT':  # TODO
-        pass
+        data = request.json
+        return Client_Controller_Handler().Put_Client(client_id, data)
     elif request.method == 'DELETE':  # TODO
-        pass
+        return Client_Controller_Handler().Delete_Client(client_id)
     else:
         return jsonify("Not supported"), 405
 
@@ -548,3 +560,4 @@ def clientid(client_id):  # TODO
 
 if __name__ == '__main__':
     app.run(debug=True)
+ 

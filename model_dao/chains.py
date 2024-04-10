@@ -91,3 +91,27 @@ class Chains_Model_Dao:
             return count
         except:
             return "Error deleting"
+
+        
+    def Get_Markup(self, chid):
+        """
+        Retrieves the markup values for the specified chain ID from the database.
+
+        Parameters:
+            chid (int): The chain ID for which the markup values are to be retrieved.
+
+        Returns:
+            tuple: A tuple containing the markup values for spring, summer, fall, and winter.
+        """
+        
+        cur = self.db.docker_connection.cursor()
+        query = ("""SELECT springmkup, summermkup, fallmkup, wintermkup 
+                FROM chains
+                WHERE chid = %s""")
+        
+        cur.execute(query, (chid,))
+        markups = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return markups        
+        

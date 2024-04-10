@@ -7,6 +7,8 @@ class Client_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
+        
+    
 
     """
     ------------------
@@ -37,3 +39,49 @@ class Client_Model_Dao:
         self.db.close()
         cur.close()
         return client
+
+    def Post_Client(self,fname, lname, age, memberyear):
+        # ** Method to add a new client to the database
+        with self.db.docker_connection.cursor() as cur:
+            query = ("INSERT INTO client ( fname, lname, age, memberyear)"
+                     "VALUES (%s, %s, %s, %s)"
+                     "returning clid")
+            cur.execute(query, (fname, lname, age, memberyear))
+            result = cur.fetchone()[0]
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return result
+        
+    def Put_Client(self, clid, fname, lname, age, memberyear):
+        with self.db.docker_connection.cursor() as cur:
+            query = ("UPDATE client "
+                     "SET fname = %s, lname = %s, age = %s, memberyear = %s "
+                     "WHERE clid = %s")
+            cur.execute(query, (fname, lname, age, memberyear, clid))
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return clid
+        
+    def Delete_Client(self, clid):
+        with self.db.docker_connection.cursor() as cur:
+            query = ("DELETE FROM client "
+                     "WHERE clid = %s")
+            cur.execute(query, (clid,))
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return clid
+        
+    def Get_Client_Reservations(self, clid):
+        with self.db.docker_connection.cursor() as cur:
+            query = ("SELECT * "
+                     "FROM reserve "
+                     "WHERE clid = %s")
+            cur.execute(query, (clid,))
+            result = cur.fetchall()
+            self.db.docker_connection.commit()
+            self.db.close()
+            cur.close()
+            return result

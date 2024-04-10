@@ -19,8 +19,37 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+    
+    
+    #HotelMethod
+    def Get_top_10_hotelreservation(self):
+        
+        cur = self.db.docker_connection.cursor()
+        query = ("""Select hid, rid,ruid,reid 
+                 from hotel natural inner join room
+                 natural inner join roomunavailable
+                 natural inner join reserve
+                 
+                  
+        
+        """)
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        return result
 
-    # * MOST_REVENUE
+    def Get_top_3_monthly_reservation(self,chid):
+        cur = self.db.docker_connection.cursor()
+        query = ("""Select reid,ruid, startdate,enddate
+                 From reserve natural inner join roomunavailable natural inner join hotel
+                 where chid = %s
+                 
+        """)
+        cur.execute(query,(chid,))
+        result = cur.fetchall()
+        self.db.close()
+        return result
+# * MOST_REVENUE
     def Get_post_MostRevenue(self):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT chid, round(cast(sum(total_cost) as numeric), 2) as total_revenue "
