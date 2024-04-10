@@ -29,6 +29,19 @@ class GlobalStatistics_Controller_Handler:
                 'total reservations': hotel[1]
             })
         return hotelmethod_dict
+    
+    def Month_Dict(self, r):
+        month_dict = {
+            'months': []
+            
+        }
+        
+        for month in r:
+            month_dict['months'].append({
+                'month': month[0],
+                'total reservations': month[1]
+            })
+        return month_dict
 
     # * PAYMENTMETHOD
 
@@ -94,4 +107,41 @@ class GlobalStatistics_Controller_Handler:
         return jsonify(result=result_dict), 200
         
         
-         
+    
+    def Get_top_3_monthly_reservation(self, data):
+        if data == None:
+            return jsonify(Error="Invalid Data"), 400
+        
+        eid = data['eid']
+        chid = data['chid']
+        
+        if any(x is None for x in [eid, chid]):
+            return jsonify(Error="Invalid Data"), 400
+        
+        
+        employeedao = Employee_Model_Dao()
+        employee = employeedao.Get_Employee(eid)
+        
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        
+        daoGS = GlobalStatistics_Model_Dao()
+        result = daoGS.Get_top_3_monthly_reservation(chid)
+        
+        monthmap = {}
+        
+        for reserve in result:
+            month = reserve[2].month
+            
+            if month in monthmap:
+                monthmap[month] +=1
+            else:
+                monthmap[month] = 1
+                
+        sorted_months = sorted(monthmap.items(), key=lambda x: x[1], reverse=True)
+        top3 = sorted_months[:3]
+        
+        result = self.Month_Dict(top3)
+            
+        
+        return jsonify(result=result), 200

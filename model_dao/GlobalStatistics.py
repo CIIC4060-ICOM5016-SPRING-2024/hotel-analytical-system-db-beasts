@@ -29,6 +29,7 @@ class GlobalStatistics_Model_Dao:
                  from hotel natural inner join room
                  natural inner join roomunavailable
                  natural inner join reserve
+                 
                   
         
         """)
@@ -37,4 +38,14 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         return result
 
-    
+    def Get_top_3_monthly_reservation(self,chid):
+        cur = self.db.docker_connection.cursor()
+        query = ("""Select reid,ruid, startdate,enddate
+                 From reserve natural inner join roomunavailable natural inner join hotel
+                 where chid = %s
+                 
+        """)
+        cur.execute(query,(chid,))
+        result = cur.fetchall()
+        self.db.close()
+        return result
