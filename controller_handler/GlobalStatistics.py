@@ -165,3 +165,36 @@ class GlobalStatistics_Controller_Handler:
         for mostreservation in mostreservations:
             result.append(self.MostReservation_Dict(mostreservation))
         return jsonify(Most_Reservations=result), 200
+
+    # * MOST_PROFITMONTH
+    def MostProfitMonth_Dict(self, r):
+        mostprofitmonth_dict = {
+            'chid': r[0],
+            'cname': r[1],
+            'month': r[2],
+            'total reserves': r[3]
+        }
+        return mostprofitmonth_dict
+
+    # * MOST_PROFITMONTH
+    def Get_post_MostProfitMonth(self, employee_id):
+        # ** Check if there is a credential
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # if type(employee_id) is not int:
+        #     return jsonify(Error="Invalid Data"), 400
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        # ** Check employee position
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        daoGS = GlobalStatistics_Model_Dao()
+        mostprofitmonths = daoGS.Get_post_MostProfitMonth()
+        result = []
+        for mostprofitmonth in mostprofitmonths:
+            result.append(self.MostProfitMonth_Dict(mostprofitmonth))
+        return jsonify(Most_Profit_Months=result), 200
