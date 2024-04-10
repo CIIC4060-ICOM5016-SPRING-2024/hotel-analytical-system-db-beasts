@@ -133,3 +133,35 @@ class GlobalStatistics_Controller_Handler:
         for mostcapacity in mostcapacities:
             result.append(self.MostCapacity_Dict(mostcapacity))
         return jsonify(Most_Capacities=result), 200
+
+    # * MOST_RESERVATION
+    def MostReservation_Dict(self, r):
+        mostreservation_dict = {
+            'hid': r[0],
+            'hname': r[1],
+            'total reserves': r[2]
+        }
+        return mostreservation_dict
+
+    # * MOST_RESERVATION
+    def Get_post_MostReservation(self, employee_id):
+        # ** Check if there is a credential
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # if type(employee_id) is not int:
+        #     return jsonify(Error="Invalid Data"), 400
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        # ** Check employee position
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        daoGS = GlobalStatistics_Model_Dao()
+        mostreservations = daoGS.Get_post_MostReservation()
+        result = []
+        for mostreservation in mostreservations:
+            result.append(self.MostReservation_Dict(mostreservation))
+        return jsonify(Most_Reservations=result), 200
