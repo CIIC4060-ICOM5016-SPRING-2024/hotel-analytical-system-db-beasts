@@ -158,4 +158,3 @@ class RoomDescription_Controller_Handler:
                            'Executive Family': ["Deluxe", "Suite"],
                            'Presidential': ["Suite"]}
         return room_type in valid_room_type.get(room_name, [])
-
