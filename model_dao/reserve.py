@@ -1,12 +1,14 @@
 # ** Importing Docker_Database from db module
-from db import Docker_Database
+from db import Docker_Database, Heroku_Database
 import datetime
+
 
 # ** Class for handling database operations related to reserve model
 class Reserve_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
-        self.db = Docker_Database()
+        # self.db = Docker_Database()
+        self.dbh = Heroku_Database()
 
     """
     ------------------
@@ -16,69 +18,79 @@ class Reserve_Model_Dao:
 
     # ** Method to fetch all reserves from the database
     def Get_All_Reserves(self):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve  "
                  "ORDER BY reid")
         cur.execute(query)
         reserve_list = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return reserve_list
 
     # ** Method to fetch a specific reserve by its ID from the database
     def Get_Reserve(self, reid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
         reserve = cur.fetchone()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return reserve
-    
+
     def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
         # ** Method to add a new reserve to the database
-        with self.db.docker_connection.cursor() as cur:
-
+        with self.dbh.heroku_connection.cursor() as cur:
             query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
-                    "VALUES (%s, %s, %s, %s, %s)"
-                    "returning reid")
-            
+                     "VALUES (%s, %s, %s, %s, %s)"
+                     "returning reid")
+
             cur.execute(query, (ruid, clid, total_cost, payment, guests))
             result = cur.fetchone()[0]
-            self.db.docker_connection.commit()
-            self.db.close()
+            # self.db.docker_connection.commit()
+            self.dbh.heroku_connection.commit()
+            # self.db.close()
+            self.dbh.close()
             cur.close()
             return result
-            
-    def Put_Reserve(self,ruid, clid, total_cost, payment, guests,reid):
+
+    def Put_Reserve(self, ruid, clid, total_cost, payment, guests, reid):
         # ** Method to update an existing reserve in the database
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE reserve "
                  "SET ruid = %s, clid = %s, total_cost = %s, payment = %s, guests = %s "
                  "WHERE reid = %s")
-        cur.execute(query, (ruid, clid, total_cost, payment,guests,reid))
+        cur.execute(query, (ruid, clid, total_cost, payment, guests, reid))
         count = cur.rowcount
-        self.db.docker_connection.commit()
-        self.db.close()
+        # self.db.docker_connection.commit()
+        self.dbh.heroku_connection.commit()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return count
-    
-    
+
     def Delete_Reserve(self, reid):
         # ** Method to delete an existing reserve in the database
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
         count = cur.rowcount
-        self.db.docker_connection.commit()
-        self.db.close()
+        # self.db.docker_connection.commit()
+        self.dbh.heroku_connection.commit()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return count
-    
+
     def Get_Total_Cost(self, rid, clid, startdate, enddate, season_markup):
         """Calculates the total cost of a hotel reservation with member discounts.
 
@@ -93,7 +105,7 @@ class Reserve_Model_Dao:
             float: The discounted total cost of the reservation.
         """
 
-        with self.db.docker_connection.cursor() as cur:
+        with self.dbh.heroku_connection.cursor() as cur:
             query = """
                 SELECT rprice, memberyear 
                 FROM reserve 
@@ -133,9 +145,7 @@ class Reserve_Model_Dao:
             discounted_cost = round(total_cost - discount, 2)
 
         return discounted_cost
-        
-    
-    
+
     """
     ------------------
     * TOOL OPERATIONS
@@ -143,18 +153,21 @@ class Reserve_Model_Dao:
     """
 
     def Get_Reserve_ByRoomUnavailable(self, ruid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT reid"
                  " FROM reserve "
                  "WHERE ruid = %s")
         cur.execute(query, (ruid,))
         reserve = cur.fetchone()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return reserve
-    
-    def Get_RUID(self,reid):
-        cur = self.db.docker_connection.cursor()
+
+    def Get_RUID(self, reid):
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT ruid "
                  "FROM reserve "
                  "WHERE reid = %s")
@@ -162,8 +175,9 @@ class Reserve_Model_Dao:
         result = cur.fetchone()
         if type(result) == type(None):
             return None
-        else: 
+        else:
             ruid = result[0]
-            self.db.close()
+            # self.db.close()
+            self.dbh.close()
             cur.close()
             return ruid

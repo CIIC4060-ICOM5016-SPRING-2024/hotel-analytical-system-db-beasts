@@ -1,14 +1,16 @@
 # ** Importing Docker_Database from db module
-from db import Docker_Database
+from db import Docker_Database, Heroku_Database
 
 
 class GlobalStatistics_Model_Dao:
     def __init__(self):
-        self.db = Docker_Database()
+        # self.db = Docker_Database()
+        self.dbh = Heroku_Database()
 
     # * PAYMENTMETHOD
     def Get_post_PaymentMethod(self):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT "
                  "payment, "
                  "COUNT(reid), "
@@ -16,7 +18,8 @@ class GlobalStatistics_Model_Dao:
                  "FROM reserve GROUP BY payment")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result
 
@@ -57,8 +60,8 @@ class GlobalStatistics_Model_Dao:
     
     #HotelMethod
     def Get_top_10_hotelreservation(self):
-        
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("""Select hid, rid,ruid,reid 
                  from hotel natural inner join room
                  natural inner join roomunavailable
@@ -69,23 +72,28 @@ class GlobalStatistics_Model_Dao:
         """)
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         return result
 
-    def Get_top_3_monthly_reservation(self,chid):
-        cur = self.db.docker_connection.cursor()
+    def Get_top_3_monthly_reservation(self, chid):
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("""Select reid,ruid, startdate,enddate
                  From reserve natural inner join roomunavailable natural inner join hotel
                  where chid = %s
                  
         """)
-        cur.execute(query,(chid,))
+        cur.execute(query, (chid,))
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         return result
-# * MOST_REVENUE
+
+    # * MOST_REVENUE
     def Get_post_MostRevenue(self):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, round(cast(sum(total_cost) as numeric), 2) as total_revenue "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -97,6 +105,7 @@ class GlobalStatistics_Model_Dao:
                  "limit 3")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result
