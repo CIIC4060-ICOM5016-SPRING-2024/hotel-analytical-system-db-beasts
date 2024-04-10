@@ -35,3 +35,20 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+
+    #** TOP 5 HOTELS WITH MOST CAPACITY
+
+    def Get_Top_Five_Hotels_With_Most_Capacity(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT hid, hname, sum(capacity) as total_capacity "
+                 "FROM hotel "
+                 "NATURAL INNER JOIN room "
+                 "NATURAL INNER JOIN roomdescription "
+                 "GROUP BY hid, hname "
+                 "ORDER BY total_capacity ASC "
+                 "LIMIT 5")
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result

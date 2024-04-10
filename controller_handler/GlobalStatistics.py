@@ -30,6 +30,15 @@ class GlobalStatistics_Controller_Handler:
         }
         return chains_dict
 
+    # ** TOP 5 CLIENTS WITH DISCOUNTS
+    def Hotels_Dict(self, hotel):
+        hotel_dict = {
+            'hotel_id': hotel[0],
+            'hotel_name': hotel[1],
+            'total_capacity': hotel[2]
+        }
+        return hotel_dict
+
 
 
     # * PAYMENTMETHOD
@@ -81,3 +90,27 @@ class GlobalStatistics_Controller_Handler:
             result.append(self.Chains_Dict(chain))
 
         return jsonify(Top_Three_Chains=result), 200
+
+        # ** TOP 3 HOTELS WITH MOST CAPACITY
+
+    def Get_Top_Five_Hotels_With_Most_Capacity(self, employee_id):
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        # ** Check employee position
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        daoC = GlobalStatistics_Model_Dao()
+        hotel = daoC.Get_Top_Five_Hotels_With_Most_Capacity()
+
+        result = []
+        for hotels in hotel:
+            result.append(self.Hotels_Dict(hotels,))
+
+        return jsonify(Top_Three_Chains=result), 200
+

@@ -80,7 +80,8 @@ def least_rooms():
            methods=['POST'])
 def most_capacity():  # TODO
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_Top_Five_Hotels_With_Most_Capacity(data)
     else:
         return jsonify("Not supported"), 405
 
