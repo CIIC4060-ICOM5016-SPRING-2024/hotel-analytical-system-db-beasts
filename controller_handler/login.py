@@ -66,6 +66,8 @@ class Login_Controller_Handler:
             return jsonify(Error="Employee doesn't work with us."), 404
         if username and password:
             login_id = daol.Post_Login(eid, username, password)
+            if login_id == "Error":
+                return jsonify(Error="Login could not be post because the username exist."), 404
             result = self.Login_Build(login_id, eid, username, password)
             return jsonify(hotel=result), 201
         else:
@@ -81,7 +83,9 @@ class Login_Controller_Handler:
 
         if username and password:
             count = daol.Put_Login(lid, username, password)  # Pass lid, username, and password as parameters
-            if count > 0:
+            if count == "Error":
+                return jsonify(Error="Login could not be put because the username exist."), 404
+            elif count > 0:
                 return jsonify(Message="Your login info has been successfully changed!"), 200
             else:
                 return jsonify(Error="This account doesn't exist. Please create it first!"), 404

@@ -115,6 +115,11 @@ class Employee_Controller_Handler:
         # Create the account for the employee
         account_id = daol.Post_Login(employee_id, username,
                                      password)  # Call the Post_Login method to create the account
+        if account_id == "Error":
+            daoE1 = Employee_Model_Dao()
+            employee_deleted = daoE1.Delete_Employee(employee_id)
+            return jsonify(Error="The employee was not created because the "
+                                 "Login username exist."), 404
 
         result = self.Employee_Build(employee_id, hid, fname, lname, age, position, salary)
         result['username'] = username
