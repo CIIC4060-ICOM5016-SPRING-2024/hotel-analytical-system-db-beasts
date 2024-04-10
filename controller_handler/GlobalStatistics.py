@@ -15,14 +15,6 @@ class GlobalStatistics_Controller_Handler:
         }
         return paymentmethod_dict
 
-    # * MOST_REVENUE
-    def MostRevenue_Dict(self, r):
-        mostrevenue_dict = {
-            'chid': r[0],
-            'total revenue': r[1]
-        }
-        return mostrevenue_dict
-
     # * PAYMENTMETHOD
     def Get_post_PaymentMethod(self, employee_id):
         # ** Check if there is a credential
@@ -48,6 +40,14 @@ class GlobalStatistics_Controller_Handler:
         return jsonify(Payment_Method_Percentage=result), 200
 
     # * MOST_REVENUE
+    def MostRevenue_Dict(self, r):
+        mostrevenue_dict = {
+            'chid': r[0],
+            'total revenue': r[1]
+        }
+        return mostrevenue_dict
+
+    # * MOST_REVENUE
     def Get_post_MostRevenue(self, employee_id):
         # ** Check if there is a credential
         if len(employee_id) != 1:
@@ -69,3 +69,35 @@ class GlobalStatistics_Controller_Handler:
         for mostrevenue in mostrevenues:
             result.append(self.MostRevenue_Dict(mostrevenue))
         return jsonify(Most_Revenues=result), 200
+
+    # * LEAST_ROOMS
+    def LeastRooms_Dict(self, r):
+        leastrooms_dict = {
+            'chid': r[0],
+            'cname': r[1],
+            'total rooms': r[2]
+        }
+        return leastrooms_dict
+
+    # * LEAST_ROOMS
+    def Get_post_LeastRooms(self, employee_id):
+        # ** Check if there is a credential
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # if type(employee_id) is not int:
+        #     return jsonify(Error="Invalid Data"), 400
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        # ** Check employee position
+        if employee[5] != "Administrator":
+            return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
+        daoGS = GlobalStatistics_Model_Dao()
+        leastrooms = daoGS.Get_post_LeastRooms()
+        result = []
+        for leastroom in leastrooms:
+            result.append(self.LeastRooms_Dict(leastroom))
+        return jsonify(Least_Rooms=result), 200
