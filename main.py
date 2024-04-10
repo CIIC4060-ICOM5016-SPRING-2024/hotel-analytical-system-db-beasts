@@ -101,9 +101,10 @@ def most_reservation():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/profitmonth',  # ** Top 3 month with the most reservation by chain.
            methods=['POST'])
-def most_profitmonth():  # TODO
+def most_profitmonth():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_MostProfitMonth(data)
     else:
         return jsonify("Not supported"), 405
 
