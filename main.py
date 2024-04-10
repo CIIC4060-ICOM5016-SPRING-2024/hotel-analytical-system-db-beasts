@@ -48,7 +48,9 @@ Region GLOBAL STATISTICS
            methods=['POST'])
 def most_revenue():  # TODO
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_MostRevenue(data)
+
     else:
         return jsonify("Not supported"), 405
 
@@ -203,7 +205,7 @@ def hotelid(hotel_id):
 def handicaproom(hotel_id):  # TODO
     if request.method == 'POST':
         employee_id = request.json
-        return LocalStatistics_Controller_Handler().Get_post_HandicapRoom(hotel_id, employee_id)    
+        return LocalStatistics_Controller_Handler().Get_post_top5_HandicapRoom(hotel_id, employee_id)    
     else:
         return jsonify("Not supported"), 405
 
@@ -408,11 +410,12 @@ Region ROOM DESCRIPTION
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomdescription',
            methods=['GET', 'POST'])
-def roomdescription():  # TODO
+def roomdescription():
     if request.method == 'GET':
         return RoomDescription_Controller_Handler().Get_All_RoomDescriptions()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':
+        data = request.json
+        return RoomDescription_Controller_Handler().Post_RoomDescription(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -420,13 +423,14 @@ def roomdescription():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomdescription/<int:roomdescription_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomdescriptionid(roomdescription_id):  # TODO
+def roomdescriptionid(roomdescription_id):
     if request.method == 'GET':
         return RoomDescription_Controller_Handler().Get_RoomDescription(roomdescription_id)
-    elif request.method == 'PUT':  # TODO
-        pass
-    elif request.method == 'DELETE':  # TODO
-        pass
+    elif request.method == 'PUT':
+        data = request.json
+        return RoomDescription_Controller_Handler().Put_RoomDescription(roomdescription_id, data)
+    elif request.method == 'DELETE':
+        return RoomDescription_Controller_Handler().Delete_RoomDescription(roomdescription_id)
     else:
         return jsonify("Not supported"), 405
 
@@ -447,11 +451,12 @@ Region ROOM UNAVAILABLE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable',
            methods=['GET', 'POST'])
-def roomunavailable():  # TODO
+def roomunavailable():
     if request.method == 'GET':
         return RoomUnavailable_Controller_Handler().Get_All_RoomsUnavailable()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Post_RoomUnavailable(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -459,16 +464,17 @@ def roomunavailable():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/roomunavailable/<int:roomunavailable_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomunavailableid(roomunavailable_id):  # TODO
+def roomunavailableid(roomunavailable_id):
     if request.method == 'GET':
         return RoomUnavailable_Controller_Handler().Get_RoomUnavailable(roomunavailable_id)
-    elif request.method == 'PUT':  # TODO
-        pass
-    elif request.method == 'DELETE':  # TODO
-        pass
+    elif request.method == 'PUT':
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Put_RoomUnavailable(roomunavailable_id, data)
+    elif request.method == 'DELETE':
+        data = request.json
+        return RoomUnavailable_Controller_Handler().Delete_RoomUnavailable(roomunavailable_id, data)
     else:
         return jsonify("Not supported"), 405
-
 
 """
 -----------------------------------------------------------------------------------------------------------------------

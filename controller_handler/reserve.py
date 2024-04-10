@@ -9,7 +9,7 @@ from model_dao.chains import Chains_Model_Dao
 from model_dao.client import Client_Model_Dao
 from model_dao.employee import Employee_Model_Dao
 from model_dao.reserve import Reserve_Model_Dao
-from model_dao.room import ROOM_Model_Dao
+from model_dao.room import Room_Model_Dao
 from model_dao.roomunavailable import RoomUnavailable_Model_Dao
 from model_dao.hotel import Hotel_Model_Dao
 
@@ -86,7 +86,7 @@ class Reserve_Controller_Handler:
         daoc = Client_Model_Dao()
         daoroomunavailable = RoomUnavailable_Model_Dao()
         daoe = Employee_Model_Dao()
-        daoroom = ROOM_Model_Dao()
+        daoroom = Room_Model_Dao()
         daohotel = Hotel_Model_Dao()
         
         employee = daoe.Get_Employee(eid)
@@ -188,7 +188,7 @@ class Reserve_Controller_Handler:
         daoc = Client_Model_Dao()
         daoroomunavailable = RoomUnavailable_Model_Dao()
         daoe = Employee_Model_Dao()
-        daoroom = ROOM_Model_Dao()
+        daoroom = Room_Model_Dao()
         daohotel = Hotel_Model_Dao()
         
         employee = daoe.Get_Employee(eid)

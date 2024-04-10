@@ -36,6 +36,7 @@ class Reserve_Model_Dao:
         reserve = cur.fetchone()
         self.db.close()
         cur.close()
+        return reserve
     
     def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
         # ** Method to add a new reserve to the database
@@ -133,20 +134,7 @@ class Reserve_Model_Dao:
 
         return discounted_cost
         
-    def Get_RUID(self,reid):
-        cur = self.db.docker_connection.cursor()
-        query = ("SELECT ruid "
-                 "FROM reserve "
-                 "WHERE reid = %s")
-        cur.execute(query, (reid,))
-        result = cur.fetchone()
-        if type(result) == type(None):
-            return None
-        else: 
-            ruid = result[0]
-            self.db.close()
-            cur.close()
-            return ruid
+    
     
     """
     ------------------
@@ -164,3 +152,18 @@ class Reserve_Model_Dao:
         self.db.close()
         cur.close()
         return reserve
+    
+    def Get_RUID(self,reid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT ruid "
+                 "FROM reserve "
+                 "WHERE reid = %s")
+        cur.execute(query, (reid,))
+        result = cur.fetchone()
+        if type(result) == type(None):
+            return None
+        else: 
+            ruid = result[0]
+            self.db.close()
+            cur.close()
+            return ruid
