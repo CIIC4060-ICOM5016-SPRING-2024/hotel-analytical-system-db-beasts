@@ -40,7 +40,7 @@ class Hotel_Controller_Handler:
         result = []
         for hotel in hotels:
             result.append(self.Hotel_Dict(hotel))
-        return jsonify(hotels=result)
+        return jsonify(Hotels=result)
 
     # ** Method to retrieve a specific hotel by its ID
     def Get_Hotel(self, hotel_id):
@@ -48,8 +48,8 @@ class Hotel_Controller_Handler:
         hotel = dao.Get_Hotel(hotel_id)
         if hotel:
             result = self.Hotel_Dict(hotel)
-            return jsonify(hotel=result)
-        return jsonify("Not Found"), 404
+            return jsonify(Hotel=result)
+        return jsonify(Error="Not Found"), 404
 
     # ** Method to add a new hotel
     def Post_Hotel(self, hotel_data):
@@ -68,44 +68,45 @@ class Hotel_Controller_Handler:
         if hname and hcity:
             hotel_id = daoh.Post_Hotel(chid, hname, hcity)
             result = self.Hotel_Build(hotel_id, chid, hname, hcity)
-            return jsonify(hotel=result), 201
+            return jsonify(Hotel=result), 201
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     # ** Method to update an existing hotel
     def Put_Hotel(self, hid, hotel_data):
         if len(hotel_data) != 3:
             return jsonify(Error="Invalid Data"), 400
-        # ** Models/Daos to use
+
+        daoH = Hotel_Model_Dao()
+        if not daoH.Get_Hotel(hid):
+            return jsonify(Error="Hotel not found"), 404
+
         daoc = Chains_Model_Dao()
-        daoh = Hotel_Model_Dao()
-        # ** Data received
         chid = hotel_data['chid']
-        hname = hotel_data['hname']
-        hcity = hotel_data['hcity']
-        # ** Search chid if exists
         if not daoc.Get_Chain(chid):
             return jsonify(Error="Chain not found"), 404
-        if (hid or hid == 0) and hname and hcity:
-            hotel = daoh.Put_Hotel(hid, chid, hname, hcity)
+
+        hname = hotel_data['hname']
+        hcity = hotel_data['hcity']
+        if hname and hcity:
+            daoH1 = Hotel_Model_Dao()
+            hotel = daoH1.Put_Hotel(hid, chid, hname, hcity)
             result = self.Hotel_Build(hid, chid, hname, hcity)
-            if hotel:
-                return jsonify(hotel=result), 200
-            else:
-                return jsonify(Error="Hotel not found"), 404
+            return jsonify(Hotel=result), 200
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Unexpected attribute values."), 400
 
     # ** Method to delete an existing hotel
     def Delete_Hotel(self, hid):
-        if hid or hid == 0:
-            dao = Hotel_Model_Dao()
-            result = dao.Delete_Hotel(hid)
-            if result == "Error deleting":
-                return jsonify("Hotel is referenced"), 400
-            elif result:
-                return jsonify("Deleted"), 200
-            else:
-                return jsonify("Not Found"), 404
+        daoH = Hotel_Model_Dao()
+        if not daoH.Get_Hotel(hid):
+            return jsonify(Error="Hotel not found"), 404
+
+        daoH1 = Hotel_Model_Dao()
+        result = daoH1.Delete_Hotel(hid)
+        if result == "Error deleting":
+            return jsonify(Error="Hotel is referenced"), 400
+        elif result:
+            return jsonify(OK="Deleted"), 200
         else:
-            return jsonify("Error deleting"), 400
+            return jsonify(Error="Delete Failed"), 500
