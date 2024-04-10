@@ -80,3 +80,4 @@ class Chains_Model_Dao:
             return count
         except:
             return "Error deleting"
+

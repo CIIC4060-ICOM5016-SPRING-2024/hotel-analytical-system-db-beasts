@@ -67,9 +67,10 @@ def paymentmethod():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/least/rooms',  # ** Top 3 chain with the least rooms.
            methods=['POST'])
-def least_rooms():  # TODO
+def least_rooms():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_Top_Three_Chains_With_Least_Rooms(data)
     else:
         return jsonify("Not supported"), 405
 

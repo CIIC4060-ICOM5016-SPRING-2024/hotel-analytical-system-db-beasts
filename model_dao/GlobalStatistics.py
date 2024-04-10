@@ -19,3 +19,19 @@ class GlobalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result
+
+    # ** TOP 3 Top 3 YAYAYAYAYAYAYA
+    def Get_Top_Three_Chains_With_Least_Rooms(self):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT chid, cname, springmkup, summermkup, fallmkup, wintermkup, COUNT(rid) as room_count "
+            "FROM chains "
+            "NATURAL INNER JOIN hotel "
+            "NATURAL INNER JOIN room "
+            "GROUP BY chid, cname, springmkup, summermkup, fallmkup, wintermkup "
+            "ORDER BY room_count ASC "
+            "LIMIT 3; " )
+        cur.execute(query)
+        result = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result
