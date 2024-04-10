@@ -79,9 +79,10 @@ def least_rooms():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/capacity',  # ** Top 5 hotels with the most capacity.
            methods=['POST'])
-def most_capacity():  # TODO
+def most_capacity():
     if request.method == 'POST':
-        pass
+        data = request.json
+        return GlobalStatistics_Controller_Handler().Get_post_MostCapacity(data)
     else:
         return jsonify("Not supported"), 405
 
