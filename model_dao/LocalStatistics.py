@@ -39,3 +39,22 @@ class LocalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result_list
+
+    # * HANDICAPROOM
+    def Get_post_HandicapRoom(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select rid, rname, rtype, ishandicap, count(reid) as total_reserves "
+                 "from reserve "
+                 "natural inner join roomunavailable "
+                 "natural inner join room "
+                 "natural inner join roomdescription "
+                 "natural inner join hotel "
+                 "where ishandicap = true and hid = %s "
+                 "group by ishandicap, rtype, rname, rid "
+                 "order by total_reserves desc "
+                 "limit 5; ")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
