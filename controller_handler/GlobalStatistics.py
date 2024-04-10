@@ -53,16 +53,12 @@ class GlobalStatistics_Controller_Handler:
 
 
 
-    #** TOP 3 CHAINS WIth LESS ROOMS
+    #** TOP 3 CHAINS WITH LESS ROOMS
     def Chains_Dict(self, chain):
         chains_dict = {
             'chid': chain[0],
             'cname': chain[1],
-            'springmkup': chain[2],
-            'summermkup': chain[3],
-            'fallmkup': chain[4],
-            'wintermkup': chain[5],
-            'room_count': chain[6]
+            'room_count': chain[2]
         }
         return chains_dict
 
