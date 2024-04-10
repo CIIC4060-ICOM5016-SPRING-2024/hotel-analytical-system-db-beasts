@@ -3,12 +3,14 @@
     <words>
       <w>chainid</w>
       <w>chid</w>
+      <w>chidquery</w>
       <w>daoh</w>
       <w>enddate</w>
       <w>fallmkup</w>
       <w>fname</w>
       <w>hcity</w>
       <w>hname</w>
+      <w>hotelreservation</w>
       <w>ishandicap</w>
       <w>lname</w>
       <w>memberyear</w>
@@ -18,6 +20,7 @@
       <w>nquq</w>
       <w>paymentmethods</w>
       <w>rdid</w>
+      <w>roomdateavailable</w>
       <w>roomdescriptions</w>
       <w>roomsunavailable</w>
       <w>roomtypes</w>
