@@ -218,7 +218,7 @@ def handicaproom(hotel_id):  # TODO
 def leastreserve(hotel_id):  # TODO
     if request.method == 'POST':
         employee_id = request.json
-        return LocalStatistics_Controller_Handler().Get_leastreserve_HandicapRoom(hotel_id, employee_id)
+        return LocalStatistics_Controller_Handler().Get_leastreserve_Room(hotel_id, employee_id)
     else:
         return jsonify("Not supported"), 405
 

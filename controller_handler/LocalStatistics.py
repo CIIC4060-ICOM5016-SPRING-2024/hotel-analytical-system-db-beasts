@@ -54,7 +54,8 @@ class LocalStatistics_Controller_Handler:
         for room in r:
             least_reserved_room_dict['rooms'].append({
                 'rid': room[0],
-                'days_reserved': room[1],
+                'chid': room[1],
+                'days_reserved': room[2],
             })
             
         return least_reserved_room_dict
@@ -186,7 +187,7 @@ class LocalStatistics_Controller_Handler:
             return jsonify(Error="No handicap room reservation data found"), 404 
         
     
-    def Get_leastreserve_HandicapRoom(self, hid, employee_id):
+    def Get_leastreserve_Room(self, hid, employee_id):
 
         # ** Check if there is a credential
         if not isinstance(employee_id, dict) or 'eid' not in employee_id:
@@ -205,55 +206,53 @@ class LocalStatistics_Controller_Handler:
         if not employee:
             return jsonify(Error="Employee not found"), 404
 
-        #Role 1:employee, 2:supervisor, 3:admin
-        role = -1
-        # ** Check employee position
-        if employee[5] == "Regular":
-            role = 1
-            # ** Check if the employee works at the hotel that are looking for
-            if employee[1] != hid:
-                return jsonify(Error="Employee is not part of the hotel."), 404
-
-
-        elif employee[5] == "Supervisor":
-            role = 2
+        employee_role = employee[5]
+        employee_works_at = employee[1]
+        daoH = Hotel_Model_Dao()
+        hotel_chid = daoH.Get_Hotels_Chain(hid)
+        if employee_role != "Administrator":
+            daoH = Hotel_Model_Dao()
+            employee_chid = daoH.Get_Hotels_Chain(employee_works_at)
+        
+        
+            # ** Check employee can view data
+            if employee_role == "Regular" and employee_works_at != hid:
+                return  jsonify(Error="Employee does not work at the hotel."), 404
             
-        elif employee[5] == "Administrator":
-            role = 3
+            if employee_role == "Supervisor" and employee_chid != hotel_chid:
+                return  jsonify(Error="Employee cannot view statistics from different chains."), 404
+        
+        
+        localdao = LocalStatistics_Model_Dao()
+        rooms_availability = localdao.Get_room_availability_by_hotel(hid)
+        # Check if there is any data
+        if type(rooms_availability) == type(None):
+            return jsonify(Error="No room reservation data found"), 404
+        
+        roommap = {}
+        
+        #Order of elements
+        #hid,chid,rid,startdate, enddate
+        for room in rooms_availability:
+            rid = room[2]
+            chid = room[1]
+            if rid in roommap:
+                roommap[rid][1] += (room[4] - room[3]).days
+            else:
+                internal_dat = [chid, (room[4] - room[3]).days]
+                roommap[rid] = internal_dat
+                
+        rooms = []
+        for key,value in roommap.items():
+            room = [key,value[0],value[1]]
+            rooms.append(room)
             
-        else:
-            return jsonify(Error="Invalid Employee role"), 404
-            
-        daoLS = LocalStatistics_Model_Dao()
-        match role:
-            
-            case 1:
-                room_data = daoLS.Get_room_availability_Reg(hid)
+        #Sort by least reserved and limit to 3
+        sortedrooms = sorted(rooms, key=lambda x: x[2])[:3]
+        #Create dictionary model
+        sortedrooms_dict = self.least_reserved_room_Dict(sortedrooms)
+        return jsonify(sortedrooms=sortedrooms_dict), 200
 
-            case 2:
-                room_data = daoLS.Get_room_availability_Sup(hid)
-
-            case 3:
-                room_data = daoLS.Get_room_availability_Admin(hid)
-
-        if room_data:
-            room_reservations = {}
-            for reservation in room_data:
-                room_id = reservation[1]
-                days_reserved = (reservation[3] - reservation[2]).days + 1  
-                if room_id in room_reservations:
-                    
-                    room_reservations[room_id] += days_reserved
-                else:
-                    room_reservations[room_id] = days_reserved
-
-            least_reserved = sorted(room_reservations.items(), key=lambda item: item[1])[:3]
-            least_reserved_dict = self.least_reserved_room_Dict(least_reserved)
-            
-            
-            return jsonify(least_rooms=least_reserved_dict), 200
-        else:
-            return jsonify(Error="No handicap room unavailability data found"), 404 
         
 # * ROOMTYPE
     def Get_post_RoomType(self, hid, employee_id):
