@@ -240,7 +240,9 @@ def mostcreditcard(hotel_id):  # TODO
            methods=['POST'])
 def highestpaid(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return (LocalStatistics_Controller_Handler()
+                .Get_post_Highest_Paid_Regular_Employees(hotel_id, employee_id))
     else:
         return jsonify("Not supported"), 405
 
@@ -250,7 +252,9 @@ def highestpaid(hotel_id):  # TODO
            methods=['POST'])
 def mostdiscount(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        employee_id = request.json
+        return (LocalStatistics_Controller_Handler()
+                .Get_post_MostDiscount(hotel_id, employee_id))
     else:
         return jsonify("Not supported"), 405
 
