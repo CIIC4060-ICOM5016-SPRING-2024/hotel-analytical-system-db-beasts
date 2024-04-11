@@ -106,8 +106,8 @@ def most_reservation():
 def most_profitmonth():
     if request.method == 'POST':
         data = request.json
-        return GlobalStatistics_Controller_Handler().Get_top_3_monthly_reservation(data)
-
+        # return GlobalStatistics_Controller_Handler().Get_top_3_monthly_reservation(data)
+        return GlobalStatistics_Controller_Handler().Get_post_MostProfitMonth(data)
     else:
         return jsonify("Not supported"), 405
 
