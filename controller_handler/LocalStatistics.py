@@ -36,11 +36,10 @@ class LocalStatistics_Controller_Handler:
         # Add room information to the 'rooms' list
         for room in r:
             top5_handicaproom_dict['rooms'].append({
-                'hotel_id': room[0],
-                'room_id': room[1],
-                'room_type': room[2],
-                'total_reserves': room[3],
-                'is_handicap': room[4]
+                'room_id': room[0],
+                'chid': room[1],
+                'total_reserves': room[2],
+
             })
 
         return top5_handicaproom_dict 
@@ -111,18 +110,7 @@ class LocalStatistics_Controller_Handler:
     #Hotel
     #Top 5 handicap rooms that were reserve the most.
     def Get_post_top5_HandicapRoom(self, hid, employee_id):
-        """Retrieves a list of the top 5 most reserved handicap rooms for a hotel.
-
-        Args:
-            hid: The hotel ID.
-            employee_id: The employee's identification information.
-
-        Returns:
-            A JSON object containing the top 5 handicap rooms and their reservation counts, 
-            or an error message if applicable.
-        """
-
-        # ** Check if there is a credential
+        
         if not isinstance(employee_id, dict) or 'eid' not in employee_id:
             return jsonify(Error="Invalid employee data"), 400
 
@@ -139,54 +127,48 @@ class LocalStatistics_Controller_Handler:
         if not employee:
             return jsonify(Error="Employee not found"), 404
         
-        
-        #Role 1:employee, 2:supervisor, 3:admin
-        role = -1 
-        
-        # ** Check employee position
-        if employee[5] == "Regular":
-            role = 1
-            # ** Check if the employee works at the hotel that are looking for
-            if employee[1] != hid:
+        employee_role = employee[5]
+        employee_works_at = employee[1]
+        daoH = Hotel_Model_Dao()
+        hotel_chid = daoH.Get_Hotels_Chain(hid)
+        if employee_role != "Administrator":
+            daoH = Hotel_Model_Dao()
+            employee_chid = daoH.Get_Hotels_Chain(employee_works_at)
+            if employee_role == "Regular" and employee_works_at != hid:
                 return jsonify(Error="Employee is not part of the hotel."), 404
-        elif employee[5] == "Supervisor":
-            role = 2
             
-        elif employee[5] == "Administrator":
-            role = 3
-        
-        else:
-            return jsonify(Error="Invalid Employee role"), 404
+            if employee_role == "Supervisor" and employee_chid != hotel_chid:
+                return  jsonify(Error="Employee cannot view statistics from different chains."), 404
             
-        daoLS = LocalStatistics_Model_Dao()
-        match role:
+        localdao = LocalStatistics_Model_Dao()
+        rooms = localdao.Get_handicap_rooms(hid)
         
-            case 1:
-                # ** Get handicap room reservation data
-                
-                room_data = daoLS.Get_post_top5_HandicapRoom_Reg(hid)
-                
-            case 2:
-                # ** Get handicap room reservation data
-                
-                room_data = daoLS.Get_post_top5_HandicapRoom_Sup(hid)
-                
-            case 3:
-                # ** Get handicap room reservation data
-                
-                room_data = daoLS.Get_post_top5_HandicapRoom_Admin(hid)
-
-        # **Process and return top 5 rooms**
-        if type(room_data) != type(None):
-            # Sort by total reserves (descending)
-            top_5 = room_data[:5]
-            top_5_dict = self.Top5_HandicapRoom_Dict(top_5)
+        if rooms == None:
+            return jsonify(Error="No rooms found"), 404
+        
+        
+        #Data order hid,chid,rid,reid as total_reserve,ishandicap as handicap_room
+        roommap = {}
+        for room in rooms:
+            rid = room[2]
+            chid = room[1]
+            if rid not in roommap:
+                roommap[rid] = [chid, 1]
+            else:
+                roommap[rid][1] += 1
+        
+        rooms = []
+        for key,value in roommap.items():
+            room = [key,value[0],value[1]]
+            rooms.append(room)
+        
+        rooms = sorted(rooms, key=lambda x: x[2], reverse=True)[:5]
+        rooms_dict = self.Top5_HandicapRoom_Dict(rooms)
+        return jsonify(Top5_HandicapRoom=rooms_dict), 200
             
-            return jsonify(top_rooms=top_5_dict), 200
-        else:
-            return jsonify(Error="No handicap room reservation data found"), 404 
         
-    
+        
+           
     def Get_leastreserve_Room(self, hid, employee_id):
 
         # ** Check if there is a credential

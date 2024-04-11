@@ -47,7 +47,7 @@ class LocalStatistics_Model_Dao:
         return result_list
 
     def Get_post_top5_HandicapRoom_Sup(self, hid):
-        # #cur = self.db.docker_connection.cursor()
+        #cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()
 
         chidquery = "SELECT chid FROM hotel WHERE hid = %s"
@@ -66,28 +66,27 @@ class LocalStatistics_Model_Dao:
             "order by total_reserve desc")
         cur.execute(query, (chid,))
         result_list = cur.fetchall()
-        # self.db.close()
+        #self.db.close()
         self.dbh.close()
         cur.close()
         return result_list
 
-    def Get_post_top5_HandicapRoom_Admin(self, hid):
+    def Get_handicap_rooms(self, hid):
         #cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()
         query = (
-            "SELECT hid as hotel, rid as roomID ,rtype as room_type, count(reid) as total_reserve, ishandicap as "
-            "handicap_room "
+            "SELECT hid,chid,rid,reid,ishandicap as handicap_room "
             "FROM reserve "
             "natural inner join roomunavailable "
             "natural inner join room "
             "natural inner join roomdescription "
-            "where ishandicap = true "
-            "group by hid,rid, rtype, ishandicap "
-            "order by total_reserve desc")
+            "natural inner join hotel "
+            "where ishandicap = true and hid = %s "
+            "group by hid,chid,rid,reid,ishandicap ")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        #self.db.close()
-        self.dbh.close()
+        self.db.close()
+        #self.dbh.close()
         cur.close()
         return result_list
 
