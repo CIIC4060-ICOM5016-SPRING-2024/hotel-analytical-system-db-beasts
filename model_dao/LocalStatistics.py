@@ -43,14 +43,14 @@ class LocalStatistics_Model_Dao:
     # * HANDICAPROOM
     def Get_post_HandicapRoom(self, hid):
         cur = self.db.docker_connection.cursor()
-        query = ("select rid, rname, rtype, ishandicap, count(reid) as total_reserves "
+        query = ("select hid, rid, rname, rtype, ishandicap, count(reid) as total_reserves "
                  "from reserve "
                  "natural inner join roomunavailable "
                  "natural inner join room "
                  "natural inner join roomdescription "
                  "natural inner join hotel "
                  "where ishandicap = true and hid = %s "
-                 "group by ishandicap, rtype, rname, rid "
+                 "group by ishandicap, rtype, rname, rid, hid "
                  "order by total_reserves desc "
                  "limit 5; ")
         cur.execute(query, (hid,))
@@ -62,13 +62,13 @@ class LocalStatistics_Model_Dao:
     # * LEASTRESERVE
     def Get_post_LeastReserve(self, hid):
         cur = self.db.docker_connection.cursor()
-        query = ("select rid, rname, rtype, sum(enddate-startdate) as unavailable "
+        query = ("select hid, rid, rname, rtype, sum(enddate-startdate) as unavailable "
                  "from room "
                  "natural inner join roomunavailable "
                  "natural inner join roomdescription "
                  "natural inner join hotel "
-                 "where hid = 1 "
-                 "group by rid, rname, rtype "
+                 "where hid = %s "
+                 "group by rid, rname, rtype, hid "
                  "order by unavailable asc "
                  "limit 3; ")
         cur.execute(query, (hid,))
