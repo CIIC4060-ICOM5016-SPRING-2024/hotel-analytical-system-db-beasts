@@ -270,9 +270,10 @@ def roomtype(hotel_id):
            # ** Top 3 rooms that were reserved
            # ** that had the least guest-to-capacity ratio.
            methods=['POST'])
-def leastguests(hotel_id):  # TODO
+def leastguests(hotel_id):
     if request.method == 'POST':
-        pass
+        data = request.json
+        return LocalStatistics_Controller_Handler().Get_post_LeastGuests(hotel_id, data)
     else:
         return jsonify("Not supported"), 405
 
