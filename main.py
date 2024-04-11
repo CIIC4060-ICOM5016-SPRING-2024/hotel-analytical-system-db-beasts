@@ -46,7 +46,7 @@ Region GLOBAL STATISTICS
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/revenue',  # ** Top 3 chains with the highest total revenue.
            methods=['POST'])
-def most_revenue():  # TODO
+def most_revenue(): 
     if request.method == 'POST':
         data = request.json
         return GlobalStatistics_Controller_Handler().Get_post_MostRevenue(data)
@@ -80,7 +80,7 @@ def least_rooms():
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/capacity',  # ** Top 5 hotels with the most capacity.
            methods=['POST'])
-def most_capacity():  # TODO
+def most_capacity(): 
     if request.method == 'POST':
         data = request.json
         return GlobalStatistics_Controller_Handler().Get_Top_Five_Hotels_With_Most_Capacity(data)
@@ -91,7 +91,7 @@ def most_capacity():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/reservation',  # ** Top 10% hotels that had the most reservations.
            methods=['POST'])
-def most_reservation():  # TODO
+def most_reservation():  
     if request.method == 'POST':
         employee_id = request.json
         return GlobalStatistics_Controller_Handler().Get_top_10_hotelreservation(employee_id)
@@ -103,7 +103,7 @@ def most_reservation():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/most/profitmonth',  # ** Top 3 month with the most reservation by chain.
            methods=['POST'])
-def most_profitmonth():  # TODO
+def most_profitmonth():  
     if request.method == 'POST':
         data = request.json
         return GlobalStatistics_Controller_Handler().Get_top_3_monthly_reservation(data)
@@ -204,7 +204,7 @@ def hotelid(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/handicaproom',  # ** Top 5 handicap rooms that were reserve the most.
            methods=['POST'])
-def handicaproom(hotel_id):  # TODO
+def handicaproom(hotel_id):  
     if request.method == 'POST':
         employee_id = request.json
         return LocalStatistics_Controller_Handler().Get_post_top5_HandicapRoom(hotel_id, employee_id)    
@@ -215,7 +215,7 @@ def handicaproom(hotel_id):  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/leastreserve',  # ** Top 3 rooms that were the least time unavailable.
            methods=['POST'])
-def leastreserve(hotel_id):  # TODO
+def leastreserve(hotel_id): 
     if request.method == 'POST':
         employee_id = request.json
         return LocalStatistics_Controller_Handler().Get_leastreserve_Room(hotel_id, employee_id)
@@ -230,7 +230,7 @@ def leastreserve(hotel_id):  # TODO
            methods=['POST'])
 def mostcreditcard(hotel_id):  # TODO
     if request.method == 'POST':
-        pass
+        return LocalStatistics_Controller_Handler.Get_post_MostCreditCard(hotel_id)
     else:
         return jsonify("Not supported"), 405
 
@@ -238,7 +238,7 @@ def mostcreditcard(hotel_id):  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/highestpaid',  # ** Top 3 highest paid regular employees.
            methods=['POST'])
-def highestpaid(hotel_id):  # TODO
+def highestpaid(hotel_id):  
     if request.method == 'POST':
         employee_id = request.json
         return (LocalStatistics_Controller_Handler()
@@ -250,7 +250,7 @@ def highestpaid(hotel_id):  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/mostdiscount',  # ** Top 5 clients that received the most discounts.
            methods=['POST'])
-def mostdiscount(hotel_id):  # TODO
+def mostdiscount(hotel_id):  
     if request.method == 'POST':
         employee_id = request.json
         return (LocalStatistics_Controller_Handler()
@@ -276,9 +276,10 @@ def roomtype(hotel_id):
            # ** Top 3 rooms that were reserved
            # ** that had the least guest-to-capacity ratio.
            methods=['POST'])
-def leastguests(hotel_id):  # TODO
+def leastguests(hotel_id):
     if request.method == 'POST':
-        pass
+        data = request.json
+        return LocalStatistics_Controller_Handler().Get_post_LeastGuests(hotel_id, data)
     else:
         return jsonify("Not supported"), 405
 
@@ -299,7 +300,7 @@ Region EMPLOYEE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/employee',
            methods=['GET', 'POST'])
-def employee():  # TODO
+def employee(): 
     if request.method == 'GET':
         return Employee_Controller_Handler().Get_All_Employees()
     elif request.method == 'POST':
@@ -341,7 +342,7 @@ Region LOGIN
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login',
            methods=['GET', 'POST'])
-def login():  # TODO
+def login(): 
     if request.method == 'GET':
         return Login_Controller_Handler().Get_All_Logins()
     elif request.method == 'POST':
@@ -354,7 +355,7 @@ def login():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/login/<int:login_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def loginid(login_id):  # TODO
+def loginid(login_id):  
     if request.method == 'GET':
         return Login_Controller_Handler().Get_Login(login_id)
     elif request.method == 'PUT':
@@ -382,11 +383,12 @@ Region ROOM
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room',
            methods=['GET', 'POST'])
-def room():  # TODO
+def room(): 
     if request.method == 'GET':
         return Room_Controller_Handler().Get_All_Rooms()
-    elif request.method == 'POST':  # TODO
-        pass
+    elif request.method == 'POST':  
+        data = request.json
+        return Room_Controller_Handler().Post_Room(data)
     else:
         return jsonify("Not supported"), 405
 
@@ -394,12 +396,15 @@ def room():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/room/<int:room_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def roomid(room_id):  # TODO
+def roomid(room_id):  
     if request.method == 'GET':
         return Room_Controller_Handler().Get_Room(room_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':  
+        data = request.json
+        return Room_Controller_Handler().Put_Room(room_id, data)
         pass
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':  
+        return Room_Controller_Handler().Delete_Room(room_id)
         pass
     else:
         return jsonify("Not supported"), 405
@@ -503,10 +508,10 @@ Region RESERVE
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve',
            methods=['GET', 'POST'])
-def reserve():  # TODO
+def reserve(): 
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_All_Reserves()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST': 
         data = request.json
         return Reserve_Controller_Handler().Post_Reserve(data)
         
@@ -517,14 +522,14 @@ def reserve():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def reserveid(reserve_id):  # TODO
+def reserveid(reserve_id):  
     if request.method == 'GET':
         return Reserve_Controller_Handler().Get_Reserve(reserve_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT': 
         data = request.json
         return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
     
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE':  
         return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
         return jsonify("Not supported"), 405
@@ -546,10 +551,10 @@ Region CLIENT
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client',
            methods=['GET', 'POST'])
-def client():  # TODO
+def client():  
     if request.method == 'GET':
         return Client_Controller_Handler().Get_All_Clients()
-    elif request.method == 'POST':  # TODO
+    elif request.method == 'POST':  
         data = request.json
         return Client_Controller_Handler().Post_Client(data)
     else:
@@ -559,13 +564,13 @@ def client():  # TODO
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
-def clientid(client_id):  # TODO
+def clientid(client_id): 
     if request.method == 'GET':
         return Client_Controller_Handler().Get_Client(client_id)
-    elif request.method == 'PUT':  # TODO
+    elif request.method == 'PUT':  
         data = request.json
         return Client_Controller_Handler().Put_Client(client_id, data)
-    elif request.method == 'DELETE':  # TODO
+    elif request.method == 'DELETE': 
         return Client_Controller_Handler().Delete_Client(client_id)
     else:
         return jsonify("Not supported"), 405
