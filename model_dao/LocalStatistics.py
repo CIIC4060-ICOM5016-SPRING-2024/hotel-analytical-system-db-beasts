@@ -9,11 +9,12 @@ class LocalStatistics_Model_Dao:
     # * ROOMTYPE
     def Get_post_RoomType(self, hid):
         cur = self.db.docker_connection.cursor()
-        query = ("SELECT hid as hotel, rtype as room_type, count(reid) as total_reserves "
+        query = ("SELECT hid, rtype as room_type, count(reid) as total_reserves "
                  "FROM reserve "
                  "natural inner join roomunavailable "
                  "natural inner join room "
                  "natural inner join roomdescription "
+                 "natural inner join hotel "
                  "where hid = %s "
                  "group by  rtype, hid")
         cur.execute(query, (hid,))
