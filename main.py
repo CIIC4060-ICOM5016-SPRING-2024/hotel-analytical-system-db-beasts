@@ -212,9 +212,10 @@ def handicaproom(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/leastreserve',  # ** Top 3 rooms that were the least time unavailable.
            methods=['POST'])
-def leastreserve(hotel_id):  # TODO
+def leastreserve(hotel_id):
     if request.method == 'POST':
-        pass
+        data = request.json
+        return LocalStatistics_Controller_Handler().Get_post_LeastReserve(hotel_id, data)
     else:
         return jsonify("Not supported"), 405
 
