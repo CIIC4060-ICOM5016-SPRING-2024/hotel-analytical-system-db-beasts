@@ -185,7 +185,7 @@ class LocalStatistics_Controller_Handler:
             'rid': r[1],
             'rname': r[2],
             'rtype': r[3],
-            'Unavailable': r[4],
+            'unavailable': r[4],
         }
         return leastreserve_dict
 
