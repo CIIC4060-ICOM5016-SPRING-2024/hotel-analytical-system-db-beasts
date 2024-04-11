@@ -60,6 +60,9 @@ class Login_Model_Dao:
             cur.close()
             return result
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "Error"
 
     def Put_Login(self, lid, username, password):
@@ -78,6 +81,9 @@ class Login_Model_Dao:
             cur.close()
             return count
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "Error"
 
     def Delete_Login(self, lid):
@@ -95,6 +101,9 @@ class Login_Model_Dao:
             cur.close()
             return count
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "We couldn't delete your information, sorry!"
 
     """

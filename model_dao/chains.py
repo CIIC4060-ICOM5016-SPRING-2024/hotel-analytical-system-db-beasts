@@ -90,6 +90,8 @@ class Chains_Model_Dao:
             cur.close()
             return count
         except:
+            self.dbh.close()
+            cur.close()
             return "Error deleting"
 
     def Get_Markup(self, chid):

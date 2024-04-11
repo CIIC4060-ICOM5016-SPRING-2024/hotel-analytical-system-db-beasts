@@ -49,8 +49,8 @@ class Employee_Model_Dao:
         # cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO employee (hid, fname, lname, age, position, salary)"
-                    "VALUES (%s, %s, %s, %s, %s, %s)" 
-                    "returning eid")
+                 "VALUES (%s, %s, %s, %s, %s, %s)"
+                 "returning eid")
         cur.execute(query, (hid, fname, lname, age, position, salary))
         result = cur.fetchone()[0]
         # self.db.docker_connection.commit()
@@ -93,5 +93,7 @@ class Employee_Model_Dao:
             cur.close()
             return count
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "Error deleting the employee"
-

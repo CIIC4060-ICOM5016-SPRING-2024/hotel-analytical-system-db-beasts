@@ -4,7 +4,7 @@ from db import Docker_Database, Heroku_Database
 
 class LocalStatistics_Model_Dao:
     def __init__(self):
-        #self.db = Docker_Database()
+        # self.db = Docker_Database()
         self.dbh = Heroku_Database()
 
     # * ROOMTYPE

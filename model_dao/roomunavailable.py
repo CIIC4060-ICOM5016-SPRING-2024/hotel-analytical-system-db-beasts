@@ -88,6 +88,9 @@ class RoomUnavailable_Model_Dao:
             cur.close()
             return count
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "Error deleting"
 
     """

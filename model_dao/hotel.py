@@ -56,6 +56,7 @@ class Hotel_Model_Dao:
         self.dbh.heroku_connection.commit()
         # self.db.close()
         self.dbh.close()
+        cur.close()
         return result
 
     # ** Method to update an existing hotel in the database
@@ -90,6 +91,9 @@ class Hotel_Model_Dao:
             cur.close()
             return count
         except:
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return "Error deleting"
         
     def Get_Hotels_Chain(self, hid):

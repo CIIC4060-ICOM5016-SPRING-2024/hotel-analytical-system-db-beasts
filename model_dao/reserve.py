@@ -143,7 +143,9 @@ class Reserve_Model_Dao:
             total_cost = rprice * num_days * season_markup
             discount = total_cost * member_discount
             discounted_cost = round(total_cost - discount, 2)
-
+        # self.db.close()
+        self.dbh.close()
+        cur.close()
         return discounted_cost
 
     """
@@ -174,6 +176,9 @@ class Reserve_Model_Dao:
         cur.execute(query, (reid,))
         result = cur.fetchone()
         if type(result) == type(None):
+            # self.db.close()
+            self.dbh.close()
+            cur.close()
             return None
         else:
             ruid = result[0]
