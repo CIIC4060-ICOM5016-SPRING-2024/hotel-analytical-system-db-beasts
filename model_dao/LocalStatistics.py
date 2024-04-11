@@ -22,18 +22,35 @@ class LocalStatistics_Model_Dao:
         cur.close()
         return result_list
 
-
     # * THE TOP 3 HIGHEST PAID EMPLOYEES
     def Get_post_Highest_Paid_Regular_Employees(self, hid):
         cur = self.db.docker_connection.cursor()
         query = ("SELECT hid, eid, fname, lname, salary, position "
-                "FROM employee "
-                "WHERE position = 'Regular' and hid = %s "
-                "ORDER BY salary DESC "
-                "LIMIT  3; ")
+                 "FROM employee "
+                 "WHERE position = 'Regular' and hid = %s "
+                 "ORDER BY salary DESC "
+                 "LIMIT  3; ")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
         cur.close()
         return result_list
 
+    # * THE TOP 5 MOST DISCOUNTS HOLDER CLIENTS
+    # def Get_post_Most_Discount_Clients(self, hid):
+    def Get_post_MostDiscount(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT hid, clid, fname, lname, memberyear, calculate_most_discount(memberyear) as discount "
+                 "FROM client "
+                 "NATURAL INNER JOIN reserve "
+                 "NATURAL INNER JOIN roomunavailable "
+                 "NATURAL INNER JOIN room "
+                 "NATURAL INNER JOIN hotel "
+                 "WHERE hid = %s "
+                 "ORDER BY discount DESC "
+                 "LIMIT  5; ")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
