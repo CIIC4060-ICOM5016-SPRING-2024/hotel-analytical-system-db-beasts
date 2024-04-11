@@ -247,9 +247,10 @@ def highestpaid(hotel_id):
 @app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
            '/hotel/<int:hotel_id>/mostdiscount',  # ** Top 5 clients that received the most discounts.
            methods=['POST'])
-def mostdiscount(hotel_id):  # TODO
+def mostdiscount(hotel_id):
     if request.method == 'POST':
-        pass
+        data = request.json
+        return LocalStatistics_Controller_Handler().Get_post_MostDiscount(hotel_id, data)
     else:
         return jsonify("Not supported"), 405
 
