@@ -126,7 +126,7 @@ class LocalStatistics_Model_Dao:
                  "natural inner join roomunavailable "
                  "natural inner join room "
                  "natural inner join hotel "
-                 "where hid = 17 "
+                 "where hid = %s "
                  "order by discount desc "
                  "limit 5;")
         cur.execute(query, (hid,))
