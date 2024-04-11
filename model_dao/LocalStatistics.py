@@ -21,3 +21,19 @@ class LocalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result_list
+
+
+    # * THE TOP 3 HIGHEST PAID EMPLOYEES
+    def Get_post_Highest_Paid_Regular_Employees(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT hid, eid, fname, lname, salary, position "
+                "FROM employee "
+                "WHERE position = 'Regular' and hid = %s "
+                "ORDER BY salary DESC "
+                "LIMIT  3; ")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
+
