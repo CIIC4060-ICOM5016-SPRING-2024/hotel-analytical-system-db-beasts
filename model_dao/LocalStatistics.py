@@ -112,3 +112,24 @@ class LocalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result_list
+
+    # * MOSTDISCOUNT
+    def Get_post_MostDiscount(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select hid,"
+                 "       clid, "
+                 "       fname || ' ' || lname as full_name, "
+                 "       memberyear, calculate_most_discount(memberyear) as discount "
+                 "from client "
+                 "natural inner join reserve "
+                 "natural inner join roomunavailable "
+                 "natural inner join room "
+                 "natural inner join hotel "
+                 "where hid = 17 "
+                 "order by discount desc "
+                 "limit 5;")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
