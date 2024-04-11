@@ -25,7 +25,8 @@ class GlobalStatistics_Model_Dao:
 
     # ** TOP 3 CHAINS WITH LESS ROOMS
     def Get_Top_Three_Chains_With_Least_Rooms(self):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, cname, COUNT(rid) as room_count "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -35,14 +36,16 @@ class GlobalStatistics_Model_Dao:
                  "LIMIT 3; ")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result
 
-    #** TOP 5 HOTELS WITH MOST CAPACITY
+    # ** TOP 5 HOTELS WITH MOST CAPACITY
 
     def Get_Top_Five_Hotels_With_Most_Capacity(self):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, hname, sum(capacity) as total_capacity "
                  "FROM hotel "
                  "NATURAL INNER JOIN room "
@@ -52,13 +55,12 @@ class GlobalStatistics_Model_Dao:
                  "LIMIT 5")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result
 
-    
-    
-    #HotelMethod
+    # HotelMethod
     def Get_top_10_hotelreservation(self):
         # cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()

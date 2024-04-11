@@ -25,7 +25,7 @@ class Employee_Controller_Handler:
 
     def Employee_Build(self, employee_id, hid, fname, lname, age, position, salary):
         employee_build = {
-            'eid' : employee_id,
+            'eid': employee_id,
             'hid': hid,
             'fname': fname,
             'lname': lname,
@@ -127,11 +127,6 @@ class Employee_Controller_Handler:
 
         return jsonify(employee=result), 201
 
-
-
-
-
-
     # ** Method to update an existing employee
 
     def Put_Employee(self, eid, employee_data):
@@ -161,7 +156,6 @@ class Employee_Controller_Handler:
                 return jsonify(Error="Employee not found"), 404
         else:
             return jsonify(Error="Unexpected attribute values."), 400
-
 
     # ** Method to fire an employee (Delete)
     def Delete_Employee(self, eid):

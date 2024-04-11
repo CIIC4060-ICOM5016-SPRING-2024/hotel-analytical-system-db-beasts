@@ -27,7 +27,7 @@ class LocalStatistics_Model_Dao:
 
     # * Hotel
     def Get_handicap_rooms(self, hid):
-        #cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()
         query = (
             "SELECT hid,chid,rid,reid,ishandicap as handicap_room "
@@ -40,13 +40,13 @@ class LocalStatistics_Model_Dao:
             "group by hid,chid,rid,reid,ishandicap ")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        self.db.close()
-        #self.dbh.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result_list
 
     def Get_room_availability_by_hotel(self, hid):
-        #cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
         cur = self.dbh.heroku_connection.cursor()
         query = ("""Select hid,chid,rid,startdate, enddate
                  From roomunavailable natural inner join room
@@ -55,16 +55,15 @@ class LocalStatistics_Model_Dao:
                  Group by hid,chid,rid,startdate,enddate""")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        #self.db.close()
+        # self.db.close()
         self.dbh.close()
         cur.close()
         return result_list
-    
-    
 
     # * THE TOP 3 HIGHEST PAID EMPLOYEES
     def Get_post_Highest_Paid_Regular_Employees(self, hid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, eid, fname, lname, salary, position "
                  "FROM employee "
                  "WHERE position = 'Regular' and hid = %s "
@@ -72,14 +71,16 @@ class LocalStatistics_Model_Dao:
                  "LIMIT  3; ")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result_list
 
     # * THE TOP 5 MOST DISCOUNTS HOLDER CLIENTS
     # def Get_post_Most_Discount_Clients(self, hid):
     def Get_post_MostDiscount(self, hid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, clid, fname, lname, memberyear, calculate_most_discount(memberyear) as discount "
                  "FROM client "
                  "NATURAL INNER JOIN reserve "
@@ -91,13 +92,15 @@ class LocalStatistics_Model_Dao:
                  "LIMIT  5; ")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result_list
-    
-     # * LEASTGUESTS
+
+    # * LEASTGUESTS
     def Get_post_LeastGuests(self, hid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("select hid, rid, rname, rtype, "
                  "guests || ':' || capacity as guest_capacity, "
                  "round(abs((guests::float/capacity::float)::numeric - 1) ,2) as space "
@@ -112,12 +115,14 @@ class LocalStatistics_Model_Dao:
                  "limit 3")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result_list
 
     def Get_post_MostCreditCard(self, hid):
-        cur = self.db.docker_connection.cursor()
+        # cur = self.db.docker_connection.cursor()
+        cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT clid, age, hid, chid, payment, count(reid) as total_reserves "
                  "FROM client "
                  "NATURAL INNER JOIN reserve "
@@ -129,6 +134,7 @@ class LocalStatistics_Model_Dao:
                  "ORDER BY total_reserves desc limit 5")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
-        self.db.close()
+        # self.db.close()
+        self.dbh.close()
         cur.close()
         return result_list

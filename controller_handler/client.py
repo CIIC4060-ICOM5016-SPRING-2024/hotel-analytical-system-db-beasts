@@ -15,8 +15,8 @@ class Client_Controller_Handler:
             'memberyear': r[4]
         }
         return client_dict
-    
-    def Client_Build(self,clid,fname, lname, age, memberyear):
+
+    def Client_Build(self, clid, fname, lname, age, memberyear):
         client_build = {
             'clid': clid,
             'fname': fname,
@@ -62,56 +62,53 @@ class Client_Controller_Handler:
         else:
             dao = Client_Model_Dao()
             clid = dao.Post_Client(fname, lname, age, memberyear)
-            client_result = self.Client_Build(clid, fname,lname, age, memberyear)
-            
-            return jsonify(client=client_result),201
+            client_result = self.Client_Build(clid, fname, lname, age, memberyear)
 
-            
-        
-    
+            return jsonify(client=client_result), 201
+
     def Put_Client(self, client_id, client_data):
         if len(client_data) != 4:
             return jsonify(Error="Invalid Data"), 400
-        
+
         if client_id is None:
             return jsonify(Error="Client ID cannot be empty"), 400
-        
+
         client = self.Get_Client(client_id)
-        
+
         if client is None:
             return jsonify(Error="Client not found"), 404
-        
+
         fname = client_data['fname']
         lname = client_data['lname']
         age = client_data['age']
         memberyear = client_data['memberyear']
-        
+
         if any(elm is None or elm == ' ' or elm == '' for elm in [fname, lname, age, memberyear]):
             return jsonify(Error="Unexpected attribute values"), 400
         else:
             dao = Client_Model_Dao()
             clid = dao.Post_Client(fname, lname, age, memberyear)
-            client_result = self.Client_Build(clid, fname,lname, age, memberyear)
-            
-            return jsonify(client=client_result),201
-    
+            client_result = self.Client_Build(clid, fname, lname, age, memberyear)
+
+            return jsonify(client=client_result), 201
+
     def Delete_Client(self, client_id):
         if client_id is None:
             return jsonify(Error="Client ID cannot be empty"), 400
-        
+
         clientdao = Client_Model_Dao()
         client = clientdao.Get_Client(client_id)
         if client is not None:
-            
-            #Checking if client has reservations on system
+
+            # Checking if client has reservations on system
             clientdao2 = Client_Model_Dao()
             client_reservations = clientdao2.Get_Client_Reservations(client_id)
 
             if len(client_reservations) == 0:
-                
+
                 dao = Client_Model_Dao()
                 result = dao.Delete_Client(client_id)
-                
+
                 if result:
                     return jsonify("Deleted"), 200
             else:
