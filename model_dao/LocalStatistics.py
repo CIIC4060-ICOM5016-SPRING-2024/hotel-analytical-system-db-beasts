@@ -97,3 +97,18 @@ class LocalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result_list
+
+    # * HIGHESTPAID
+    def Get_post_HighestPaid(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select hid, eid, fname || ' ' || lname as fullname, position, salary "
+                 "from employee "
+                 "natural inner join hotel "
+                 "where position = 'Regular' and hid = %s "
+                 "order by salary desc "
+                 "limit 3;")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
