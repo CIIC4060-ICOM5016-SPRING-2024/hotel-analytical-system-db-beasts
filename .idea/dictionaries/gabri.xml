@@ -8,12 +8,20 @@
       <w>enddate</w>
       <w>fallmkup</w>
       <w>fname</w>
+      <w>handicaprooms</w>
       <w>hcity</w>
       <w>hname</w>
       <w>ishandicap</w>
+      <w>leastreserves</w>
       <w>lname</w>
       <w>memberyear</w>
+      <w>mostcapacities</w>
+      <w>mostcapacity</w>
       <w>mostcreditcards</w>
+      <w>mostprofitmonth</w>
+      <w>mostprofitmonths</w>
+      <w>mostreservation</w>
+      <w>mostreservations</w>
       <w>mostrevenue</w>
       <w>mostrevenues</w>
       <w>nquq</w>
