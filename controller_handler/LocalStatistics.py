@@ -10,7 +10,7 @@ class LocalStatistics_Controller_Handler:
     # * ROOMTYPE
     def RoomType_Dict(self, r):
         roomtype_dict = {
-            'hotel': r[0],
+            'hid': r[0],
             'room type': r[1],
             'total reserves': r[2]
         }
