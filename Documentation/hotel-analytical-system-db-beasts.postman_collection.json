@@ -63,13 +63,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/chains/7",
+									"raw": "{{route}}/chains/5",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"chains",
-										"7"
+										"5"
 									]
 								}
 							},
@@ -82,7 +82,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"cname\": \"Prueba1\",\r\n    \"fallmkup\": 3,\r\n    \"springmkup\": 1,\r\n    \"summermkup\": 2,\r\n    \"wintermkup\": 4\r\n}",
+									"raw": "{\r\n    \"cname\": \"Prueba2\",\r\n    \"fallmkup\": 3,\r\n    \"springmkup\": 1,\r\n    \"summermkup\": 2,\r\n    \"wintermkup\": 4\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -90,13 +90,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{route}}/chains/7",
+									"raw": "{{route}}/chains/6",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"chains",
-										"7"
+										"6"
 									]
 								}
 							},
@@ -108,13 +108,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/chains/7",
+									"raw": "{{route}}/chains/5",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"chains",
-										"7"
+										"5"
 									]
 								}
 							},
@@ -136,7 +136,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"eid\": 199\r\n}",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -164,7 +164,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"eid\":3\r\n}\r\n",
+											"raw": "{\r\n    \"eid\": 3\r\n}\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -172,13 +172,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{route}}/hotel/17/handicaproom",
+											"raw": "{{route}}/hotel/2/handicaproom",
 											"host": [
 												"{{route}}"
 											],
 											"path": [
 												"hotel",
-												"17",
+												"2",
 												"handicaproom"
 											]
 										}
@@ -192,7 +192,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"eid\": 3\r\n\r\n}",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -208,6 +208,118 @@
 												"hotel",
 												"17",
 												"leastreserve"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "mostdiscount",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\":3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/mostdiscount",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"mostdiscount"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "highestpaid",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/highestpaid",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"highestpaid"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "mostcreditcard",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/mostcreditcard",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"mostcreditcard"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "leastguests",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/leastguests",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"leastguests"
 											]
 										}
 									},
@@ -258,7 +370,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"chid\": 6,\r\n    \"hname\": \"Prueba\",\r\n    \"hcity\": \"Prueba\"\r\n}",
+									"raw": "{\r\n    \"chid\": 5,\r\n    \"hname\": \"Prueba\",\r\n    \"hcity\": \"Prueba\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -284,7 +396,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"chid\": 7,\r\n    \"hname\": \"Prueba\",\r\n    \"hcity\": \"Prueba\"\r\n}",
+									"raw": "{\r\n    \"chid\": 5,\r\n    \"hname\": \"Prueba1\",\r\n    \"hcity\": \"Prueba1\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -292,13 +404,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{route}}/hotel/54",
+									"raw": "{{route}}/hotel/41",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"hotel",
-										"54"
+										"41"
 									]
 								}
 							},
@@ -310,13 +422,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/hotel/43",
+									"raw": "{{route}}/hotel/16",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"hotel",
-										"43"
+										"16"
 									]
 								}
 							},
@@ -370,7 +482,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"hid\" : 7,\r\n    \"fname\" : \"Samuel\",\r\n    \"lname\" : \"DeLuque\",\r\n    \"age\"   : 777 ,\r\n    \"position\" : \"Regular\", \r\n    \"salary\" : 27777,\r\n    \"username\" : \"vegetita\",\r\n    \"password\" : \"lososcuros\"\r\n}",
+									"raw": "{\r\n    \"hid\" : 6,\r\n    \"fname\" : \"Samuel\",\r\n    \"lname\" : \"DeLuque\",\r\n    \"age\"   : 777 ,\r\n    \"position\" : \"Regular\", \r\n    \"salary\" : 27777,\r\n    \"username\" : \"vegetita\",\r\n    \"password\" : \"lososcuros\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -396,7 +508,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"hid\": 32,\r\n    \"fname\": \"Aldo\",\r\n    \"lname\": \"Hog\",\r\n    \"age\": 47,\r\n    \"position\": \"supervisor\",\r\n    \"salary\": 543.21\r\n}",
+									"raw": "{\r\n    \"hid\": 32,\r\n    \"fname\": \"Aldo\",\r\n    \"lname\": \"Hog\",\r\n    \"age\": 47,\r\n    \"position\": \"Supervisor\",\r\n    \"salary\": 543.21\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -404,13 +516,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{route}}/employee/96",
+									"raw": "{{route}}/employee/201",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"employee",
-										"96"
+										"201"
 									]
 								}
 							},
@@ -422,13 +534,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/employee/201",
+									"raw": "{{route}}/employee/202",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"employee",
-										"201"
+										"202"
 									]
 								}
 							},
@@ -482,7 +594,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"eid\" : 200,\r\n    \"username\" : \"vegetita\",\r\n    \"password\" : \"Trivago\"\r\n}",
+									"raw": "{\r\n    \"eid\" : 202,\r\n    \"username\" : \"reghste\",\r\n    \"password\" : \"Trivago\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -508,7 +620,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \r\n    \"username\" : \"pboura\",\r\n    \"password\" : \"gameruler\"\r\n}",
+									"raw": "{\r\n    \"username\" : \"lgilbert5a\",\r\n    \"password\" : \"gameruler\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -628,12 +740,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{route}}/room",
+									"raw": "{{route}}/room/451",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
-										"room"
+										"room",
+										"451"
 									]
 								}
 							},
@@ -645,12 +758,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/room",
+									"raw": "{{route}}/room/451",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
-										"room"
+										"room",
+										"451"
 									]
 								}
 							},
@@ -738,13 +852,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{route}}/roomdescription/45",
+									"raw": "{{route}}/roomdescription/63",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"roomdescription",
-										"45"
+										"63"
 									]
 								}
 							},
@@ -756,13 +870,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/roomdescription/45",
+									"raw": "{{route}}/roomdescription/63",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"roomdescription",
-										"45"
+										"63"
 									]
 								}
 							},
@@ -937,7 +1051,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"eid\": 92,\r\n    \"rid\" : 233,\r\n    \"guests\" : 1,\r\n    \"startdate\" : \"2023-12-19\",\r\n    \"enddate\": \"2023-12-20\",\r\n    \"clid\" : 1,\r\n    \"payment\" :\"test\"\r\n}\r\n\r\n",
+									"raw": "{\r\n    \"eid\": 92,\r\n    \"rid\" : 233,\r\n    \"guests\" : 1,\r\n    \"startdate\" : \"2023-12-19\",\r\n    \"enddate\": \"2023-12-20\",\r\n    \"clid\" : 1,\r\n    \"payment\" :\"test\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1127,13 +1241,13 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{route}}/client/4211",
+									"raw": "{{route}}/client/402",
 									"host": [
 										"{{route}}"
 									],
 									"path": [
 										"client",
-										"4211"
+										"402"
 									]
 								}
 							},
@@ -1289,7 +1403,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"eid\":3,\r\n    \"chid\":1\r\n}",
+							"raw": "{\r\n    \"eid\": 3\r\n    // \"chid\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
