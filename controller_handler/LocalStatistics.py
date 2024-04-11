@@ -177,3 +177,58 @@ class LocalStatistics_Controller_Handler:
             result.append(self.HandicapRoom_Dict(handicaproom))
         return jsonify(Total_HandicapRooms=result), 200
 
+    # * LEASTRESERVE
+    def LeastReserve_Dict(self, r):
+        leastreserve_dict = {
+            'rid': r[0],
+            'rname': r[1],
+            'rtype': r[2],
+            'Unavailable': r[3],
+        }
+        return leastreserve_dict
+
+    # * LEASTRESERVE
+    def Get_post_LeastReserve(self, hid, employee_id):
+        # ** Check if there is a credential
+        if len(employee_id) != 1:
+            return jsonify(Error="Invalid Data"), 400
+        # ** Check if the searched hotel exists
+        daoH = Hotel_Model_Dao()
+        hotel = daoH.Get_Hotel(hid)
+        if not hotel:
+            return jsonify(Error="Hotel not found"), 404
+        # ** Check if the employee exists and their information
+        eid = employee_id['eid']
+        daoE = Employee_Model_Dao()
+        employee = daoE.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Employee not found"), 404
+        daoLS = LocalStatistics_Model_Dao()
+        # ** Check employee position
+        if employee[5] == "Regular":
+            # ** Check if the employee works at the hotel that are looking for
+            if employee[1] != hid:
+                return jsonify(Error="Employee is not part of the hotel."), 404
+            leastreserves = daoLS.Get_post_LeastReserve(hid)
+            result = []
+            for leastreserve in leastreserves:
+                result.append(self.LeastReserve_Dict(leastreserve))
+            return jsonify(Least_Reserves=result), 200
+        elif employee[5] == "Supervisor":
+            # ** Check the hotel information where the employee works
+            daoH1 = Hotel_Model_Dao()
+            hotel1 = daoH1.Get_Hotel(employee[1])
+            # ** Check if the employee works for the same chain as the searched hotel.
+            if hotel1[1] != hotel[1]:
+                return jsonify(Error=f"Hotel not part of a chain. {hotel1[1]} != {hotel[1]}"), 404
+            leastreserves = daoLS.Get_post_LeastReserve(hid)
+            result = []
+            for leastreserve in leastreserves:
+                result.append(self.LeastReserve_Dict(leastreserve))
+            return jsonify(Least_Reserves=result), 200
+        # ** If the employee is an administrator
+        leastreserves = daoLS.Get_post_LeastReserve(hid)
+        result = []
+        for leastreserve in leastreserves:
+            result.append(self.LeastReserve_Dict(leastreserve))
+        return jsonify(Least_Reserves=result), 200
