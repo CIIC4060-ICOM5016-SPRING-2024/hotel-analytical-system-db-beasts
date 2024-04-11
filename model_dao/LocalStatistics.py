@@ -58,3 +58,21 @@ class LocalStatistics_Model_Dao:
         self.db.close()
         cur.close()
         return result_list
+
+    # * LEASTRESERVE
+    def Get_post_LeastReserve(self, hid):
+        cur = self.db.docker_connection.cursor()
+        query = ("select rid, rname, rtype, sum(enddate-startdate) as unavailable "
+                 "from room "
+                 "natural inner join roomunavailable "
+                 "natural inner join roomdescription "
+                 "natural inner join hotel "
+                 "where hid = 1 "
+                 "group by rid, rname, rtype "
+                 "order by unavailable asc "
+                 "limit 3; ")
+        cur.execute(query, (hid,))
+        result_list = cur.fetchall()
+        self.db.close()
+        cur.close()
+        return result_list
