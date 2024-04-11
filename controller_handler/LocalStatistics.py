@@ -123,11 +123,12 @@ class LocalStatistics_Controller_Handler:
     # * HANDICAPROOM
     def HandicapRoom_Dict(self, r):
         handicaproom_dict = {
-            'rid': r[0],
-            'rname': r[1],
-            'rtype': r[2],
-            'ishandicap': r[3],
-            'total reserves': r[4]
+            'hid': r[0],
+            'rid': r[1],
+            'rname': r[2],
+            'rtype': r[3],
+            'ishandicap': r[4],
+            'total reserves': r[5]
         }
         return handicaproom_dict
 
@@ -180,10 +181,11 @@ class LocalStatistics_Controller_Handler:
     # * LEASTRESERVE
     def LeastReserve_Dict(self, r):
         leastreserve_dict = {
-            'rid': r[0],
-            'rname': r[1],
-            'rtype': r[2],
-            'Unavailable': r[3],
+            'hid': r[0],
+            'rid': r[1],
+            'rname': r[2],
+            'rtype': r[3],
+            'Unavailable': r[4],
         }
         return leastreserve_dict
 
