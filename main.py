@@ -322,6 +322,23 @@ def employeeid(employee_id):
 
 
 """
+------------------
+* VOILA OPERATIONS
+------------------
+"""
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/employee/voila',
+           methods=['POST'])
+def employee_voila():
+    if request.method == 'POST':
+        return Employee_Controller_Handler().Check_Employee(request.json)
+    else:
+        return jsonify("Not supported"), 405
+
+
+"""
 -----------------------------------------------------------------------------------------------------------------------
 Region LOGIN
 -----------------------------------------------------------------------------------------------------------------------
