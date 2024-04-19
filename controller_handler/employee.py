@@ -187,3 +187,22 @@ class Employee_Controller_Handler:
     def is_valid_salary(self, position, salary):
         min_salary, max_salary = self.SALARY_CONSTRAINTS.get(position, (None, None))
         return min_salary <= salary <= max_salary if min_salary is not None else False
+
+    """
+    ------------------
+    * VOILA OPERATIONS
+    ------------------
+    """
+
+    def Check_Employee(self, data):
+        if len(data) != 3:
+            return jsonify(Error="Invalid Data"), 400
+        eid = data['eid']
+        fname = data['fname']
+        lname = data['lname']
+        dao = Employee_Model_Dao()
+        employee = dao.Check_Employee(eid, fname, lname)
+        if employee:
+            result = self.Employee_Dict(employee)
+            return jsonify(Employee=result)
+        return jsonify(Error="Not Found"), 404
