@@ -78,7 +78,7 @@ class Login_Controller_Handler:
             else:
                 return jsonify(Error="Unexpected attribute values."), 400
         else:
-            return jsonify(Error="Employee have login account"), 404
+            return jsonify(Error="Employee have login account"), 400
 
     def Put_Login(self, lid, login_data):
         if len(login_data) != 2:
