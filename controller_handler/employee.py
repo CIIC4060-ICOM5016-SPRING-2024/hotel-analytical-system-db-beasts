@@ -195,8 +195,6 @@ class Employee_Controller_Handler:
     """
 
     def Check_Employee(self, data):
-        if len(data) != 3:
-            return jsonify(Error="Invalid Data"), 400
         eid = data['eid']
         fname = data['fname']
         lname = data['lname']
@@ -204,5 +202,5 @@ class Employee_Controller_Handler:
         employee = dao.Check_Employee(eid, fname, lname)
         if employee:
             result = self.Employee_Dict(employee)
-            return jsonify(Employee=result)
+            return jsonify(Employee=result), 200
         return jsonify(Error="Not Found"), 404
