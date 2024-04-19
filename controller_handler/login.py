@@ -124,7 +124,9 @@ class Login_Controller_Handler:
     def Login(self, credentials):
         username = credentials['username']
         password = credentials['password']
-        if Login_Model_Dao().Login(username, password):
-            return jsonify(True)
-        else:
-            return jsonify(False)
+        dao = Login_Model_Dao()
+        login = dao.Login(username, password)
+        if login:
+            result = self.Login_Dict(login)
+            return jsonify(Login=result), 200
+        return jsonify(Error="Not Found"), 404
