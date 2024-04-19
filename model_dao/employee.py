@@ -83,3 +83,20 @@ class Employee_Model_Dao:
             return count
         except:
             return "Error"
+
+    """
+    ------------------
+    * VOILA OPERATIONS
+    ------------------
+    """
+
+    def Check_Employee(self, eid, fname, lname):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM employee "
+                 "WHERE eid = %s and fname = %s and lname = %s")
+        cur.execute(query, (eid, fname, lname))
+        employee = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return employee
