@@ -363,6 +363,23 @@ def loginid(login_id):
 
 
 """
+------------------
+* VOILA OPERATIONS
+------------------
+"""
+
+
+@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+           '/login/voila',
+           methods=['POST'])
+def login_voila():
+    if request.method == 'POST':
+        return Login_Controller_Handler().Login(request.json)
+    else:
+        return jsonify(Error="Not supported"), 405
+
+
+"""
 -----------------------------------------------------------------------------------------------------------------------
 Region ROOM
 -----------------------------------------------------------------------------------------------------------------------

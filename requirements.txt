@@ -14,3 +14,5 @@ packaging==24.0
 touch==2020.12.3
 values==2020.12.3
 openpyxl==3.2.0b1
+voila==0.5.6
+jupyter==1.0.0

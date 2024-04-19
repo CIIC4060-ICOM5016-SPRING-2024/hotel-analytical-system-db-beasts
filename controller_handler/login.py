@@ -114,3 +114,17 @@ class Login_Controller_Handler:
             return jsonify(Error="Delete Failed"), 500
         else:
             return jsonify(OK="Login Deleted Successfully"), 200
+
+    """
+    ------------------
+    * VOILA OPERATIONS
+    ------------------
+    """
+
+    def Login(self, credentials):
+        username = credentials['username']
+        password = credentials['password']
+        if Login_Model_Dao().Login(username, password):
+            return jsonify(True)
+        else:
+            return jsonify(False)

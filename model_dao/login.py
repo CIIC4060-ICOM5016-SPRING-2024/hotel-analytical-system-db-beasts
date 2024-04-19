@@ -96,6 +96,23 @@ class Login_Model_Dao:
                  "FROM login "
                  "WHERE eid = %s")
         cur.execute(query, (eid,))
+        loginbyemployee = cur.fetchone()
+        self.db.close()
+        cur.close()
+        return loginbyemployee
+
+    """
+    ------------------
+    * VOILA OPERATIONS
+    ------------------
+    """
+
+    def Login(self, username, password):
+        cur = self.db.docker_connection.cursor()
+        query = ("SELECT * "
+                 "FROM login "
+                 "WHERE username = %s AND password = %s")
+        cur.execute(query, (username, password))
         login = cur.fetchone()
         self.db.close()
         cur.close()
