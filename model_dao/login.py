@@ -117,3 +117,9 @@ class Login_Model_Dao:
         self.db.close()
         cur.close()
         return login
+
+    # def SignIn(self, fname, lname, username, password):
+    #     cur = self.db.docker_connection.cursor()
+    #     query = ("INSERT INTO login (eid, username, password) "
+    #              "VALUES (%s, %s, %s)"
+    #              "returning lid")
