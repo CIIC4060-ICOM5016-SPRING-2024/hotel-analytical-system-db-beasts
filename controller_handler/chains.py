@@ -89,7 +89,7 @@ class Chains_Controller_Handler:
             dao = Chains_Model_Dao()
             chain = dao.Put_Chain(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
             result = self.Chain_Build(chid, cname, springmkup, summermkup, fallmkup, wintermkup)
-            return jsonify(Chain=result), 201
+            return jsonify(Chain=result), 202
         else:
             return jsonify(Error="Unexpected attribute values."), 400
 
