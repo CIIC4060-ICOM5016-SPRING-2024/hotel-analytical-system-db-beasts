@@ -16,7 +16,8 @@ class LocalStatistics_Model_Dao:
                  "natural inner join roomdescription "
                  "natural inner join hotel "
                  "where hid = %s "
-                 "group by  rtype, hid")
+                 "group by  rtype, hid "
+                 "ORDER BY total_reserves")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
