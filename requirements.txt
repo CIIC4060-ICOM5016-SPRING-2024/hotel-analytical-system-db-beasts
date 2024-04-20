@@ -13,7 +13,7 @@ gunicorn==21.2.0
 packaging==24.0
 touch==2020.12.3
 values==2020.12.3
-openpyxl==3.2.0b1
+openpyxl==3.1.2
 voila==0.5.6
 jupyter==1.0.0
 IPython==8.23.0
