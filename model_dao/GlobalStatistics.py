@@ -12,8 +12,9 @@ class GlobalStatistics_Model_Dao:
         query = ("SELECT "
                  "payment, "
                  "COUNT(reid), "
-                 "ROUND(CAST(COUNT(reid)*100.0/(SELECT COUNT(reid) FROM reserve) AS numeric),2) "
-                 "FROM reserve GROUP BY payment")
+                 "ROUND(CAST(COUNT(reid)*100.0/(SELECT COUNT(reid) FROM reserve) AS numeric),2) as percentage "
+                 "FROM reserve GROUP BY payment "
+                 "ORDER BY percentage")
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
