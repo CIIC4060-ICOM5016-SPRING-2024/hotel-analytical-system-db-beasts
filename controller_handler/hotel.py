@@ -92,7 +92,7 @@ class Hotel_Controller_Handler:
             daoH1 = Hotel_Model_Dao()
             hotel = daoH1.Put_Hotel(hid, chid, hname, hcity)
             result = self.Hotel_Build(hid, chid, hname, hcity)
-            return jsonify(Hotel=result), 200
+            return jsonify(Hotel=result), 202
         else:
             return jsonify(Error="Unexpected attribute values."), 400
 
