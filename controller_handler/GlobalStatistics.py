@@ -43,7 +43,8 @@ class GlobalStatistics_Controller_Handler:
     def MostRevenue_Dict(self, r):
         mostrevenue_dict = {
             'chid': r[0],
-            'total revenue': r[1]
+            'cname': r[1],
+            'total revenue': r[2]
         }
         return mostrevenue_dict
 
