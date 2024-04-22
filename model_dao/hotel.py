@@ -1,5 +1,5 @@
 # ** Importing Docker_Database from db module
-from db import Docker_Database
+from config.db import Docker_Database
 
 
 # ** Class for handling database operations related to hotel model
