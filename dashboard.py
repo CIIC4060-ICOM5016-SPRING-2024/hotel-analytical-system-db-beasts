@@ -1,18 +1,20 @@
+import streamlit
 from IPython.core.display_functions import clear_output
 import ipywidgets as widgets
 from IPython.display import display
 import requests
+import streamlit as st
 
-header_text = widgets.HTML(
-    "<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; padding: 15px "
-    "0;'>Hotel Analytics Systems by DB Beasts</h1>")
-display(header_text)
+# header_text = widgets.HTML(
+#     "<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; padding: 15px "
+#     "0;'>Hotel Analytics Systems by DB Beasts</h1>")
+# display(header_text)
 
-"""
-------------------
-* LOGIN
-------------------
-"""
+# """
+# ------------------
+# * LOGIN
+# ------------------
+# """
 
 
 def Check_Login(username, password):
@@ -59,7 +61,7 @@ def change_view2(button):
 
 
 # ** Login Credentials
-def login(button):
+def login():
     # ** Login Logic
     with output:
         response = Check_Login(username.value, password.value)
@@ -97,26 +99,29 @@ def signup(button):
 
 
 # ** Login Widgets
-username = widgets.Text(placeholder='Username')
-password = widgets.Password(placeholder='Password')
-login_button = widgets.Button(description="Log In")
-login_button.on_click(login)
+username = streamlit.text_input("Username")
+password = streamlit.text_input("Password")
+login_button = st.button("Log In")
+# login_button.on_click(login)
+if login_button:
+    login()
+
 
 # ** Sigin Widgets
-employee_id = widgets.Text(placeholder='Employee ID')
-first_name = widgets.Text(placeholder='First Name')
-last_name = widgets.Text(placeholder='Last Name')
-sign_up_button = widgets.Button(description="Sign Up")
-sign_up_button.on_click(signup)
+employee_id = streamlit.text_input('Employee ID')
+first_name = streamlit.text_input('First Name')
+last_name = streamlit.text_input('Last Name')
+sign_up_button = st.button("Sign Up")
+# sign_up_button.on_click(signup)
 
-logout_button = widgets.Button(description="Log Out")
-logout_button.on_click(change_view2)
+logout_button = st.button("Log Out")
+# logout_button.on_click(change_view2)
 
 # ** Initial State
 login_box = widgets.VBox([username, password, login_button])
 
 # ** Switch between log in and sign in credentials
-toggle_button = widgets.Button(description="Sign Up")
+toggle_button = widgets.Button("Sign Up")
 toggle_button.on_click(change_view1)
 
 output = widgets.Output()
