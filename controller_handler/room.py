@@ -104,7 +104,7 @@ class Room_Controller_Handler:
             daoR = Room_Model_Dao()
             daoR.Put_Room(rid, hid, rdid, rprice)
             result = self.Room_Build(rid, hid, rdid, rprice)
-            return jsonify(Room=result), 200
+            return jsonify(Room=result), 202
         else:
             return jsonify(Error="Unexpected attribute values."), 400
 
