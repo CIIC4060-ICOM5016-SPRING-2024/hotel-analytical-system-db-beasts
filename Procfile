@@ -1,2 +1,2 @@
-voila: voila --port=$PORT --no-browser --Voila.ip=0.0.0.0 dashboard.ipynb
-web: gunicorn main:app
+web: gunicorn main:app --bind 0.0.0.0:$PORT
+voila: voila dashboard.ipynb --port=$PORT --no-browser --Voila.base_url=/voila/ --Voila.server_url=/voila/
