@@ -21,3 +21,4 @@ requests==2.31.0
 ipywidgets==8.1.2
 matplotlib==3.8.4
 gunicorn==21.2.0
+streamlit==1.33.0
