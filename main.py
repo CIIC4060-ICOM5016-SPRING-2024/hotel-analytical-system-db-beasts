@@ -15,6 +15,8 @@ from controller_handler.hotel import Hotel_Controller_Handler
 from controller_handler.LocalStatistics import LocalStatistics_Controller_Handler
 from controller_handler.GlobalStatistics import GlobalStatistics_Controller_Handler
 
+from dashboard import loginpage
+
 app = Flask(__name__)
 
 # ** apply CORS
@@ -27,13 +29,14 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def greeting():
-    return (''
-            '<div '
-            'style="text-align:center; '
-            '       font-size: 50px;"'
-            '>Hello, this is the hotel-analytical-system-db-beasts app'
-            '</div>'
-            )
+    # return (''
+    #         '<div '
+    #         'style="text-align:center; '
+    #         '       font-size: 50px;"'
+    #         '>Hello, this is the hotel-analytical-system-db-beasts app'
+    #         '</div>'
+    #         )
+    return loginpage().loginpage()
 
 
 """
