@@ -27,7 +27,7 @@ CORS(app)
 """
 
 
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def greeting():
     return (''
             '<div '
