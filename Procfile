@@ -1,2 +1,2 @@
 web: gunicorn main:app
-voila: voila dashboard.ipynb
+web: voila dashboard.ipynb
