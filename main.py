@@ -1,5 +1,5 @@
 # ** Flask Import
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from flask_cors import CORS
 
 # ** Controller Handler Imports
@@ -14,8 +14,6 @@ from controller_handler.client import Client_Controller_Handler
 from controller_handler.hotel import Hotel_Controller_Handler
 from controller_handler.LocalStatistics import LocalStatistics_Controller_Handler
 from controller_handler.GlobalStatistics import GlobalStatistics_Controller_Handler
-
-# from dashboard import loginpage
 
 app = Flask(__name__)
 
@@ -36,7 +34,12 @@ def greeting():
             '>Hello, this is the hotel-analytical-system-db-beasts app'
             '</div>'
             )
-    # return loginpage().loginpage()
+
+
+@app.route('/dashboard', methods=['GET'])
+def view_dashboard():
+    # Direct users to the Voila dashboard
+    return redirect("/voila/render/dashboard.ipynb")
 
 
 """
