@@ -1,2 +1,2 @@
-flask: python app.py
-voila: voila --no-browser --port=8866
+gunicorn: gunicorn main:app
+voila: voila --no-browser --port=8866 dashboard.ipynb
