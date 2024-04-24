@@ -36,10 +36,10 @@ def greeting():
             )
 
 
-@app.route('/dashboard', methods=['GET'])
-def view_dashboard():
-    # Direct users to the Voila dashboard
-    return redirect("/voila/render/dashboard.ipynb")
+# @app.route('/dashboard', methods=['GET'])
+# def view_dashboard():
+#     # Direct users to the Voila dashboard
+#     return redirect("/voila/render/dashboard.ipynb")
 
 
 """
