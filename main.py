@@ -43,19 +43,18 @@ Region GLOBAL STATISTICS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/most/revenue',  # ** Top 3 chains with the highest total revenue.
            methods=['POST'])
 def most_revenue():
     if request.method == 'POST':
         data = request.json
         return GlobalStatistics_Controller_Handler().Get_post_MostRevenue(data)
-
     else:
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/paymentmethod',  # ** Total reservation percentage by payment method.
            methods=['POST'])
 def paymentmethod():
@@ -66,7 +65,7 @@ def paymentmethod():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/least/rooms',  # ** Top 3 chain with the least rooms.
            methods=['POST'])
 def least_rooms():
@@ -77,7 +76,7 @@ def least_rooms():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/most/capacity',  # ** Top 5 hotels with the most capacity.
            methods=['POST'])
 def most_capacity():
@@ -88,7 +87,7 @@ def most_capacity():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/most/reservation',  # ** Top 10% hotels that had the most reservations.
            methods=['POST'])
 def most_reservation():
@@ -100,7 +99,7 @@ def most_reservation():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/most/profitmonth',  # ** Top 3 month with the most reservation by chain.
            methods=['POST'])
 def most_profitmonth():
@@ -125,7 +124,7 @@ Region CHAINS
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/chains',
            methods=['GET', 'POST'])
 def chains():
@@ -138,7 +137,7 @@ def chains():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/chains/<int:chain_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def chainid(chain_id):
@@ -166,7 +165,7 @@ Region HOTEL
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel',
            methods=['GET', 'POST'])
 def hotel():
@@ -179,7 +178,7 @@ def hotel():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def hotelid(hotel_id):
@@ -201,7 +200,7 @@ def hotelid(hotel_id):
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/handicaproom',  # ** Top 5 handicap rooms that were reserve the most.
            methods=['POST'])
 def handicaproom(hotel_id):
@@ -212,7 +211,7 @@ def handicaproom(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/leastreserve',  # ** Top 3 rooms that were the least time unavailable.
            methods=['POST'])
 def leastreserve(hotel_id):
@@ -223,7 +222,7 @@ def leastreserve(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/mostcreditcard',
            # ** Top 5 clients under 30 that
            # ** made the most reservation with a credit card.
@@ -236,7 +235,7 @@ def mostcreditcard(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/highestpaid',  # ** Top 3 highest paid regular employees.
            methods=['POST'])
 def highestpaid(hotel_id):
@@ -248,7 +247,7 @@ def highestpaid(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/mostdiscount',  # ** Top 5 clients that received the most discounts.
            methods=['POST'])
 def mostdiscount(hotel_id):
@@ -260,7 +259,7 @@ def mostdiscount(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/roomtype',  # ** Total reservation by room type.
            methods=['POST'])
 def roomtype(hotel_id):
@@ -272,7 +271,7 @@ def roomtype(hotel_id):
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/hotel/<int:hotel_id>/leastguests',
            # ** Top 3 rooms that were reserved
            # ** that had the least guest-to-capacity ratio.
@@ -298,7 +297,7 @@ Region EMPLOYEE
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/employee',
            methods=['GET', 'POST'])
 def employee():
@@ -311,7 +310,7 @@ def employee():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/employee/<int:employee_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def employeeid(employee_id):
@@ -320,7 +319,6 @@ def employeeid(employee_id):
     elif request.method == 'PUT':
         data = request.json
         return Employee_Controller_Handler().Put_Employee(employee_id, data)
-
     elif request.method == 'DELETE':
         return Employee_Controller_Handler().Delete_Employee(employee_id)
     else:
@@ -340,7 +338,7 @@ Region LOGIN
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/login',
            methods=['GET', 'POST'])
 def login():
@@ -353,7 +351,7 @@ def login():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/login/<int:login_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def loginid(login_id):
@@ -381,7 +379,7 @@ Region ROOM
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/room',
            methods=['GET', 'POST'])
 def room():
@@ -394,7 +392,7 @@ def room():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/room/<int:room_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomid(room_id):
@@ -403,10 +401,8 @@ def roomid(room_id):
     elif request.method == 'PUT':
         data = request.json
         return Room_Controller_Handler().Put_Room(room_id, data)
-        pass
     elif request.method == 'DELETE':
         return Room_Controller_Handler().Delete_Room(room_id)
-        pass
     else:
         return jsonify("Not supported"), 405
 
@@ -424,7 +420,7 @@ Region ROOM DESCRIPTION
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/roomdescription',
            methods=['GET', 'POST'])
 def roomdescription():
@@ -437,7 +433,7 @@ def roomdescription():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/roomdescription/<int:roomdescription_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomdescriptionid(roomdescription_id):
@@ -465,7 +461,7 @@ Region ROOM UNAVAILABLE
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/roomunavailable',
            methods=['GET', 'POST'])
 def roomunavailable():
@@ -478,7 +474,7 @@ def roomunavailable():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/roomunavailable/<int:roomunavailable_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def roomunavailableid(roomunavailable_id):
@@ -507,7 +503,7 @@ Region RESERVE
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/reserve',
            methods=['GET', 'POST'])
 def reserve():
@@ -516,12 +512,11 @@ def reserve():
     elif request.method == 'POST':
         data = request.json
         return Reserve_Controller_Handler().Post_Reserve(data)
-
     else:
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/reserve/<int:reserve_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def reserveid(reserve_id):
@@ -530,7 +525,6 @@ def reserveid(reserve_id):
     elif request.method == 'PUT':
         data = request.json
         return Reserve_Controller_Handler().Put_Reserve(reserve_id, data)
-
     elif request.method == 'DELETE':
         return Reserve_Controller_Handler().Delete_Reserve(reserve_id)
     else:
@@ -550,7 +544,7 @@ Region CLIENT
 """
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/client',
            methods=['GET', 'POST'])
 def client():
@@ -563,7 +557,7 @@ def client():
         return jsonify("Not supported"), 405
 
 
-@app.route('/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts'
+@app.route('/db-beasts'
            '/client/<int:client_id>',
            methods=['GET', 'PUT', 'DELETE'])
 def clientid(client_id):
