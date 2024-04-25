@@ -399,10 +399,8 @@ class LocalStatistics_Controller_Handler:
         leastguests_dict = {
             'hid': r[0],
             'rid': r[1],
-            'rname': r[2],
-            'rtype': r[3],
-            'guests:capacity': r[4],
-            'space': r[5]
+            'room': r[2],
+            'ratio': r[3]
         }
         return leastguests_dict
 
