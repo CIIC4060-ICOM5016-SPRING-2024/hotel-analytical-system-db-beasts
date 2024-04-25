@@ -5,11 +5,11 @@ class Heroku_Database:
 
     def connect_heroku_db(self):
         heroku_db = {
-            'host': 'ec2-35-170-27-172.compute-1.amazonaws.com',
-            'database': 'd233pmhuh6h64h',
-            'user': 'izafoudsvarjpv',
+            'host': 'ec2-54-84-182-168.compute-1.amazonaws.com',
+            'database': 'delmhnb2eu0kvr',
+            'user': 'mhcrlshjnkrhdy',
             'port': '5432',
-            'password': '02f14a70c06a81b2d5c2bc94a2f4aa05849295ec5317f624d97f10e3b077cbc2'
+            'password': '184f3f83593c1ad5fe74045555ae6848fad5553ac8126cb7f5b8d2f2eeeefcb7'
         }
         return heroku_db
 
