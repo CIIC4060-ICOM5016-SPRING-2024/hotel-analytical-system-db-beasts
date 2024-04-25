@@ -38,19 +38,6 @@ class GlobalStatistics_Controller_Handler:
             })
         return hotelmethod_dict
 
-    def Month_Dict(self, r):
-        month_dict = {
-            'months': []
-
-        }
-
-        for month in r:
-            month_dict['months'].append({
-                'month': month[0],
-                'total reservations': month[1]
-            })
-        return month_dict
-
     # ** TOP 3 CHAINS WITH LESS ROOMS
     def Chains_Dict(self, chain):
         chains_dict = {
@@ -142,54 +129,6 @@ class GlobalStatistics_Controller_Handler:
 
         return jsonify(Top_Five_Hotels_With_Most_Capacity=result), 200
 
-    # ** GETTING THE TOP 3 CHAINS WITH LESS ROOMS
-
-    # def Get_Top_Three_Chains_With_Least_Rooms(self, employee_id):
-    #     if len(employee_id) != 1:
-    #         return jsonify(Error="Invalid Data"), 400
-    #     # if type(employee_id) is not int:
-    #     #     return jsonify(Error="Invalid Data"), 400
-    #     # ** Check if the employee exists and their information
-    #     eid = employee_id['eid']
-    #     daoE = Employee_Model_Dao()
-    #     employee = daoE.Get_Employee(eid)
-    #     if not employee:
-    #         return jsonify(Error="Employee not found"), 404
-    #     # ** Check employee position
-    #     if employee[5] != "Administrator":
-    #         return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
-    #     daoC = GlobalStatistics_Model_Dao()
-    #     chains = daoC.Get_Top_Three_Chains_With_Least_Rooms()
-    #
-    #     result = []
-    #     for chain in chains:
-    #         result.append(self.Chains_Dict(chain))
-    #
-    #     return jsonify(Top_Three_Chains=result), 200
-
-    # ** TOP 3 HOTELS WITH MOST CAPACITY
-
-    # def Get_Top_Five_Hotels_With_Most_Capacity(self, employee_id):
-    #     if len(employee_id) != 1:
-    #         return jsonify(Error="Invalid Data"), 400
-    #     # ** Check if the employee exists and their information
-    #     eid = employee_id['eid']
-    #     daoE = Employee_Model_Dao()
-    #     employee = daoE.Get_Employee(eid)
-    #     if not employee:
-    #         return jsonify(Error="Employee not found"), 404
-    #     # ** Check employee position
-    #     if employee[5] != "Administrator":
-    #         return jsonify(Error=f"You are not an Administrator. {employee[5]}"), 403
-    #     daoC = GlobalStatistics_Model_Dao()
-    #     hotel = daoC.Get_Top_Five_Hotels_With_Most_Capacity()
-    #
-    #     result = []
-    #     for hotels in hotel:
-    #         result.append(self.Hotels_Dict(hotels, ))
-    #
-    #     return jsonify(Top_Five_Hotels_With_Most_Capacity=result), 200
-
     def Get_top_10_hotelreservation(self, employee_id):
 
         if employee_id is None:
@@ -226,6 +165,19 @@ class GlobalStatistics_Controller_Handler:
 
         result_dict = self.HotelMethod_Dict(top10)
         return jsonify(result=result_dict), 200
+
+    # def Month_Dict(self, r):
+    #     month_dict = {
+    #         'months': []
+    #
+    #     }
+    #
+    #     for month in r:
+    #         month_dict['months'].append({
+    #             'month': month[0],
+    #             'total reservations': month[1]
+    #         })
+    #     return month_dict
 
     # def Get_top_3_monthly_reservation(self, data):
     #     if data is None:
