@@ -107,17 +107,17 @@ class LocalStatistics_Model_Dao:
     def Get_post_LeastGuests(self, hid):
         cur = self.db.docker_connection.cursor()
         # cur = self.dbh.heroku_connection.cursor()
-        query = ("select hid, rid, rname, rtype, "
-                 "guests || ':' || capacity as guest_capacity, "
-                 "round(abs((guests::float/capacity::float)::numeric - 1) ,2) as space "
+        query = ("select hid, rid, rname || ' ' || rtype as room, "
+                 "round((avg(guests::float)/capacity)::numeric, 2) as ratio "
                  "from room "
                  "natural inner join roomdescription "
                  "natural inner join roomunavailable "
                  "natural inner join reserve "
                  "natural inner join hotel "
+                 "natural inner join chains "
                  "where hid = %s "
-                 "group by hid, rid, rname, rtype, guest_capacity, space "
-                 "order by space asc "
+                 "group by hid, rid, room, capacity "
+                 "order by ratio asc "
                  "limit 3")
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
