@@ -9,3 +9,7 @@ password = st.text_input("Password", type="password")  # Requires a label; type=
 
 # Button for login
 login_button = st.button("Login")
+
+choice1 = st.number_input('Enter First number')  #Accepts a number input
+choice2 = st.number_input('Enter Second number')
+choice3 = st.number_input('Enter Third number')
