@@ -20,6 +20,7 @@ class Login_Controller_Handler:
 
     def Login_Build(self, login_id, eid, username, password):
         login_build = {
+            'lid': login_id,
             'eid': eid,
             'username': username,
             'password': password
@@ -54,24 +55,26 @@ class Login_Controller_Handler:
     def Post_Login(self, login_data):
         if len(login_data) != 3:
             return jsonify(Error="Invalid Data"), 400
-        # ** Models/Daos to use
-        daoe = Employee_Model_Dao()
-        daol = Login_Model_Dao()
-        # ** Data received
         eid = login_data['eid']
-        username = login_data['username']
-        password = login_data['password']
-        # ** Search chid if exists
+        daoe = Employee_Model_Dao()
         if not daoe.Get_Employee(eid):
             return jsonify(Error="Employee doesn't work with us."), 404
-        if username and password:
-            login_id = daol.Post_Login(eid, username, password)
-            if login_id == "Error":
-                return jsonify(Error="Login could not be post because the username exist."), 404
-            result = self.Login_Build(login_id, eid, username, password)
-            return jsonify(hotel=result), 201
+        daol = Login_Model_Dao()
+        login_id_employee = daol.Get_Login_ByEmployee(eid)
+        if not login_id_employee:
+            username = login_data['username']
+            password = login_data['password']
+            if username and password:
+                daol1 = Login_Model_Dao()
+                login_id = daol1.Post_Login(eid, username, password)
+                if login_id == "Error":
+                    return jsonify(Error="Login could not be post because the username exist."), 404
+                result = self.Login_Build(login_id, eid, username, password)
+                return jsonify(Login=result, OK="Loin Posted Successfully"), 201
+            else:
+                return jsonify("Unexpected attribute values."), 400
         else:
-            return jsonify("Unexpected attribute values."), 400
+            return jsonify(Error="Employee have login account"), 400
 
     def Put_Login(self, lid, login_data):
         if len(login_data) != 2:
