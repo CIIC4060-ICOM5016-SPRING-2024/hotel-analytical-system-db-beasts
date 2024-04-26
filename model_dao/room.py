@@ -25,6 +25,7 @@ class Room_Model_Dao:
         cur.execute(query)
         room_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return room_list
 
@@ -38,6 +39,7 @@ class Room_Model_Dao:
         cur.execute(query, (rid,))
         room = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return room
 
@@ -52,6 +54,7 @@ class Room_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -66,6 +69,7 @@ class Room_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -80,9 +84,13 @@ class Room_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error deleting"
 
     """
@@ -102,5 +110,6 @@ class Room_Model_Dao:
         cur.execute(query, (rid, hid,))
         room_info = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return room_info

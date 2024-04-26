@@ -25,6 +25,7 @@ class Hotel_Model_Dao:
         cur.execute(query)
         hotels_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return hotels_list
 
@@ -38,6 +39,7 @@ class Hotel_Model_Dao:
         cur.execute(query, (hid,))
         hotel = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return hotel
 
@@ -52,6 +54,7 @@ class Hotel_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -66,6 +69,7 @@ class Hotel_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -80,7 +84,11 @@ class Hotel_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error deleting"

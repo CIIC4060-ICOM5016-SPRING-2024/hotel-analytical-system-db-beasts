@@ -25,6 +25,7 @@ class Reserve_Model_Dao:
         cur.execute(query)
         reserve_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return reserve_list
 
@@ -38,6 +39,7 @@ class Reserve_Model_Dao:
         cur.execute(query, (reid,))
         reserve = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return reserve
 
@@ -52,6 +54,7 @@ class Reserve_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -66,6 +69,7 @@ class Reserve_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -79,6 +83,7 @@ class Reserve_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -107,6 +112,7 @@ class Reserve_Model_Dao:
         cur.execute(query, (enddate, startdate, startdate, rid, clid))
         total_cost = cur.fetchone()[0]
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return total_cost
 
@@ -119,5 +125,6 @@ class Reserve_Model_Dao:
         cur.execute(query, (ruid,))
         reserve = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return reserve

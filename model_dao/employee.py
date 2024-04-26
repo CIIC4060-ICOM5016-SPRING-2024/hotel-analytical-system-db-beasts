@@ -25,6 +25,7 @@ class Employee_Model_Dao:
         cur.execute(query)
         employees_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return employees_list
 
@@ -38,6 +39,7 @@ class Employee_Model_Dao:
         cur.execute(query, (eid,))
         employee = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return employee
 
@@ -52,6 +54,7 @@ class Employee_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -71,6 +74,7 @@ class Employee_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -85,9 +89,13 @@ class Employee_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error"
 
     """
@@ -105,5 +113,6 @@ class Employee_Model_Dao:
         cur.execute(query, (eid, fname, lname))
         employee = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return employee

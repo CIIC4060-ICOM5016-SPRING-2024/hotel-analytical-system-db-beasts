@@ -23,6 +23,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -42,6 +43,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -62,6 +64,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -81,6 +84,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -103,6 +107,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -119,6 +124,7 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list
 
@@ -144,5 +150,6 @@ class LocalStatistics_Model_Dao:
         cur.execute(query, (hid,))
         result_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result_list

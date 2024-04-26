@@ -25,6 +25,7 @@ class Client_Model_Dao:
         cur.execute(query)
         client_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return client_list
 
@@ -38,6 +39,7 @@ class Client_Model_Dao:
         cur.execute(query, (clid,))
         client = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return client
 
@@ -51,6 +53,7 @@ class Client_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -64,6 +67,7 @@ class Client_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -77,7 +81,11 @@ class Client_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error"

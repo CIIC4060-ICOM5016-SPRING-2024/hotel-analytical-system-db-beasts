@@ -39,6 +39,7 @@ class Chains_Model_Dao:
         cur.execute(query, (chid,))
         chain = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return chain
 
@@ -53,6 +54,7 @@ class Chains_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -67,6 +69,7 @@ class Chains_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -80,7 +83,11 @@ class Chains_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error deleting"

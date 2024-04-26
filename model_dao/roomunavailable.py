@@ -25,6 +25,7 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query)
         roomsunavailable_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return roomsunavailable_list
 
@@ -38,6 +39,7 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query, (ruid,))
         roomunavailable = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return roomunavailable
 
@@ -51,6 +53,7 @@ class RoomUnavailable_Model_Dao:
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -64,6 +67,7 @@ class RoomUnavailable_Model_Dao:
         count = cur.rowcount
         self.db.docker_connection.commit()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return count
 
@@ -77,9 +81,13 @@ class RoomUnavailable_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error deleting"
 
     """
@@ -98,6 +106,7 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query, (rid,))
         roomunavailable_time = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return roomunavailable_time
 
@@ -110,5 +119,6 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query, (rid, ruid))
         roomunavailable_time = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return roomunavailable_time

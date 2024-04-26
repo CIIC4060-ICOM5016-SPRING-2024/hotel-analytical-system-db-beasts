@@ -20,6 +20,7 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -39,6 +40,7 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -56,6 +58,7 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -73,6 +76,7 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -92,6 +96,7 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result
 
@@ -114,5 +119,6 @@ class GlobalStatistics_Model_Dao:
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return result

@@ -25,6 +25,7 @@ class Login_Model_Dao:
         cur.execute(query)
         login_list = cur.fetchall()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return login_list
 
@@ -38,6 +39,7 @@ class Login_Model_Dao:
         cur.execute(query, (lid,))
         login = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return login
 
@@ -52,9 +54,13 @@ class Login_Model_Dao:
             result = cur.fetchone()[0]
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return result
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error"
 
     def Put_Login(self, lid, eid, username, password):
@@ -70,9 +76,13 @@ class Login_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error"
 
     def Delete_Login(self, lid):
@@ -85,9 +95,13 @@ class Login_Model_Dao:
             count = cur.rowcount
             self.db.docker_connection.commit()
             self.db.close()
+            # self.dbh.close()
             cur.close()
             return count
         except:
+            self.db.close()
+            # self.dbh.close()
+            cur.close()
             return "Error"
 
     """
@@ -105,6 +119,7 @@ class Login_Model_Dao:
         cur.execute(query, (eid,))
         loginbyemployee = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return loginbyemployee
 
@@ -123,6 +138,7 @@ class Login_Model_Dao:
         cur.execute(query, (username, password))
         login = cur.fetchone()
         self.db.close()
+        # self.dbh.close()
         cur.close()
         return login
 
