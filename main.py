@@ -25,21 +25,12 @@ CORS(app)
 """
 
 
-@app.route('/api', methods=['GET'])
+@app.route('/', methods=['GET'])
 def greeting():
-    return (''
-            '<div '
-            'style="text-align:center; '
-            '       font-size: 50px;"'
-            '>Hello, this is the hotel-analytical-system-db-beasts app'
-            '</div>'
-            )
-
-
-# @app.route('/dashboard', methods=['GET'])
-# def view_dashboard():
-#     # Direct users to the Voila dashboard
-#     return redirect("/voila/render/dashboard.ipynb")
+    return ("<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
+            "padding: 15px 0;'>Hotel Analytics Systems by DB Beasts</h1>"
+            "<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
+            "padding: 15px 0;'>API</h1>")
 
 
 """
