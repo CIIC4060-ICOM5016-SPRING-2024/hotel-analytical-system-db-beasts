@@ -27,13 +27,10 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def greeting():
-    return (''
-            '<div '
-            'style="text-align:center; '
-            '       font-size: 50px;"'
-            '>Hello, this is the hotel-analytical-system-db-beasts app'
-            '</div>'
-            )
+    return ("<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
+            "padding: 15px 0;'>Hotel Analytics Systems by DB Beasts</h1>"
+            "<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
+            "padding: 15px 0;'>BACKEND</h1>")
 
 
 """
