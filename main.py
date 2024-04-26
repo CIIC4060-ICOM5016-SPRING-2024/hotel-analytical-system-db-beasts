@@ -30,7 +30,7 @@ def greeting():
     return ("<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
             "padding: 15px 0;'>Hotel Analytics Systems by DB Beasts</h1>"
             "<h1 style='text-align: center; color: white; background-color: #333; width: 100%; margin: 0; "
-            "padding: 15px 0;'>API</h1>")
+            "padding: 15px 0;'>BACKEND</h1>")
 
 
 """
