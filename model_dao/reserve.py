@@ -53,6 +53,7 @@ class Reserve_Model_Dao:
         cur.execute(query, (ruid, clid, total_cost, payment, guests))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -68,6 +69,7 @@ class Reserve_Model_Dao:
         cur.execute(query, (ruid, clid, total_cost, payment, guests, reid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -82,6 +84,7 @@ class Reserve_Model_Dao:
         cur.execute(query, (reid,))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()

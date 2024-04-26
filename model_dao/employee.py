@@ -53,6 +53,7 @@ class Employee_Model_Dao:
         cur.execute(query, (hid, fname, lname, age, position, salary))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -73,6 +74,7 @@ class Employee_Model_Dao:
         cur.execute(query, (hid, fname, lname, age, position, salary, eid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -88,6 +90,7 @@ class Employee_Model_Dao:
             cur.execute(query, (eid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()

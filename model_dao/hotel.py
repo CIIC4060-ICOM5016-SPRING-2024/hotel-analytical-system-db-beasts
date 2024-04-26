@@ -53,6 +53,7 @@ class Hotel_Model_Dao:
         cur.execute(query, (chid, hname, hcity))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -68,6 +69,7 @@ class Hotel_Model_Dao:
         cur.execute(query, (chid, hname, hcity, hid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -83,6 +85,7 @@ class Hotel_Model_Dao:
             cur.execute(query, (hid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()

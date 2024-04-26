@@ -52,6 +52,7 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query, (rid, startdate, enddate))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -66,6 +67,7 @@ class RoomUnavailable_Model_Dao:
         cur.execute(query, (rid, startdate, enddate, ruid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -80,6 +82,7 @@ class RoomUnavailable_Model_Dao:
             cur.execute(query, (ruid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()

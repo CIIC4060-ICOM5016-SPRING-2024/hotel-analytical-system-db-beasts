@@ -53,6 +53,7 @@ class Room_Model_Dao:
         cur.execute(query, (hid, rdid, rprice))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -68,6 +69,7 @@ class Room_Model_Dao:
         cur.execute(query, (hid, rdid, rprice, rid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -83,6 +85,7 @@ class Room_Model_Dao:
             cur.execute(query, (rid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()

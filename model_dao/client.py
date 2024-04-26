@@ -52,6 +52,7 @@ class Client_Model_Dao:
         cur.execute(query, (fname, lname, age, memberyear))
         result = cur.fetchone()[0]
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -66,6 +67,7 @@ class Client_Model_Dao:
         cur.execute(query, (fname, lname, age, memberyear, clid))
         count = cur.rowcount
         self.db.docker_connection.commit()
+        # self.dbh.heroku_connection.commit()
         self.db.close()
         # self.dbh.close()
         cur.close()
@@ -80,6 +82,7 @@ class Client_Model_Dao:
             cur.execute(query, (clid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()

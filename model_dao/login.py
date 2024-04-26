@@ -53,6 +53,7 @@ class Login_Model_Dao:
             cur.execute(query, (eid, username, password))
             result = cur.fetchone()[0]
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()
@@ -75,6 +76,7 @@ class Login_Model_Dao:
             cur.execute(query, (eid, username, password, lid))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()
@@ -94,6 +96,7 @@ class Login_Model_Dao:
             cur.execute(query, (lid,))
             count = cur.rowcount
             self.db.docker_connection.commit()
+            # self.dbh.heroku_connection.commit()
             self.db.close()
             # self.dbh.close()
             cur.close()
