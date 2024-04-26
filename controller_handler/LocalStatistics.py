@@ -355,9 +355,13 @@ class LocalStatistics_Controller_Handler:
         mostdiscount_dict = {
             'hid': r[0],
             'clid': r[1],
-            'full name': r[2],
-            'memberyear': r[3],
-            'discount': r[4],
+            'fname': r[2],
+            'lname': r[3],
+            'memberyear': r[4],
+            'discount percentage': r[5],
+            'all payments': r[6],
+            'not discount': r[7],
+            'discount': r[8]
         }
         return mostdiscount_dict
 
