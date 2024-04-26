@@ -7,6 +7,7 @@ class Hotel_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
         self.db = Docker_Database()
+        # self.dbh = Heroku_Database()
 
     """
     ------------------

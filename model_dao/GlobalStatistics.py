@@ -5,6 +5,7 @@ from config.db import Docker_Database, Heroku_Database
 class GlobalStatistics_Model_Dao:
     def __init__(self):
         self.db = Docker_Database()
+        # self.dbh = Heroku_Database()
 
     # * PAYMENTMETHOD
     def Get_post_PaymentMethod(self):
