@@ -18,6 +18,7 @@ class Client_Model_Dao:
     # ** Method to fetch all clients from the database
     def Get_All_Clients(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM client  "
                  "ORDER BY clid")
@@ -30,6 +31,7 @@ class Client_Model_Dao:
     # ** Method to fetch a specific client by its ID from the database
     def Get_Client(self, clid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM client "
                  "WHERE clid = %s")
@@ -41,6 +43,7 @@ class Client_Model_Dao:
 
     def Post_Client(self, fname, lname, age, memberyear):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO client (fname, lname, age, memberyear)"
                  "VALUES (%s, %s, %s, %s)"
                  "returning clid")
@@ -53,6 +56,7 @@ class Client_Model_Dao:
 
     def Put_Client(self, clid, fname, lname, age, memberyear):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE client "
                  "SET fname = %s, lname = %s, age = %s, memberyear = %s "
                  "WHERE clid = %s")
@@ -65,6 +69,7 @@ class Client_Model_Dao:
 
     def Delete_Client(self, clid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM client "
                  "WHERE clid = %s")
         try:

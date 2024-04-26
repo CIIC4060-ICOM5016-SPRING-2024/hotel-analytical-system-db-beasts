@@ -32,6 +32,7 @@ class Chains_Model_Dao:
     # ** Method to fetch a specific chain by its ID from the database
     def Get_Chain(self, chid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM chains "
                  "WHERE chid = %s")
@@ -44,6 +45,7 @@ class Chains_Model_Dao:
     # ** Method to add a new chain to the database
     def Post_Chain(self, cname, springmkup, summermkup, fallmkup, wintermkup):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO chains (cname, springmkup, summermkup, fallmkup, wintermkup) "
                  "VALUES (%s, %s, %s, %s, %s) "
                  "returning chid")
@@ -57,6 +59,7 @@ class Chains_Model_Dao:
     # ** Method to update an existing chain in the database
     def Put_Chain(self, chid, cname, springmkup, summermkup, fallmkup, wintermkup):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE chains "
                  "SET cname = %s, springmkup = %s, summermkup = %s, fallmkup = %s, wintermkup = %s "
                  "WHERE chid = %s")
@@ -69,6 +72,7 @@ class Chains_Model_Dao:
 
     def Delete_Chain(self, chid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM chains "
                  "WHERE chid = %s")
         try:

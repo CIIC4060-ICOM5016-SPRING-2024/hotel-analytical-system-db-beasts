@@ -18,6 +18,7 @@ class Employee_Model_Dao:
     # ** Method to fetch all employees from the database
     def Get_All_Employees(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM employee "
                  "order by eid")
@@ -30,6 +31,7 @@ class Employee_Model_Dao:
     # ** Method to fetch a specific employee by its ID from the database
     def Get_Employee(self, eid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM employee "
                  "WHERE eid = %s")
@@ -42,6 +44,7 @@ class Employee_Model_Dao:
     # ** Method to add a new employee to the database
     def Post_Employee(self, hid, fname, lname, age, position, salary):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO employee (hid, fname, lname, age, position, salary)"
                  "VALUES (%s, %s, %s, %s, %s, %s)"
                  "returning eid")
@@ -55,6 +58,7 @@ class Employee_Model_Dao:
     # ** Method to update an existing employee in the database
     def Put_Employee(self, eid, hid, fname, lname, age, position, salary):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE employee "
                  "SET hid = %s, "
                  "fname = %s, "
@@ -73,6 +77,7 @@ class Employee_Model_Dao:
     # ** Method to delete an existing employee in the database (WIP, Docker is down)
     def Delete_Employee(self, eid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM employee "
                  "WHERE eid = %s")
         try:
@@ -93,6 +98,7 @@ class Employee_Model_Dao:
 
     def Check_Employee(self, eid, fname, lname):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM employee "
                  "WHERE eid = %s and fname = %s and lname = %s")

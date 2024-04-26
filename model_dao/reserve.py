@@ -18,6 +18,7 @@ class Reserve_Model_Dao:
     # ** Method to fetch all reserves from the database
     def Get_All_Reserves(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve  "
                  "ORDER BY reid")
@@ -30,6 +31,7 @@ class Reserve_Model_Dao:
     # ** Method to fetch a specific reserve by its ID from the database
     def Get_Reserve(self, reid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve "
                  "WHERE reid = %s")
@@ -42,6 +44,7 @@ class Reserve_Model_Dao:
     def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
         # ** Method to add a new reserve to the database
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
                  "VALUES (%s, %s, %s, %s, %s)"
                  "returning reid")
@@ -55,6 +58,7 @@ class Reserve_Model_Dao:
     def Put_Reserve(self, ruid, clid, total_cost, payment, guests, reid):
         # ** Method to update an existing reserve in the database
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE reserve "
                  "SET ruid = %s, clid = %s, total_cost = %s, payment = %s, guests = %s "
                  "WHERE reid = %s")
@@ -68,6 +72,7 @@ class Reserve_Model_Dao:
     def Delete_Reserve(self, reid):
         # ** Method to delete an existing reserve in the database
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
@@ -85,6 +90,7 @@ class Reserve_Model_Dao:
 
     def Get_Total_Cost(self, rid, clid, startdate, enddate):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = (" SELECT calculate_reservation_cost( "
                  "          rprice, "
                  "          (date(%s) - date(%s)), "
@@ -106,6 +112,7 @@ class Reserve_Model_Dao:
 
     def Get_Reserve_ByRoomUnavailable(self, ruid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT reid"
                  " FROM reserve "
                  "WHERE ruid = %s")

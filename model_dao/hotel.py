@@ -18,6 +18,7 @@ class Hotel_Model_Dao:
     # ** Method to fetch all hotels from the database
     def Get_All_Hotels(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM hotel "
                  "order by hid")
@@ -30,6 +31,7 @@ class Hotel_Model_Dao:
     # ** Method to fetch a specific hotel by its ID from the database
     def Get_Hotel(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM hotel "
                  "WHERE hid = %s")
@@ -42,6 +44,7 @@ class Hotel_Model_Dao:
     # ** Method to add a new hotel to the database
     def Post_Hotel(self, chid, hname, hcity):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO hotel (chid, hname, hcity) "
                  "VALUES (%s, %s, %s) "
                  "returning hid")
@@ -55,6 +58,7 @@ class Hotel_Model_Dao:
     # ** Method to update an existing hotel in the database
     def Put_Hotel(self, hid, chid, hname, hcity):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE hotel "
                  "SET chid = %s, hname = %s, hcity = %s "
                  "WHERE hid = %s")
@@ -68,6 +72,7 @@ class Hotel_Model_Dao:
     # ** Method to delete an existing hotel in the database
     def Delete_Hotel(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM hotel "
                  "WHERE hid = %s")
         try:

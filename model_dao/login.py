@@ -18,6 +18,7 @@ class Login_Model_Dao:
     # ** Method to fetch all logins from the database
     def Get_All_Logins(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM login "
                  "order by lid")
@@ -30,6 +31,7 @@ class Login_Model_Dao:
     # ** Method to fetch a specific login by its ID from the database
     def Get_Login(self, lid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM login "
                  "WHERE lid = %s")
@@ -41,6 +43,7 @@ class Login_Model_Dao:
 
     def Post_Login(self, eid, username, password):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO login (eid, username, password) "
                  "VALUES (%s, %s, %s)"
                  "returning lid")
@@ -56,6 +59,7 @@ class Login_Model_Dao:
 
     def Put_Login(self, lid, eid, username, password):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE login "
                  "SET eid = %s, "
                  "username = %s, "
@@ -73,6 +77,7 @@ class Login_Model_Dao:
 
     def Delete_Login(self, lid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM login "
                  "WHERE lid = %s")
         try:
@@ -93,6 +98,7 @@ class Login_Model_Dao:
 
     def Get_Login_ByEmployee(self, eid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT lid "
                  "FROM login "
                  "WHERE eid = %s")
@@ -110,6 +116,7 @@ class Login_Model_Dao:
 
     def Login(self, username, password):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM login "
                  "WHERE username = %s AND password = %s")

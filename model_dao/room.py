@@ -18,6 +18,7 @@ class Room_Model_Dao:
     # ** Method to fetch all rooms from the database
     def Get_All_Rooms(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM room "
                  "ORDER BY rid")
@@ -30,6 +31,7 @@ class Room_Model_Dao:
     # ** Method to fetch a specific room by its ID from the database
     def Get_Room(self, rid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM room "
                  "WHERE rid = %s")
@@ -42,6 +44,7 @@ class Room_Model_Dao:
     # ** Method to add a new room to the database
     def Post_Room(self, hid, rdid, rprice):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO room (hid, rdid, rprice) "
                  "VALUES (%s, %s, %s)"
                  "returning rid")
@@ -55,6 +58,7 @@ class Room_Model_Dao:
     # ** Method to update an existing room in the database
     def Put_Room(self, rid, hid, rdid, rprice):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE room "
                  "SET hid = %s, rdid = %s, rprice = %s "
                  "WHERE rid = %s")
@@ -68,6 +72,7 @@ class Room_Model_Dao:
     # ** Method to delete an existing room in the database
     def Delete_Room(self, rid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM room "
                  "WHERE rid = %s")
         try:
@@ -89,6 +94,7 @@ class Room_Model_Dao:
     # ** Looking for room information based on the supposed hotel.
     def Get_Room_Info(self, rid, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("select rid, hid, rdid, capacity, rprice "
                  "from room "
                  "natural inner join roomdescription "

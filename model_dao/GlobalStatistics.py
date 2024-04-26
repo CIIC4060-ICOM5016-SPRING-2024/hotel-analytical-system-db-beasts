@@ -10,6 +10,7 @@ class GlobalStatistics_Model_Dao:
     # * PAYMENTMETHOD
     def Get_post_PaymentMethod(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT "
                  "payment, "
                  "COUNT(reid), "
@@ -25,6 +26,7 @@ class GlobalStatistics_Model_Dao:
     # * MOST_REVENUE
     def Get_post_MostRevenue(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, cname, round(cast(sum(total_cost) as numeric), 2) as total_revenue "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -43,6 +45,7 @@ class GlobalStatistics_Model_Dao:
     # * LEAST_ROOMS
     def Get_post_LeastRooms(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, cname, count(rid) as total_rooms "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -59,6 +62,7 @@ class GlobalStatistics_Model_Dao:
     # * MOST_CAPACITY
     def Get_post_MostCapacity(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, hname, sum(capacity) as total_capacity "
                  "FROM hotel "
                  "NATURAL INNER JOIN room "
@@ -75,6 +79,7 @@ class GlobalStatistics_Model_Dao:
     # * MOST_RESERVATION
     def Get_post_MostReservation(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, hname, count(reid) as total_reserves "
                  "FROM hotel "
                  "NATURAL INNER JOIN room "
@@ -93,6 +98,7 @@ class GlobalStatistics_Model_Dao:
     # * MOST_PROFITMONTH
     def Get_post_MostProfitMonth(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, "
                  "       cname, "
                  "       (SELECT EXTRACT(MONTH FROM startdate)) AS month, "

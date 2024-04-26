@@ -10,6 +10,7 @@ class LocalStatistics_Model_Dao:
     # * ROOMTYPE
     def Get_post_RoomType(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, rtype as room_type, count(reid) as total_reserves "
                  "FROM reserve "
                  "natural inner join roomunavailable "
@@ -28,6 +29,7 @@ class LocalStatistics_Model_Dao:
     # * MOSTCREDITCARD
     def Get_post_MostCreditCard(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT clid, age, hid, chid, payment, count(reid) as total_reserves "
                  "FROM client "
                  "NATURAL INNER JOIN reserve "
@@ -46,6 +48,7 @@ class LocalStatistics_Model_Dao:
     # * HANDICAPROOM
     def Get_post_HandicapRoom(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("select hid, rid, rname, rtype, ishandicap, count(reid) as total_reserves "
                  "from reserve "
                  "natural inner join roomunavailable "
@@ -65,6 +68,7 @@ class LocalStatistics_Model_Dao:
     # * LEASTRESERVE
     def Get_post_LeastReserve(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("select hid, rid, rname, rtype, sum(enddate-startdate) as unavailable "
                  "from room "
                  "natural inner join roomunavailable "
@@ -83,6 +87,7 @@ class LocalStatistics_Model_Dao:
     # * LEASTGUESTS
     def Get_post_LeastGuests(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("select hid, rid, rname || ' ' || rtype as room, "
                  "round((avg(guests::float)/capacity)::numeric, 2) as ratio "
                  "from room "
@@ -104,6 +109,7 @@ class LocalStatistics_Model_Dao:
     # * HIGHESTPAID
     def Get_post_HighestPaid(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("select hid, eid, fname || ' ' || lname as fullname, position, salary "
                  "from employee "
                  "natural inner join hotel "
@@ -119,6 +125,7 @@ class LocalStatistics_Model_Dao:
     # * MOSTDISCOUNT
     def Get_post_MostDiscount(self, hid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, clid, fname, lname, memberyear, "
                  "discount_percentage(memberyear) as discount_percentage, "
                  "sum(total_cost) as all_payments, "

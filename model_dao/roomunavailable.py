@@ -18,6 +18,7 @@ class RoomUnavailable_Model_Dao:
     # ** Method to fetch all roomsunavailable from the database
     def Get_All_RoomsUnavailable(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM roomunavailable "
                  "ORDER BY ruid")
@@ -30,6 +31,7 @@ class RoomUnavailable_Model_Dao:
     # ** Method to fetch a specific roomunavailable by its ID from the database
     def Get_RoomUnavailable(self, ruid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM roomunavailable "
                  "WHERE ruid = %s")
@@ -41,6 +43,7 @@ class RoomUnavailable_Model_Dao:
 
     def Post_RoomUnavailable(self, rid, startdate, enddate):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO roomunavailable (rid, startdate, enddate) "
                  "VALUES (%s, %s, %s)"
                  "returning ruid")
@@ -53,6 +56,7 @@ class RoomUnavailable_Model_Dao:
 
     def Put_RoomUnavailable(self, ruid, rid, startdate, enddate):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE roomunavailable "
                  "SET rid = %s, startdate = %s, enddate = %s "
                  "WHERE ruid = %s")
@@ -65,6 +69,7 @@ class RoomUnavailable_Model_Dao:
 
     def Delete_RoomUnavailable(self, ruid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM roomunavailable "
                  "WHERE ruid = %s")
         try:
@@ -86,6 +91,7 @@ class RoomUnavailable_Model_Dao:
     # ** Searching for the last date where the room is not available
     def RoomUnavailable_Time(self, rid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT max(enddate) as enddate "
                  "FROM roomunavailable "
                  "where rid = %s")
@@ -97,6 +103,7 @@ class RoomUnavailable_Model_Dao:
 
     def RoomUnavailable_Time_put(self, rid, ruid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT max(enddate) as enddate "
                  "FROM roomunavailable "
                  "WHERE rid = %s and ruid != %s")

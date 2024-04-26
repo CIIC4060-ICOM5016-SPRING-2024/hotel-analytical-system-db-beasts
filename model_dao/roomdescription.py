@@ -18,6 +18,7 @@ class RoomDescription_Model_Dao:
     # ** Method to fetch all RoomDescriptions from the database
     def Get_All_RoomDescriptions(self):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM roomdescription "
                  "ORDER BY rdid")
@@ -30,6 +31,7 @@ class RoomDescription_Model_Dao:
     # ** Method to fetch a specific RoomDescription by its ID from the database
     def Get_RoomDescription(self, rdid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT *  "
                  "FROM roomdescription  "
                  "WHERE rdid = %s")
@@ -42,6 +44,7 @@ class RoomDescription_Model_Dao:
     # ** Method to add a new RoomDescription to the database
     def Post_RoomDescription(self, rname, rtype, capacity, ishandicap):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO roomdescription (rname, rtype, capacity, ishandicap) "
                  "VALUES (%s, %s, %s, %s)"
                  "returning rdid")
@@ -55,6 +58,7 @@ class RoomDescription_Model_Dao:
     # ** Method to update an existing RoomDescription in the database
     def Put_RoomDescription(self, rdid, rname, rtype, capacity, ishandicap):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE roomdescription "
                  "SET rname = %s, rtype = %s, capacity = %s, ishandicap = %s "
                  "WHERE rdid = %s")
@@ -67,6 +71,7 @@ class RoomDescription_Model_Dao:
 
     def Delete_RoomDescription(self, rdid):
         cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM roomdescription "
                  "WHERE rdid = %s")
         try:
