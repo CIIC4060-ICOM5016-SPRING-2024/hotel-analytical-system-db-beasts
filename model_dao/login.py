@@ -1,13 +1,16 @@
 # ** Importing Docker_Database from db module
 from config.db import Docker_Database, Heroku_Database
+from config.dboption import DatabaseOption
 
 
 # ** Class for handling database operations related to login model
 class Login_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
-        self.db = Docker_Database()
-        # self.dbh = Heroku_Database()
+        if DatabaseOption() == 'd':
+            self.db = Docker_Database()
+        elif DatabaseOption() == 'h':
+            self.dbh = Heroku_Database()
 
     """
     ------------------
@@ -133,17 +136,26 @@ class Login_Model_Dao:
     """
 
     def Login(self, username, password):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
-        query = ("SELECT * "
-                 "FROM login "
-                 "WHERE username = %s AND password = %s")
-        cur.execute(query, (username, password))
-        login = cur.fetchone()
-        self.db.close()
-        # self.dbh.close()
-        cur.close()
-        return login
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+            query = ("SELECT * "
+                     "FROM login "
+                     "WHERE username = %s AND password = %s")
+            cur.execute(query, (username, password))
+            login = cur.fetchone()
+            self.db.close()
+            cur.close()
+            return login
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
+            query = ("SELECT * "
+                     "FROM login "
+                     "WHERE username = %s AND password = %s")
+            cur.execute(query, (username, password))
+            login = cur.fetchone()
+            self.dbh.close()
+            cur.close()
+            return login
 
     # def SignIn(self, fname, lname, username, password):
     #     cur = self.db.docker_connection.cursor()
