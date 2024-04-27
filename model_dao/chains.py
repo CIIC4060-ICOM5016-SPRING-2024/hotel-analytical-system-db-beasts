@@ -1,6 +1,5 @@
 # ** Importing Docker_Database from db module
-from config.db import Docker_Database, Heroku_Database
-from config.dboption import DatabaseOption
+from config.db import Docker_Database, Heroku_Database, DatabaseOption
 
 
 # ** Class for handling database operations related to chains model
