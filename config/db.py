@@ -1,6 +1,10 @@
 import psycopg2
 
 
+def DatabaseOption():
+    return 'd'
+
+
 class Heroku_Database:
 
     def connect_heroku_db(self):
