@@ -1,5 +1,5 @@
 # ** Importing Docker_Database from db module
-from config.db import Docker_Database, Heroku_Database
+from config.db import Docker_Database, Heroku_Database, DatabaseOption
 import datetime
 
 
@@ -7,8 +7,10 @@ import datetime
 class Reserve_Model_Dao:
     def __init__(self):
         # ** Initializing database connection to Docker_Database
-        self.db = Docker_Database()
-        # self.dbh = Heroku_Database()
+        if DatabaseOption() == 'd':
+            self.db = Docker_Database()
+        elif DatabaseOption() == 'h':
+            self.dbh = Heroku_Database()
 
     """
     ------------------
@@ -18,95 +20,121 @@ class Reserve_Model_Dao:
 
     # ** Method to fetch all reserves from the database
     def Get_All_Reserves(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve  "
                  "ORDER BY reid")
         cur.execute(query)
         reserve_list = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return reserve_list
 
     # ** Method to fetch a specific reserve by its ID from the database
     def Get_Reserve(self, reid):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT * "
                  "FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
         reserve = cur.fetchone()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return reserve
 
     def Post_Reserve(self, ruid, clid, total_cost, payment, guests):
         # ** Method to add a new reserve to the database
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("INSERT INTO reserve (ruid, clid, total_cost, payment, guests)"
                  "VALUES (%s, %s, %s, %s, %s)"
                  "returning reid")
         cur.execute(query, (ruid, clid, total_cost, payment, guests))
         result = cur.fetchone()[0]
-        self.db.docker_connection.commit()
-        # self.dbh.heroku_connection.commit()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.docker_connection.commit()
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.heroku_connection.commit()
+            self.dbh.close()
         cur.close()
         return result
 
     def Put_Reserve(self, ruid, clid, total_cost, payment, guests, reid):
         # ** Method to update an existing reserve in the database
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("UPDATE reserve "
                  "SET ruid = %s, clid = %s, total_cost = %s, payment = %s, guests = %s "
                  "WHERE reid = %s")
         cur.execute(query, (ruid, clid, total_cost, payment, guests, reid))
         count = cur.rowcount
-        self.db.docker_connection.commit()
-        # self.dbh.heroku_connection.commit()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.docker_connection.commit()
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.heroku_connection.commit()
+            self.dbh.close()
         cur.close()
         return count
 
     def Delete_Reserve(self, reid):
         # ** Method to delete an existing reserve in the database
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("DELETE FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
         count = cur.rowcount
-        self.db.docker_connection.commit()
-        # self.dbh.heroku_connection.commit()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.docker_connection.commit()
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.heroku_connection.commit()
+            self.dbh.close()
         cur.close()
         return count
 
     def Get_Total_Cost(self, rid, clid, startdate, enddate, season_markup):
-        """Calculates the total cost of a hotel reservation with member discounts.
-
+        """
+        Calculates the total cost of a hotel reservation with member discounts.
         Args:
             rid (int): Reservation ID.
             clid (int): Client ID.
             startdate (date): Start date of the reservation.
             enddate (date): End date of the reservation.
             season_markup (float): Seasonal price markup.
-
         Returns:
             float: The discounted total cost of the reservation.
         """
-
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT rprice, memberyear "
                  "FROM reserve "
                  "NATURAL INNER JOIN client "
@@ -114,17 +142,13 @@ class Reserve_Model_Dao:
                  "NATURAL INNER JOIN hotel "
                  "NATURAL INNER JOIN chains "
                  "WHERE rid = %s AND clid = %s ")
-
         # Validate and convert dates
         if type(startdate) == str or type(enddate) == str:
             startdate = datetime.datetime.strptime(startdate, '%Y-%m-%d').date()
             enddate = datetime.datetime.strptime(enddate, '%Y-%m-%d').date()
-
         cur.execute(query, (rid, clid))
         rprice, memberyear = cur.fetchone()
-
         num_days = (enddate - startdate).days
-
         # Calculate discount based on membership years
         member_discounts = {
             range(1, 5): 0.02,
@@ -138,13 +162,13 @@ class Reserve_Model_Dao:
                 break
         else:
             member_discount = 0
-
         total_cost = rprice * num_days * season_markup
         discount = total_cost * member_discount
         discounted_cost = round(total_cost - discount, 2)
-
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return discounted_cost
 
@@ -155,34 +179,46 @@ class Reserve_Model_Dao:
     """
 
     def Get_Reserve_ByRoomUnavailable(self, ruid):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT reid "
                  "FROM reserve "
                  "WHERE ruid = %s")
         cur.execute(query, (ruid,))
         reserve = cur.fetchone()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return reserve
 
     def Get_RUID(self, reid):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT ruid "
                  "FROM reserve "
                  "WHERE reid = %s")
         cur.execute(query, (reid,))
         result = cur.fetchone()
         if type(result) == type(None):
-            self.db.close()
-            # self.dbh.close()
+            if DatabaseOption() == 'd':
+                self.db.close()
+            elif DatabaseOption() == 'h':
+                self.dbh.close()
             cur.close()
             return None
         else:
             ruid = result[0]
-            self.db.close()
-            # self.dbh.close()
+            if DatabaseOption() == 'd':
+                self.db.close()
+            elif DatabaseOption() == 'h':
+                self.dbh.close()
             cur.close()
             return ruid

@@ -12,17 +12,21 @@
       <w>hname</w>
       <w>hotelreservation</w>
       <w>ishandicap</w>
+      <w>leastguests</w>
       <w>lname</w>
       <w>memberyear</w>
       <w>mostcreditcards</w>
       <w>mostrevenue</w>
       <w>mostrevenues</w>
       <w>nquq</w>
+      <w>paymentmethod</w>
       <w>paymentmethods</w>
+      <w>profitmonth</w>
       <w>rdid</w>
       <w>roomdateavailable</w>
       <w>roomdescriptions</w>
       <w>roomsunavailable</w>
+      <w>roomtype</w>
       <w>roomtypes</w>
       <w>rprice</w>
       <w>ruid</w>

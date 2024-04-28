@@ -1,16 +1,21 @@
 # ** Importing Docker_Database from db module
-from config.db import Docker_Database, Heroku_Database
+from config.db import Docker_Database, Heroku_Database, DatabaseOption
 
 
 class GlobalStatistics_Model_Dao:
     def __init__(self):
-        self.db = Docker_Database()
-        # self.dbh = Heroku_Database()
+        if DatabaseOption() == 'd':
+            self.db = Docker_Database()
+        elif DatabaseOption() == 'h':
+            self.dbh = Heroku_Database()
 
     # * PAYMENTMETHOD
     def Get_post_PaymentMethod(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT "
                  "payment, "
                  "COUNT(reid), "
@@ -18,15 +23,20 @@ class GlobalStatistics_Model_Dao:
                  "FROM reserve GROUP BY payment")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return result
 
     # ** TOP 3 CHAINS WITH LESS ROOMS
     def Get_Top_Three_Chains_With_Least_Rooms(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, cname, COUNT(rid) as room_count "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -36,16 +46,20 @@ class GlobalStatistics_Model_Dao:
                  "LIMIT 3; ")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return result
 
     # ** TOP 5 HOTELS WITH MOST CAPACITY
-
     def Get_Top_Five_Hotels_With_Most_Capacity(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT hid, hname, sum(capacity) as total_capacity "
                  "FROM hotel "
                  "NATURAL INNER JOIN room "
@@ -55,47 +69,56 @@ class GlobalStatistics_Model_Dao:
                  "LIMIT 5")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return result
 
     # HotelMethod
     def Get_top_10_hotelreservation(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
-        query = ("""Select hid, rid,ruid,reid 
-                 from hotel natural inner join room
-                 natural inner join roomunavailable
-                 natural inner join reserve
-                 
-                  
-        
-        """)
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
+        query = ("Select hid, rid,ruid,reid "
+                 "from hotel natural inner join room "
+                 "natural inner join roomunavailable "
+                 "natural inner join reserve")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         return result
 
     def Get_top_3_monthly_reservation(self, chid):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
-        query = ("""Select reid,ruid, startdate,enddate
-                 From reserve natural inner join roomunavailable natural inner join hotel
-                 where chid = %s
-                 
-        """)
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
+        query = ("Select reid,ruid, startdate,enddate "
+                 "From reserve natural inner join roomunavailable natural inner join hotel "
+                 "where chid = %s")
         cur.execute(query, (chid,))
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         return result
 
     # * MOST_REVENUE
     def Get_post_MostRevenue(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, round(cast(sum(total_cost) as numeric), 2) as total_revenue "
                  "FROM chains "
                  "NATURAL INNER JOIN hotel "
@@ -107,15 +130,20 @@ class GlobalStatistics_Model_Dao:
                  "limit 3")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return result
 
     # * MOST_PROFITMONTH
     def Get_post_MostProfitMonth(self):
-        cur = self.db.docker_connection.cursor()
-        # cur = self.dbh.heroku_connection.cursor()
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
         query = ("SELECT chid, "
                  "       cname, "
                  "       (SELECT EXTRACT(MONTH FROM startdate)) AS month, "
@@ -130,7 +158,9 @@ class GlobalStatistics_Model_Dao:
                  "LIMIT 3 ")
         cur.execute(query)
         result = cur.fetchall()
-        self.db.close()
-        # self.dbh.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
         cur.close()
         return result
