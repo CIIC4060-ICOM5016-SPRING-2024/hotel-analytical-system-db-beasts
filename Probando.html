@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <style>
+        h1 {text-align: center;}
+        h2 {text-align: center;}
+        form {text-align: center;}
+        body {background-image: url('fondo.png'); background-repeat: no-repeat; background-size: cover;}
+    </style>
+
+    <script>
+        // Function to send login data to the given Flask URL
+        function login() {
+            // Get the user input for username and password
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Construct the request payload
+            const data = {
+                'username': username,
+                'password': password
+            };
+
+            // Define the Flask URL
+            const flaskUrl = "http://127.0.0.1:5000/db-beasts/login/voila";
+
+            // Create a new XMLHttpRequest object
+            const xhr = new XMLHttpRequest();
+
+            // Set up the request
+            xhr.open("POST", flaskUrl, true);
+
+            // Set the request headers to indicate that the body contains JSON
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            // Define a function to handle the response
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // If the response is successful, you can handle it here
+                    alert("Login successful!");
+                } else {
+                    // Handle errors here
+                    alert("Login failed: " + xhr.statusText);
+                }
+            };
+
+            // Send the request with the JSON data
+            xhr.send(JSON.stringify(data));
+        }
+    </script>
+</head>
+<body>
+    <h1>Hotel Analytics Systems</h1>
+    <h1>FRONTEND</h1>
+    <h2>Login Page</h2>
+
+    <!-- Simple form to collect username and password -->
+    <form>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    <br>
+
+    <!-- Button to trigger the login function -->
+    <button onclick="login()">Login</button>
+
+    </form>
+</body>
+</html>
