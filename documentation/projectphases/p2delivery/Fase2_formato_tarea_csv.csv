@@ -1,0 +1,73 @@
+Team Name:;Json to access local statistics:;Json to access global statistics:;Json to create login:;Json to create employee:;Json to create hotel:;Json to create chains:;Json to create roomdescription:;Json to create room:;Json to create roomunavailable:;Json to create client:;Json to create reserve:
+DB Beasts;"{
+    ""eid"": 3
+}";"{
+    ""eid"": 3
+}";"{
+    ""eid"" : 202,
+    ""username"" : ""reghste"",
+    ""password"" : ""Trivago""
+}";"{
+    ""hid"" : 6,
+    ""fname"" : ""Samuel"",
+    ""lname"" : ""DeLuque"",
+    ""age""   : 777 ,
+    ""position"" : ""Regular"", 
+    ""salary"" : 27777,
+    ""username"" : ""vegetita"",
+    ""password"" : ""lososcuros""
+}";"{
+    ""chid"": 5,
+    ""hname"": ""Prueba"",
+    ""hcity"": ""Prueba""
+}";"{
+    ""cname"": ""Prueba1"",
+    ""fallmkup"": 3,
+    ""springmkup"": 1,
+    ""summermkup"": 2,
+    ""wintermkup"": 4
+}";"{
+    ""rname"": ""Standard"",
+    ""rtype"": ""Basic"",
+    ""capacity"": 1,
+    ""ishandicap"": true
+}";"{
+    ""hid"": 40,
+    ""rdid"": 62,
+    ""rprice"": 277
+}";"{
+    ""eid"": 81,
+    ""rid"": 232,
+    ""startdate"": ""2023-11-05"",
+    ""enddate"": ""2023-11-13""
+}";"{
+    ""fname"": ""Tester"",
+    ""lname"": ""test"",
+    ""age"": 999,
+    ""memberyear"": 15
+}";"{
+    ""eid"": 92,
+    ""rid"" : 233,
+    ""guests"" : 1,
+    ""startdate"" : ""2023-12-19"",
+    ""enddate"": ""2023-12-20"",
+    ""clid"" : 1,
+    ""payment"" :""test""
+}"
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;

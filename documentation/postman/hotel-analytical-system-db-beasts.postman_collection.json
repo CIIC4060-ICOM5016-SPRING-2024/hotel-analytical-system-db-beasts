@@ -1,0 +1,1482 @@
+{
+	"info": {
+		"_postman_id": "76f197a1-6954-4e29-acad-47ee6d6535bc",
+		"name": "hotel-analytical-system-db-beasts",
+		"description": "<img src=\"https://content.pstmn.io/ea95266c-9b7f-45bc-9dc1-0bfe77ee6e57/aW1hZ2UucG5n\" alt=\"\" height=\"298\" width=\"514\">",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33884307",
+		"_collection_link": "https://db-beasts.postman.co/workspace/Team-Workspace~c076a4a3-53ee-4089-8564-009c8c8de1dc/collection/33884307-76f197a1-6954-4e29-acad-47ee6d6535bc?action=share&source=collection_link&creator=33884307"
+	},
+	"item": [
+		{
+			"name": "crud",
+			"item": [
+				{
+					"name": "chains",
+					"item": [
+						{
+							"name": "getallchains",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/chains",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"chains"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postchain",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cname\": \"Prueba1\",\r\n    \"fallmkup\": 3,\r\n    \"springmkup\": 1,\r\n    \"summermkup\": 2,\r\n    \"wintermkup\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/chains",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"chains"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getchain",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/chains/5",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"chains",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putchain",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cname\": \"Prueba2\",\r\n    \"fallmkup\": 3,\r\n    \"springmkup\": 1,\r\n    \"summermkup\": 2,\r\n    \"wintermkup\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/chains/6",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"chains",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletechain",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/chains/5",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"chains",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/bf6ec2a9-3788-4a6d-834b-189182d64245/aW1hZ2UucG5n\" alt=\"\" height=\"361\" width=\"394\">"
+				},
+				{
+					"name": "hotel",
+					"item": [
+						{
+							"name": "localstatistics",
+							"item": [
+								{
+									"name": "getroomtype",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/roomtype",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"roomtype"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "top5handicap",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/2/handicaproom",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"2",
+												"handicaproom"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "least3available",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/leastreserve",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"leastreserve"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "mostdiscount",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\":3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/mostdiscount",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"mostdiscount"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "highestpaid",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/highestpaid",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"highestpaid"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "mostcreditcard",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/mostcreditcard",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"mostcreditcard"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "leastguests",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"eid\": 3\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{route}}/hotel/17/leastguests",
+											"host": [
+												"{{route}}"
+											],
+											"path": [
+												"hotel",
+												"17",
+												"leastguests"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "<img src=\"https://content.pstmn.io/1377f047-ec91-4fff-b571-bdedd8255eaf/aW1hZ2UucG5n\" alt=\"\" height=\"310\" width=\"1199\">"
+						},
+						{
+							"name": "getallhotels",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/hotel",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"hotel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "gethotel",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/hotel/40",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"hotel",
+										"40"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "posthotel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"chid\": 5,\r\n    \"hname\": \"Prueba\",\r\n    \"hcity\": \"Prueba\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/hotel",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"hotel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "puthotel",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"chid\": 5,\r\n    \"hname\": \"Prueba1\",\r\n    \"hcity\": \"Prueba1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/hotel/41",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"hotel",
+										"41"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletehotel",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/hotel/16",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"hotel",
+										"16"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/52ea99bd-74e4-4b66-8141-99cbe4019954/aW1hZ2UucG5n\" alt=\"\" height=\"284\" width=\"416\">"
+				},
+				{
+					"name": "employee",
+					"item": [
+						{
+							"name": "getallemployees",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/employee",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getemployee",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/employee/96",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"employee",
+										"96"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postemployee",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hid\" : 6,\r\n    \"fname\" : \"Samuel\",\r\n    \"lname\" : \"DeLuque\",\r\n    \"age\"   : 777 ,\r\n    \"position\" : \"Regular\", \r\n    \"salary\" : 27777,\r\n    \"username\" : \"vegetita\",\r\n    \"password\" : \"lososcuros\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/employee",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"employee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putemployee",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hid\": 32,\r\n    \"fname\": \"Aldo\",\r\n    \"lname\": \"Hog\",\r\n    \"age\": 47,\r\n    \"position\": \"Supervisor\",\r\n    \"salary\": 543.21\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/employee/201",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"employee",
+										"201"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteemployee",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/employee/202",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"employee",
+										"202"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/bf2afc20-89b4-48d3-b445-717b2cad886e/aW1hZ2UucG5n\" alt=\"\" height=\"522\" width=\"508\">"
+				},
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "getalllogins",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/login",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getlogin",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/login/200",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"login",
+										"200"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postlogin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"eid\" : 202,\r\n    \"username\" : \"reghste\",\r\n    \"password\" : \"Trivago\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/login",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putlogin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\" : \"lgilbert5a\",\r\n    \"password\" : \"gameruler\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/login/202",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"login",
+										"202"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deletelogin",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/login/202",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"login",
+										"202"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/62a2e8f6-93d1-4cac-acc7-42b67a49631e/aW1hZ2UucG5n\" alt=\"\" height=\"330\" width=\"494\">"
+				},
+				{
+					"name": "room",
+					"item": [
+						{
+							"name": "getallrooms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/room",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"room"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getroom",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/room/450",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"room",
+										"450"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postroom",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hid\": 40,\r\n    \"rdid\": 62,\r\n    \"rprice\": 277\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/room",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"room"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putroom",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"hid\": 40,\r\n    \"rdid\": 50,\r\n    \"rprice\": 277\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/room/451",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"room",
+										"451"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteroom",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/room/451",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"room",
+										"451"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/6a1e25a5-6491-4de6-8ca9-76d0543171d1/aW1hZ2UucG5n\" alt=\"\" height=\"312\" width=\"458\">"
+				},
+				{
+					"name": "roomdescription",
+					"item": [
+						{
+							"name": "getallroomdescriptions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/roomdescription",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomdescription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getroomdescription",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/roomdescription/62",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomdescription",
+										"62"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postroomdescription",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rname\": \"Standard\",\r\n    \"rtype\": \"Basic\",\r\n    \"capacity\": 1,\r\n    \"ishandicap\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/roomdescription",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomdescription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putroomdescription",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"capacity\":1,\r\n    \"ishandicap\":false,\r\n    \"rname\": \"Standard\",\r\n    \"rtype\": \"Basic\"\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/roomdescription/63",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomdescription",
+										"63"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteroomdescription",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/roomdescription/63",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomdescription",
+										"63"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/36b8875d-154f-4241-be22-2e19d2df27f9/aW1hZ2UucG5n\" alt=\"\" height=\"369\" width=\"470\">"
+				},
+				{
+					"name": "roomunavailable",
+					"item": [
+						{
+							"name": "getallroomsunavailable",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/roomunavailable",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomunavailable"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getroomunavailable",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/roomunavailable/4998",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomunavailable",
+										"4998"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postroomunavailable",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"eid\": 81,\r\n    \"rid\": 232,\r\n    \"startdate\": \"2023-11-05\",\r\n    \"enddate\": \"2023-11-13\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/roomunavailable",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomunavailable"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putroomunavailable",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"eid\": 81,\r\n    \"rid\": 232,\r\n    \"startdate\": \"2024-11-05\",\r\n    \"enddate\": \"2024-11-10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/roomunavailable/5009",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomunavailable",
+										"5009"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteroomunavailable",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n    \"eid\":4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/roomunavailable/5005",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"roomunavailable",
+										"5005"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/b0a6e270-19b1-4759-bd43-b27470e7e94f/aW1hZ2UucG5n\" alt=\"\" height=\"356\" width=\"516\">"
+				},
+				{
+					"name": "reserve",
+					"item": [
+						{
+							"name": "getallreserves",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/reserve",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getreserve",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/reserve/3800",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve",
+										"3800"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postreserve",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"eid\": 92,\r\n    \"rid\" : 233,\r\n    \"guests\" : 1,\r\n    \"startdate\" : \"2023-12-19\",\r\n    \"enddate\": \"2023-12-20\",\r\n    \"clid\" : 1,\r\n    \"payment\" :\"test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/reserve",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putreserve",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"eid\": 92,\r\n    \"rid\" : 233,\r\n    \"guests\" : 1,\r\n    \"startdate\" : \"2024-1-21\",\r\n    \"enddate\": \"2024-1-26\",\r\n    \"clid\" : 1,\r\n    \"payment\" : \"testput\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/reserve/3808",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve",
+										"3808"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delreserve",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/reserve/3801",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve",
+										"3801"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postreserve_gabriel",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n    \"reid\": 96,\r\n    \"rid\": 232,\r\n    \"guests\": 1,\r\n    \"startdate\": \"2023-02-05\",\r\n    \"enddate\": \"2023-02-10\",\r\n    \"clid\": 277,\r\n    \"payment\": \"Prueba\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/reserve",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"reserve"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/bc83aa77-842d-4a31-8b32-658a35361af4/aW1hZ2UucG5n\" alt=\"\" height=\"435\" width=\"484\">"
+				},
+				{
+					"name": "client",
+					"item": [
+						{
+							"name": "getallclients",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/client",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getclient",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/client/400",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"client",
+										"400"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postclient",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fname\": \"Tester\",\r\n    \"lname\": \"test\",\r\n    \"age\": 999,\r\n    \"memberyear\": 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/client",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"client"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "putclient",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fname\": \"Changed\",\r\n    \"lname\": \"ee\",\r\n    \"age\": 1,\r\n    \"memberyear\":20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{route}}/client/419",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"client",
+										"419"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delclient",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{route}}/client/402",
+									"host": [
+										"{{route}}"
+									],
+									"path": [
+										"client",
+										"402"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "<img src=\"https://content.pstmn.io/270d294a-15ab-47d0-aa5e-e80cdf40ddc9/aW1hZ2UucG5n\" width=\"506\" height=\"399\">"
+				}
+			],
+			"description": "<img src=\"https://content.pstmn.io/4d828d2e-ccf1-440d-bed9-2c6395581c6f/aW1hZ2UucG5n\" alt=\"\" height=\"328\" width=\"395\">\n\n<img src=\"https://content.pstmn.io/feee325d-d3e6-480a-bdf9-bc001bcd1f2b/aW1hZ2UucG5n\" alt=\"\" height=\"476\" width=\"398\">"
+		},
+		{
+			"name": "globalstatistics",
+			"item": [
+				{
+					"name": "mostrevenue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eid\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/most/revenue",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"most",
+								"revenue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paymentmethod",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eid\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/paymentmethod",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"paymentmethod"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "leastrooms",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eid\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/least/rooms",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"least",
+								"rooms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mostcapacity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eid\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/most/capacity",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"most",
+								"capacity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "topreservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"eid\": 3\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/most/reservation",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"most",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "monthmostreservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eid\": 3\r\n    // \"chid\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{route}}/most/profitmonth",
+							"host": [
+								"{{route}}"
+							],
+							"path": [
+								"most",
+								"profitmonth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "<img src=\"https://content.pstmn.io/9e393807-cf34-4f59-92c4-0a0d44304b4c/aW1hZ2UucG5n\" alt=\"\" height=\"244\" width=\"868\">"
+		},
+		{
+			"name": "greeting",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000"
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "route",
+			"value": "http://127.0.0.1:5000/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts",
+			"type": "string"
+		},
+		{
+			"key": "routeh",
+			"value": "https://db-beasts-7827ce232282.herokuapp.com/ec2-54-152-144-84.compute-1.amazonaws.com/db-beasts",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
