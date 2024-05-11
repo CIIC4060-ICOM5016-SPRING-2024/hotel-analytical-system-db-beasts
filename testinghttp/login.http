@@ -1,0 +1,10 @@
+# Post new login record
+POST http://127.0.0.1:5000/db-beasts/login
+Content-Type: application/json
+
+{
+  "eid": 233,
+  "username": "pp",
+  "password": "ppp"
+}
+
