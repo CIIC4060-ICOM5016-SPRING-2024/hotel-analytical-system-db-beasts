@@ -171,7 +171,7 @@ def see_mostrevenue(id):
     return response
 
 
-# ######################      /paymentmethod ##########################
+# ###################### /paymentmethod ##########################
 def see_paymentmethod(id):
     flask_url = None
     if DatabaseOption() == 'd':
