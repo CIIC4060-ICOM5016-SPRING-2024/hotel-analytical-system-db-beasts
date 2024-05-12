@@ -160,25 +160,25 @@ Region Globales
 
 
 # ###################### /most/revenue ##########################
-def see_mostrevenue():
+def see_mostrevenue(id):
     flask_url = None
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/most/revenue"
     elif DatabaseOption() == 'h':
         pass
-    data = {'eid': 3}
+    data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
 
 
 # ######################      /paymentmethod ##########################
-def see_paymentmethod():
+def see_paymentmethod(id):
     flask_url = None
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/paymentmethod"
     elif DatabaseOption() == 'h':
         pass
-    data = {'eid': 3}
+    data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
 
