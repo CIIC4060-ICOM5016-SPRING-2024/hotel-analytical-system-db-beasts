@@ -107,3 +107,22 @@ class Login_Controller_Handler:
                 return jsonify("This account doesn't exist."), 404
         else:
             return jsonify("Oops, something went wrong! Try again."), 400
+
+    '''
+    ------------------
+    * THIRD PHASE
+    ------------------
+    '''
+
+    # ** Method to verify if the user input for the
+    # ** password and username are correct compared to
+    # ** the ones in the database
+    def LogIn_Verification(self, authentication):
+        username, password = authentication['username'], authentication['password']
+        dao = Login_Model_Dao()
+        login = dao.LogIn_Check(username, password)
+        if login is not None:
+            result = self.Login_Dict(login)
+            return jsonify(login=result)
+        else:
+            return jsonify(error="Invalid username or password")
