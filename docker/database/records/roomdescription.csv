@@ -1,0 +1,62 @@
+1,Standard,Basic,1,false
+2,Standard Queen,Basic,2,false
+3,Presidential,Suite,8,true
+4,Double Queen,Basic,4,false
+5,Standard King,Premium,2,false
+6,Double Queen,Deluxe,4,true
+7,Double King,Deluxe,4,false
+8,Presidential,Suite,6,false
+9,Triple King,Suite,6,false
+10,Standard Queen,Basic,1,false
+11,Standard King,Basic,2,true
+12,Executive Family,Suite,6,false
+13,Standard Queen,Premium,2,false
+14,Presidential,Suite,4,false
+15,Standard Queen,Premium,2,true
+16,Executive Family,Suite,4,false
+17,Presidential,Suite,8,false
+18,Double King,Premium,4,false
+19,Standard Queen,Deluxe,2,false
+20,Standard,Basic,1,true
+21,Double King,Suite,4,false
+22,Standard,Premium,1,false
+23,Standard King,Basic,2,false
+24,Presidential,Suite,6,true
+25,Double Queen,Premium,4,false
+26,Triple King,Deluxe,6,false
+27,Executive Family,Deluxe,8,false
+28,Executive Family,Deluxe,4,false
+29,Triple King,Deluxe,6,true
+30,Executive Family,Deluxe,6,false
+31,Executive Family,Suite,8,false
+32,Standard Queen,Premium,1,false
+33,Standard King,Premium,2,true
+34,Double King,Basic,4,false
+35,Executive Family,Deluxe,8,true
+36,Executive Family,Deluxe,6,true
+37,Double Queen,Deluxe,4,false
+38,Double King,Suite,6,true
+39,Double King,Premium,6,false
+40,Double King,Premium,4,true
+41,Standard King,Deluxe,2,false
+42,Double Queen,Basic,4,true
+43,Double King,Deluxe,4,true
+44,Double King,Deluxe,6,true
+45,Presidential,Suite,4,true
+46,Double Queen,Premium,4,true
+47,Double King,Suite,4,true
+48,Standard,Premium,1,true
+49,Executive Family,Deluxe,4,true
+50,Standard Queen,Deluxe,2,true
+51,Double King,Basic,4,true
+52,Standard Queen,Premium,1,true
+53,Double King,Premium,6,true
+54,Executive Family,Suite,6,true
+55,Executive Family,Suite,4,true
+56,Executive Family,Suite,8,true
+57,Standard King,Deluxe,2,true
+58,Standard Queen,Basic,2,true
+59,Standard Queen,Basic,1,true
+60,Standard Queen,Deluxe,1,false
+61,Standard Queen,Deluxe,1,true
+62,Triple King,Suite,6,true
