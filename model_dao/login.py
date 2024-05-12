@@ -135,23 +135,21 @@ class Login_Model_Dao:
     """
 
     def Login(self, username, password):
+        cur = 0
         if DatabaseOption() == 'd':
             cur = self.db.docker_connection.cursor()
-            query = ("SELECT * "
-                     "FROM login "
-                     "WHERE username = %s AND password = %s")
-            cur.execute(query, (username, password))
-            login = cur.fetchone()
-            self.db.close()
-            cur.close()
-            return login
         elif DatabaseOption() == 'h':
             cur = self.dbh.heroku_connection.cursor()
-            query = ("SELECT * "
-                     "FROM login "
-                     "WHERE username = %s AND password = %s")
-            cur.execute(query, (username, password))
-            login = cur.fetchone()
+        query = ("SELECT * "
+                 "FROM login "
+                 "WHERE username = %s AND password = %s")
+        cur.execute(query, (username, password))
+        login = cur.fetchone()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
             self.dbh.close()
-            cur.close()
-            return login
+        cur.close()
+        return login
+
+
