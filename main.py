@@ -347,6 +347,16 @@ def login():
     else:
         return jsonify("Not supported"), 405
 
+@app.route('/db-beasts'
+           '/logincred',
+           methods=['POST'])
+def Login_Creds():
+    if request.method == 'POST':
+        data = request.json
+#return ???? #(Login_Controller_Handler().Post_Login(data))
+    else:
+        return jsonify("Not supported"), 405
+
 
 @app.route('/db-beasts'
            '/login/<int:login_id>',

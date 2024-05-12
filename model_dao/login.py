@@ -188,3 +188,30 @@ class Login_Model_Dao:
             self.dbh.close()
         cur.close()
         return login
+
+
+
+    """
+       ------------------
+       * PHASE THREE
+       ------------------
+    """
+
+       # ** Verify the validity of log in input
+    def LogIn_Check(self,username,password):
+        cur = 0
+        if DatabaseOption() == 'd':
+            cur = self.db.docker_connection.cursor()
+        elif DatabaseOption() == 'h':
+            cur = self.dbh.heroku_connection.cursor()
+        query = ("SELECT * "
+                 "FROM login "
+                 "WHERE username=%s and password=%s")
+        cur.execute(query, (username,password))
+        login = cur.fetchone()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
+        cur.close()
+        return login
