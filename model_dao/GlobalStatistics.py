@@ -187,7 +187,9 @@ class GlobalStatistics_Model_Dao:
         """)
         cur.execute(query)
         result = cur.fetchall()
-        if cur:
-            cur.close()
+        if DatabaseOption() == 'd':
+            self.db.close()
+        elif DatabaseOption() == 'h':
+            self.dbh.close()
+        cur.close()
         return result
-
