@@ -15,7 +15,7 @@ Region Dashboard
 
 
 def Check_Login(username, password):
-    flask_url = ("http://127.0.0.1:5000/db-beasts/logincred")
+    flask_url = "http://127.0.0.1:5000/db-beasts/logincred"
     authentication = {
         "username": username,
         "password": password
@@ -157,6 +157,31 @@ Region Roomunavailable
 Region Globales
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
+# ###################### /most/revenue ##########################
+def see_mostrevenue():
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/revenue"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'eid': 3}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+# ######################      /paymentmethod ##########################
+def see_paymentmethod():
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/paymentmethod"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'eid': 3}
+    response = requests.post(flask_url, json=data)
+    return response
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
