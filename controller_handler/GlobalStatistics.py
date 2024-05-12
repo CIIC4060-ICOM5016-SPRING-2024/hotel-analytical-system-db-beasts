@@ -171,9 +171,9 @@ class GlobalStatistics_Controller_Handler:
     def MostProfitMonth_Dict(self, r):
         mostprofitmonth_dict = {
             'chid': r[0],
-            'cname': r[1],
-            'month': r[2],
-            'total reserves': r[3]
+            'month': r[1],
+            'total reserves': r[2],
+            'ranks': r[3]
         }
         return mostprofitmonth_dict
 
