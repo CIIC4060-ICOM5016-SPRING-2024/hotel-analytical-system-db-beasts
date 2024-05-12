@@ -104,18 +104,51 @@ class GlobalStatistics_Model_Dao:
     def Get_post_MostProfitMonth(self):
         cur = self.db.docker_connection.cursor()
         # cur = self.dbh.heroku_connection.cursor()
-        query = ("SELECT chid, "
-                 "       cname, "
-                 "       (SELECT EXTRACT(MONTH FROM startdate)) AS month, "
-                 "       count(reid) as total_reserves "
-                 "FROM reserve "
-                 "NATURAL INNER JOIN roomunavailable "
-                 "NATURAL INNER JOIN room "
-                 "NATURAL INNER JOIN hotel "
-                 "NATURAL INNER JOIN chains "
-                 "GROUP BY chid, cname, month "
-                 "ORDER BY total_reserves desc "
-                 "LIMIT 3 ")
+        query = ("""
+                    WITH month_reservations AS (
+                        SELECT
+                            chid,
+                            EXTRACT(MONTH FROM startdate::date) AS month,
+                            COUNT(reid) AS total_reservations,
+                            RANK() OVER (PARTITION BY chid ORDER BY COUNT(reid) DESC) AS ranks
+                        FROM
+                            reserve
+                        NATURAL INNER JOIN
+                            roomunavailable
+                        NATURAL INNER JOIN
+                            room
+                        NATURAL INNER JOIN
+                            hotel
+                        GROUP BY
+                            chid, month
+                    ),
+                    top_3_or_tied AS (
+                                    SELECT
+                                        chid,
+                                        month,
+                                        total_reservations,
+                                        ranks,
+                                        MAX(ranks) OVER (PARTITION BY chid) AS max_rnk
+                                    FROM month_reservations
+                                    WHERE ranks <= 3  -- Filter here to avoid unnecessary calculations
+                                ),
+                    final_top_3 AS (
+                                    SELECT *,
+                                        ROW_NUMBER() OVER (PARTITION BY chid ORDER BY ranks, month) AS row_num
+                                    FROM top_3_or_tied
+                                )
+                    SELECT
+                        chid,
+                        month,
+                        total_reservations,
+                        ranks
+                    FROM
+                        final_top_3
+                    WHERE
+                        row_num <= 3
+                    ORDER BY
+                        chid, total_reservations desc, month;
+        """)
         cur.execute(query)
         result = cur.fetchall()
         self.db.close()
