@@ -56,6 +56,7 @@ class Login_Model_Dao:
         return login
 
         # ** Method to add a new employee to the database
+
     def Post_Login(self, eid, username, password):
         cur = 0
         if DatabaseOption() == 'd':
@@ -189,16 +190,14 @@ class Login_Model_Dao:
         cur.close()
         return login
 
-
-
     """
        ------------------
        * PHASE THREE
        ------------------
     """
 
-       # ** Verify the validity of log in input
-    def LogIn_Check(self,username,password):
+    # ** Verify the validity of log in input
+    def LogIn_Check(self, username, password):
         cur = 0
         if DatabaseOption() == 'd':
             cur = self.db.docker_connection.cursor()
@@ -207,7 +206,7 @@ class Login_Model_Dao:
         query = ("SELECT * "
                  "FROM login "
                  "WHERE username=%s and password=%s")
-        cur.execute(query, (username,password))
+        cur.execute(query, (username, password))
         login = cur.fetchone()
         if DatabaseOption() == 'd':
             self.db.close()
