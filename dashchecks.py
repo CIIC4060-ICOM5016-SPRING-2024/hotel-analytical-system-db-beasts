@@ -188,3 +188,11 @@ def see_paymentmethod(id):
 Region Locales
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
+# ###################### roomtype ##########################
+def see_roomtype(hid, id):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/roomtype"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
