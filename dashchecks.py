@@ -154,6 +154,36 @@ Region Employee
 """
 
 
+def Post_Employee(hid, position, salary, fname, lname, age, username, password):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/employee"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/employee"
+    data = {
+        'hid': hid,
+        'position': position,
+        'salary': salary,
+        'fname': fname,
+        'lname': lname,
+        'age': age,
+        'username': username,
+        'password': password
+    }
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+def Delete_Employee(eid):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/employee/{eid}"
+    response = requests.delete(flask_url)
+    return response
+
+
 def Check_Employeee(eid):
     flask_url = None
     if DatabaseOption() == 'd':
