@@ -76,7 +76,34 @@ def Put_Chain(chid, cname, fallmkup, springmkup, summermkup, wintermkup):
 Region Client
 -----------------------------------------------------------------------------------------------------------------------
 """
+def Post_Client(fname, lname, age, memberyear):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/client"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'fname': fname, 'lname': lname, 'age': age, 'memberyear': memberyear}
+    response = requests.post(flask_url, json=data)
+    return response
 
+def Delete_Client(cid):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/client/{cid}"
+    elif DatabaseOption() == 'h':
+        pass
+    response = requests.delete(flask_url)
+    return response
+
+def Put_Client(cid, fname, lname, age, memberyear):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/client/{cid}"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'fname': fname, 'lname': lname, 'age': age, 'memberyear': memberyear}
+    response = requests.put(flask_url, json=data)
+    return response
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Employee
@@ -133,6 +160,34 @@ Region Login
 Region Reserve
 -----------------------------------------------------------------------------------------------------------------------
 """
+def Post_Reserve(eid, rid, guests, startdate, enddate, clid, payment):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/reserve"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid, 'payment': payment}
+    response = requests.post(flask_url, json=data)
+    return response
+
+def Delete_Reserve(rid):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/reserve/{rid}"
+    elif DatabaseOption() == 'h':
+        pass
+    response = requests.delete(flask_url)
+    return response
+
+def Put_Reserve(eid,reid,rid,guests,startdate,enddate,clid,payment):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/reserve/{reid}"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid, 'payment': payment}
+    response = requests.put(flask_url, json=data)
+    return response
 
 """
 -----------------------------------------------------------------------------------------------------------------------
