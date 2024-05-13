@@ -2,7 +2,7 @@ import psycopg2
 
 
 def DatabaseOption():
-    return 'd'
+    return 'h'
 
 
 class Heroku_Database:
