@@ -277,3 +277,9 @@ def see_roomtype(hid, id):
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
+
+def handicap_room(hid,eid):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/handicaproom"
+    data = {'eid': eid}
+    response = requests.post(flask_url, json=data)
+    return response
