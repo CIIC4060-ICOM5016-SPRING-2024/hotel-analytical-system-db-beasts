@@ -24,6 +24,16 @@ def Check_Login(username, password):
     response = requests.post(flask_url, json=authentication)
     return response
 
+def Post_LogIn(eid, username, password):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/login"
+    elif DatabaseOption() == 'h':
+        pass
+    data = {'eid': eid, 'username': username, 'password': password}
+    response = requests.post(flask_url, json=data)
+    return response
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -110,6 +120,17 @@ Region Employee
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+def Check_Employee(eid):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
+    response = requests.get(flask_url)
+    return response
+
+
+
+
+
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Hotel
@@ -154,6 +175,11 @@ def Put_Hotel(hid, chid, hname, hcity):
 Region Login
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
+
+
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------

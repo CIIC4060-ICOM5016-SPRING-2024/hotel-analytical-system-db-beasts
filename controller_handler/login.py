@@ -123,6 +123,6 @@ class Login_Controller_Handler:
         login = dao.LogIn_Check(username, password)
         if login is not None:
             result = self.Login_Dict(login)
-            return jsonify(login=result)
+            return jsonify(login=result), 200
         else:
-            return jsonify(error="Invalid username or password")
+            return jsonify(error="Invalid username or password"), 400
