@@ -15,7 +15,11 @@ Region Dashboard
 
 
 def Check_Login(username, password):
-    flask_url = "http://127.0.0.1:5000/db-beasts/logincred"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/logincred"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/logincred"
     authentication = {
         "username": username,
         "password": password
@@ -30,7 +34,7 @@ def Post_LogIn(eid, username, password):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/login"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/login"
     data = {'eid': eid, 'username': username, 'password': password}
     response = requests.post(flask_url, json=data)
     return response
@@ -75,7 +79,7 @@ def Post_Chain(cname, fallmkup, springmkup, summermkup, wintermkup):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/chains"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/chains"
     data = {'cname': cname, 'fallmkup': fallmkup, 'springmkup': springmkup, 'summermkup': summermkup,
             'wintermkup': wintermkup}
     response = requests.post(flask_url, json=data)
@@ -87,7 +91,7 @@ def Delete_Chain(chid):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/chains/{chid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/chains/{chid}"
     response = requests.delete(flask_url)
     return response
 
@@ -97,7 +101,7 @@ def Put_Chain(chid, cname, fallmkup, springmkup, summermkup, wintermkup):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/chains/{chid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/chains/{chid}"
     data = {'cname': cname, 'fallmkup': fallmkup, 'springmkup': springmkup, 'summermkup': summermkup,
             'wintermkup': wintermkup}
     response = requests.put(flask_url, json=data)
@@ -116,7 +120,7 @@ def Post_Client(fname, lname, age, memberyear):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/client"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/client"
     data = {'fname': fname, 'lname': lname, 'age': age, 'memberyear': memberyear}
     response = requests.post(flask_url, json=data)
     return response
@@ -127,7 +131,7 @@ def Delete_Client(cid):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/client/{cid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/client/{cid}"
     response = requests.delete(flask_url)
     return response
 
@@ -137,7 +141,7 @@ def Put_Client(cid, fname, lname, age, memberyear):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/client/{cid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/client/{cid}"
     data = {'fname': fname, 'lname': lname, 'age': age, 'memberyear': memberyear}
     response = requests.put(flask_url, json=data)
     return response
@@ -151,7 +155,11 @@ Region Employee
 
 
 def Check_Employeee(eid):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/employee/{eid}"
     response = requests.get(flask_url)
     return response
 
@@ -168,7 +176,7 @@ def Post_Hotel(chid, hname, hcity):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/hotel"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel"
     data = {'chid': chid, 'hname': hname, 'hcity': hcity}
     response = requests.post(flask_url, json=data)
     return response
@@ -179,7 +187,7 @@ def Delete_Hotel(hid):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}"
     response = requests.delete(flask_url)
     return response
 
@@ -189,7 +197,7 @@ def Put_Hotel(hid, chid, hname, hcity):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}"
     data = {'chid': chid, 'hname': hname, 'hcity': hcity}
     response = requests.put(flask_url, json=data)
     return response
@@ -213,7 +221,7 @@ def Post_Reserve(eid, rid, guests, startdate, enddate, clid, payment):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/reserve"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/reserve"
     data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid,
             'payment': payment}
     response = requests.post(flask_url, json=data)
@@ -225,7 +233,7 @@ def Delete_Reserve(rid):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/reserve/{rid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/reserve/{rid}"
     response = requests.delete(flask_url)
     return response
 
@@ -235,7 +243,7 @@ def Put_Reserve(eid, reid, rid, guests, startdate, enddate, clid, payment):
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/reserve/{reid}"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/reserve/{reid}"
     data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid,
             'payment': payment}
     response = requests.put(flask_url, json=data)
@@ -250,20 +258,32 @@ Region Room
 
 
 def Post_Room(hid, rdid, rprice):
-    flask_url = "http://127.0.0.1:5000/db-beasts/room"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/room"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/room"
     data = {'hid': hid, 'rdid': rdid, 'rprice': rprice}
     response = requests.post(flask_url, json=data)
     return response
 
 
 def Delete_Room(rid):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/room/{rid}"
     response = requests.delete(flask_url)
     return response
 
 
 def Put_Room(rid, hid, rdid, rprice):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/room/{rid}"
     data = {'hid': hid, 'rdid': rdid, 'rprice': rprice}
     response = requests.put(flask_url, json=data)
     return response
@@ -277,20 +297,32 @@ Region Roomdescription
 
 
 def Post_RoomDescription(capacity, ishandicap, rname, rtype):
-    flask_url = "http://127.0.0.1:5000/db-beasts/roomdescription"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/roomdescription"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomdescription"
     data = {'capacity': capacity, 'ishandicap': ishandicap, 'rname': rname, 'rtype': rtype}
     response = requests.post(flask_url, json=data)
     return response
 
 
 def Delete_RoomDescription(rdid):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomdescription/{rdid}"
     response = requests.delete(flask_url)
     return response
 
 
 def Put_RoomDescription(rdid, capacity, ishandicap, rname, rtype):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomdescription/{rdid}"
     data = {'capacity': capacity, 'ishandicap': ishandicap, 'rname': rname, 'rtype': rtype}
     response = requests.put(flask_url, json=data)
     return response
@@ -304,21 +336,33 @@ Region Roomunavailable
 
 
 def Post_RoomUnavailable(id, rid, startdate, enddate):
-    flask_url = 'http://127.0.0.1:5000/db-beasts/roomunavailable'
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = 'http://127.0.0.1:5000/db-beasts/roomunavailable'
+    elif DatabaseOption() == 'h':
+        flask_url = 'https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomunavailable'
     data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
     respond = requests.post(flask_url, json=data)
     return respond
 
 
 def Delete_RoomUnavailable(id, ruid):
-    flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    elif DatabaseOption() == 'h':
+        flask_url = f'https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomunavailable/{ruid}'
     data = {'eid': id}
     respond = requests.delete(flask_url, json=data)
     return respond
 
 
 def Put_RoomUnavailable(id, ruid, rid, startdate, enddate):
-    flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    elif DatabaseOption() == 'h':
+        flask_url = f'https://db-beasts-7827ce232282.herokuapp.com/db-beasts/roomunavailable/{ruid}'
     data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
     respond = requests.put(flask_url, json=data)
     return respond
@@ -337,7 +381,7 @@ def see_mostrevenue(id):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/most/revenue"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/revenue"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
@@ -349,7 +393,7 @@ def see_paymentmethod(id):
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/paymentmethod"
     elif DatabaseOption() == 'h':
-        pass
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/paymentmethod"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
@@ -364,14 +408,22 @@ Region Locales
 
 # ###################### roomtype ##########################
 def see_roomtype(hid, id):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/roomtype"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/roomtype"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/roomtype"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
 
 
 def handicap_room(hid, eid):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/handicaproom"
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/handicaproom"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/handicaproom"
     data = {'eid': eid}
     response = requests.post(flask_url, json=data)
     return response
