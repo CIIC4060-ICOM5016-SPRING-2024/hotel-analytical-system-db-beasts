@@ -125,3 +125,16 @@ class Employee_Model_Dao:
                 self.dbh.close()
             cur.close()
             return "Error deleting the employee"
+
+    def Check_Employee(self, eid, fname, lname):
+        cur = self.db.docker_connection.cursor()
+        # cur = self.dbh.heroku_connection.cursor()
+        query = ("SELECT * "
+                 "FROM employee "
+                 "WHERE eid = %s and fname = %s and lname = %s")
+        cur.execute(query, (eid, fname, lname))
+        employee = cur.fetchone()
+        self.db.close()
+        # self.dbh.close()
+        cur.close()
+        return employee

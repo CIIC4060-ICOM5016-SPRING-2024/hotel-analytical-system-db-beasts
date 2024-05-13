@@ -36,6 +36,28 @@ def Post_LogIn(eid, username, password):
     return response
 
 
+def Check_Employee(eid, fname, lastname):
+    flask_url = 0
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/employee/voila"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/employee/voila"
+    data = {'eid': eid, 'fname': fname, 'lname': lastname}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+def Post_Login(eid, username, password):
+    flask_url = 0
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/login"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/login"
+    data = {'eid': eid, 'username': username, 'password': password}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Crud
@@ -126,12 +148,6 @@ def Put_Client(cid, fname, lname, age, memberyear):
 Region Employee
 -----------------------------------------------------------------------------------------------------------------------
 """
-
-
-def Check_Employee(eid):
-    flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
-    response = requests.get(flask_url)
-    return response
 
 
 """
@@ -279,11 +295,14 @@ def Put_RoomDescription(rdid, capacity, ishandicap, rname, rtype):
 Region Roomunavailable
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
 def Post_RoomUnavailable(id, rid, startdate, enddate):
     flask_url = 'http://127.0.0.1:5000/db-beasts/roomunavailable'
     data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
     respond = requests.post(flask_url, json=data)
     return respond
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -330,7 +349,8 @@ def see_roomtype(hid, id):
     response = requests.post(flask_url, json=data)
     return response
 
-def handicap_room(hid,eid):
+
+def handicap_room(hid, eid):
     flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/handicaproom"
     data = {'eid': eid}
     response = requests.post(flask_url, json=data)

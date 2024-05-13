@@ -182,3 +182,18 @@ class Employee_Controller_Handler:
                 return jsonify("Not an employee"), 404
         else:
             return jsonify("Unable to find and delete this employee."), 400
+
+    def Check_Employee(self, data):
+        eid = data['eid']
+        fname = data['fname']
+        lname = data['lname']
+        dao = Employee_Model_Dao()
+        employee = dao.Get_Employee(eid)
+        if not employee:
+            return jsonify(Error="Not Found"), 404
+        dao1 = Employee_Model_Dao()
+        employee_in = dao1.Check_Employee(eid, fname, lname)
+        if employee_in:
+            result = self.Employee_Dict(employee_in)
+            return jsonify(Employee=result), 200
+        return jsonify(Error="First name or last name not valid"), 404

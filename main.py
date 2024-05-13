@@ -322,6 +322,16 @@ def employeeid(employee_id):
         return jsonify("Not supported"), 405
 
 
+@app.route('/db-beasts'
+           '/employee/voila',
+           methods=['POST'])
+def employee_voila():
+    if request.method == 'POST':
+        return Employee_Controller_Handler().Check_Employee(request.json)
+    else:
+        return jsonify("Not supported"), 405
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region LOGIN
