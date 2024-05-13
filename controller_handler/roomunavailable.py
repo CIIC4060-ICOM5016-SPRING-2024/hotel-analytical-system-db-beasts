@@ -158,8 +158,8 @@ class RoomUnavailable_Controller_Handler:
         employee = daoEmployee.Get_Employee(eid)
         if not employee:
             return jsonify(Error="Employee not found."), 404
-        if employee[5] != "Supervisor":
-            return jsonify(Error="The employee position is not Supervisor"), 401
+        if employee[5] != "Supervisor" and employee[5] != "Administrator":
+            return jsonify(Error="The employee position is not Supervisor and Administrator"), 401
 
         daoRU = RoomUnavailable_Model_Dao()
         ruid1 = daoRU.Get_RoomUnavailable(ruid)
@@ -168,7 +168,7 @@ class RoomUnavailable_Controller_Handler:
 
         daoRoom = Room_Model_Dao()
         room = daoRoom.Get_Room_Info(ruid1[1], employee[1])
-        if not room:
+        if not room and employee[1] != -1:
             return jsonify(Error=f"Employee not work in the hotel."), 404
 
         daoRU1 = RoomUnavailable_Model_Dao()
