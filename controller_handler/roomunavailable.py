@@ -107,8 +107,8 @@ class RoomUnavailable_Controller_Handler:
         employee = daoEmployee.Get_Employee(eid)
         if not employee:
             return jsonify(Error="Employee not found."), 404
-        if employee[5] != "Supervisor":
-            return jsonify(Error="The employee position is not Supervisor"), 401
+        if employee[5] != "Supervisor" and employee[5] != "Administrator":
+            return jsonify(Error="The employee position is not Supervisor and Administrator"), 401
 
         daoRU = RoomUnavailable_Model_Dao()
         ruid1 = daoRU.Get_RoomUnavailable(ruid)
@@ -125,8 +125,8 @@ class RoomUnavailable_Controller_Handler:
         rid = roomunavailable_data['rid']
         daoRoom = Room_Model_Dao()
         room = daoRoom.Get_Room_Info(rid, employee[1])
-        if not room:
-            return jsonify(Error=f"Room not found in the hotel = {employee[1]}."), 404
+        if not room and employee[1] != -1:
+            return jsonify(Error=f"Room not found in the hotel")  # = {employee[1]}."), 404
 
         # ** Checking length of unavailable
         startdate = roomunavailable_data['startdate']
@@ -139,14 +139,14 @@ class RoomUnavailable_Controller_Handler:
         not_disponibility = daoRU1.RoomUnavailable_Time_put(rid, ruid)
         startdate_date = datetime.strptime(startdate, '%Y-%m-%d').date()
         if not_disponibility[0] >= startdate_date:
-            return jsonify(Error=f"Room is not available during the selected dates. "
-                                 f"not_disponibility={not_disponibility[0]} vs "
-                                 f"startdate={startdate}"), 400
+            return jsonify(Error=f"Room is not available during the selected dates."), 400
+            # f"not_disponibility={not_disponibility[0]} vs "
+            # f"startdate={startdate}"), 400
 
         daoRU2 = RoomUnavailable_Model_Dao()
         roomunavailable = daoRU2.Put_RoomUnavailable(ruid, rid, startdate, enddate)
         result = self.RoomUnavailable_Build(ruid, rid, startdate, enddate)
-        return jsonify(RoomUnavailable=result)
+        return jsonify(RoomUnavailable=result), 200
 
     def Delete_RoomUnavailable(self, ruid, roomunavailable_data):
         if len(roomunavailable_data) != 1:
