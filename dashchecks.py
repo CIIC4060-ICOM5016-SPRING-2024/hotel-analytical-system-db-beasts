@@ -24,6 +24,7 @@ def Check_Login(username, password):
     response = requests.post(flask_url, json=authentication)
     return response
 
+
 def Post_LogIn(eid, username, password):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -86,6 +87,8 @@ def Put_Chain(chid, cname, fallmkup, springmkup, summermkup, wintermkup):
 Region Client
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
 def Post_Client(fname, lname, age, memberyear):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -96,6 +99,7 @@ def Post_Client(fname, lname, age, memberyear):
     response = requests.post(flask_url, json=data)
     return response
 
+
 def Delete_Client(cid):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -104,6 +108,7 @@ def Delete_Client(cid):
         pass
     response = requests.delete(flask_url)
     return response
+
 
 def Put_Client(cid, fname, lname, age, memberyear):
     flask_url = None
@@ -114,21 +119,19 @@ def Put_Client(cid, fname, lname, age, memberyear):
     data = {'fname': fname, 'lname': lname, 'age': age, 'memberyear': memberyear}
     response = requests.put(flask_url, json=data)
     return response
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Employee
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+
 def Check_Employee(eid):
     flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
     response = requests.get(flask_url)
     return response
-
-
-
-
-
 
 
 """
@@ -176,25 +179,24 @@ Region Login
 -----------------------------------------------------------------------------------------------------------------------
 """
 
-
-
-
-
-
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Reserve
 -----------------------------------------------------------------------------------------------------------------------
 """
+
+
 def Post_Reserve(eid, rid, guests, startdate, enddate, clid, payment):
     flask_url = None
     if DatabaseOption() == 'd':
         flask_url = "http://127.0.0.1:5000/db-beasts/reserve"
     elif DatabaseOption() == 'h':
         pass
-    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid, 'payment': payment}
+    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid,
+            'payment': payment}
     response = requests.post(flask_url, json=data)
     return response
+
 
 def Delete_Reserve(rid):
     flask_url = None
@@ -205,15 +207,18 @@ def Delete_Reserve(rid):
     response = requests.delete(flask_url)
     return response
 
-def Put_Reserve(eid,reid,rid,guests,startdate,enddate,clid,payment):
+
+def Put_Reserve(eid, reid, rid, guests, startdate, enddate, clid, payment):
     flask_url = None
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/reserve/{reid}"
     elif DatabaseOption() == 'h':
         pass
-    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid, 'payment': payment}
+    data = {'eid': eid, 'rid': rid, 'guests': guests, 'startdate': startdate, 'enddate': enddate, 'clid': clid,
+            'payment': payment}
     response = requests.put(flask_url, json=data)
     return response
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -221,17 +226,64 @@ Region Room
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+
+def Post_Room(hid, rdid, rprice):
+    flask_url = "http://127.0.0.1:5000/db-beasts/room"
+    data = {'hid': hid, 'rdid': rdid, 'rprice': rprice}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+def Delete_Room(rid):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    response = requests.delete(flask_url)
+    return response
+
+
+def Put_Room(rid, hid, rdid, rprice):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/room/{rid}"
+    data = {'hid': hid, 'rdid': rdid, 'rprice': rprice}
+    response = requests.put(flask_url, json=data)
+    return response
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Roomdescription
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+
+def Post_RoomDescription(capacity, ishandicap, rname, rtype):
+    flask_url = "http://127.0.0.1:5000/db-beasts/roomdescription"
+    data = {'capacity': capacity, 'ishandicap': ishandicap, 'rname': rname, 'rtype': rtype}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+def Delete_RoomDescription(rdid):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    response = requests.delete(flask_url)
+    return response
+
+
+def Put_RoomDescription(rdid, capacity, ishandicap, rname, rtype):
+    flask_url = f"http://127.0.0.1:5000/db-beasts/roomdescription/{rdid}"
+    data = {'capacity': capacity, 'ishandicap': ishandicap, 'rname': rname, 'rtype': rtype}
+    response = requests.put(flask_url, json=data)
+    return response
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Roomunavailable
 -----------------------------------------------------------------------------------------------------------------------
 """
+def Post_RoomUnavailable(id, rid, startdate, enddate):
+    flask_url = 'http://127.0.0.1:5000/db-beasts/roomunavailable'
+    data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
+    respond = requests.post(flask_url, json=data)
+    return respond
 
 """
 -----------------------------------------------------------------------------------------------------------------------
