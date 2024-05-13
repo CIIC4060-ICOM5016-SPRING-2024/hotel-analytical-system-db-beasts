@@ -65,7 +65,7 @@ class RoomDescription_Controller_Handler:
         rname = roomdescription_data['rname']
         if rname not in ROOM_NAMES:
             return jsonify(
-                Error=f"Invalid Room Name. Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
+                Error=f"Invalid Room Name.")  # Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
 
         capacity = roomdescription_data['capacity']
         if not self.is_valid_capacity(rname, capacity):
@@ -97,7 +97,7 @@ class RoomDescription_Controller_Handler:
         rname = roomdescription_data['rname']
         if rname not in ROOM_NAMES:
             return jsonify(
-                Error=f"Invalid Room Name. Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
+                Error=f"Invalid Room Name.")  # Options are {', '.join(ROOM_NAMES)} . But you post {rname}"), 400
 
         capacity = roomdescription_data['capacity']
         if not self.is_valid_capacity(rname, capacity):
