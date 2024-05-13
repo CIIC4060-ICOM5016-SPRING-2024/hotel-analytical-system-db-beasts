@@ -149,10 +149,13 @@ Region Employee
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+
 def Check_Employeee(eid):
     flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
     response = requests.get(flask_url)
     return response
+
+
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Hotel
@@ -304,6 +307,20 @@ def Post_RoomUnavailable(id, rid, startdate, enddate):
     flask_url = 'http://127.0.0.1:5000/db-beasts/roomunavailable'
     data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
     respond = requests.post(flask_url, json=data)
+    return respond
+
+
+def Delete_RoomUnavailable(id, ruid):
+    flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    data = {'eid': id}
+    respond = requests.delete(flask_url, json=data)
+    return respond
+
+
+def Put_RoomUnavailable(id, ruid, rid, startdate, enddate):
+    flask_url = f'http://127.0.0.1:5000/db-beasts/roomunavailable/{ruid}'
+    data = {'eid': id, 'rid': rid, 'startdate': startdate, 'enddate': enddate}
+    respond = requests.put(flask_url, json=data)
     return respond
 
 
