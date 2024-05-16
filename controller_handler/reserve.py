@@ -95,8 +95,8 @@ class Reserve_Controller_Handler:
         chid = daohotel.Get_Hotels_Chain(hid)
 
         # Check for none values
-        if employee[5] != "Regular":
-            return jsonify(Error="Employee is not regular."), 404
+        if employee[5] != "Regular" and employee[5] != "Administrator":
+            return jsonify(Error="Employee is not regular and administrtor."), 404
 
         if room is None:
             return jsonify(Error="Room not found."), 404
@@ -195,8 +195,8 @@ class Reserve_Controller_Handler:
 
         # Check for none values
 
-        if employee[5] != "Regular":
-            return jsonify(Error="Employee is not regular."), 404
+        if employee[5] != "Regular" and employee[5] != "Administrator":
+            return jsonify(Error="Employee is not regular and administrtor."), 404
 
         if room is None:
             return jsonify(Error="Room not found."), 404
