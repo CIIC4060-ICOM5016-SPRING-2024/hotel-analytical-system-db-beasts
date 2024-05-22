@@ -460,6 +460,18 @@ def see_mostcreditcard(hid, id):
     return response
 
 
+# ###################### leastguests ##########################
+def see_leastguests(hid, id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/leastguests"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/leastguests"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
 # ###################### handicaproom ##########################
 def handicap_room(hid, eid):
     flask_url = None
