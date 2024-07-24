@@ -99,21 +99,20 @@ class Reserve_Controller_Handler:
             return jsonify(Error="Employee is not regular and administrtor."), 404
 
         if room is None:
-            return jsonify(Error="Room not found."), 404
+            return jsonify(Error="Room not found."), 405
 
         if room[3] < guests:
-            return jsonify(Error="Not enough rooms for guests."), 404
+            return jsonify(Error="Not enough rooms for guests."), 406
 
         try:
-            if type(startdate) != datetime.date:
-                startdate = datetime.datetime.strptime(startdate, "%Y-%m-%d").date()
-            if type(enddate) != datetime.date:
-                enddate = datetime.datetime.strptime(enddate, "%Y-%m-%d").date()
+            
+            startdate = datetime.datetime.strptime(startdate, "%Y-%m-%d").date()
+            enddate = datetime.datetime.strptime(enddate, "%Y-%m-%d").date()
         except:
+            return jsonify(Error="Invalid date."), 400
+        
+        if type(startdate) != datetime.date or type(enddate) != datetime.date:
             return jsonify(Error="Invalid date format."), 400
-
-        if enddate <= startdate:
-            return jsonify(Error="End date is before start date."), 404
 
         availability = daoroomunavailable.Get_Roomdateavailable(rid)
         extracted_day = startdate.timetuple().tm_yday
@@ -137,7 +136,7 @@ class Reserve_Controller_Handler:
         if startdate <= availability[0]:
             txt = "Room unavailable during selected dates. Start date: " + str(startdate) + ", End date: " + str(
                 enddate) + ", Availability: " + str(availability[0])
-            return jsonify(Error=txt), 404
+            return jsonify(Error=txt), 408
 
         # Get client
         client = daoc.Get_Client(clid)
@@ -146,7 +145,7 @@ class Reserve_Controller_Handler:
         total_cost_auto = daoRE.Get_Total_Cost(rid, client[0], startdate, enddate, season_markup)
 
         if client is None:
-            return jsonify(Error="Client not found."), 404
+            return jsonify(Error="Client not found."), 409
 
         if payment is not None:
 
@@ -199,18 +198,23 @@ class Reserve_Controller_Handler:
             return jsonify(Error="Employee is not regular and administrtor."), 404
 
         if room is None:
-            return jsonify(Error="Room not found."), 404
+            return jsonify(Error="Room not found."), 405
 
         if room[3] < guests:
-            return jsonify(Error="Not enough rooms for guests."), 404
+            return jsonify(Error="Not enough rooms for guests."), 406
 
-        if type(startdate) != datetime.date:
+        try:
+            
             startdate = datetime.datetime.strptime(startdate, "%Y-%m-%d").date()
-        if type(enddate) != datetime.date:
             enddate = datetime.datetime.strptime(enddate, "%Y-%m-%d").date()
-
+        except:
+            return jsonify(Error="Invalid date."), 400
+        
+        if type(startdate) != datetime.date or type(enddate) != datetime.date:
+            return jsonify(Error="Invalid date format."), 400
+        
         if enddate < startdate:
-            return jsonify(Error="End date is before start date."), 404
+            return jsonify(Error="End date is before start date."), 407
 
         availability = daoroomunavailable.Get_Roomdateavailable(rid)
         extracted_day = startdate.timetuple().tm_yday
@@ -233,7 +237,7 @@ class Reserve_Controller_Handler:
         if startdate <= availability[0]:
             txt = "Room unavailable during selected dates. Start date: " + str(startdate) + ", End date: " + str(
                 enddate) + ", Availability: " + str(availability[0])
-            return jsonify(Error=txt), 404
+            return jsonify(Error=txt), 408
 
         client = daoc.Get_Client(clid)
         daoRE = Reserve_Model_Dao()

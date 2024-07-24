@@ -428,6 +428,25 @@ def see_paymentmethod(id):
     response = requests.post(flask_url, json=data)
     return response
 
+def seemostreservation(id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/reservation"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/reservation"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
+
+def seemostprofitmonth(id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/profitmonth"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/profitmonth"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -480,5 +499,15 @@ def handicap_room(hid, eid):
     elif DatabaseOption() == 'h':
         flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/handicaproom"
     data = {'eid': eid}
+    response = requests.post(flask_url, json=data)
+    return response
+
+def see_leastreserved(hid, id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/leastreserve"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/leastreserve"
+    data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
