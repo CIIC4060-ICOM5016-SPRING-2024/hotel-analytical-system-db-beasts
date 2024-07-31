@@ -238,7 +238,14 @@ def Put_Hotel(hid, chid, hname, hcity):
 Region Login
 -----------------------------------------------------------------------------------------------------------------------
 """
-
+def Delete_Login(lid):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/login/{lid}"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/login/{lid}"
+    response = requests.delete(flask_url)
+    return response
 """
 -----------------------------------------------------------------------------------------------------------------------
 Region Reserve
