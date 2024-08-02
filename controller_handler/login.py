@@ -89,7 +89,7 @@ class Login_Controller_Handler:
             if count == "Error":
                 return jsonify(Error="Login could not be put because the username exist."), 404
             elif count > 0:
-                return jsonify(Message="Your login info has been successfully changed!"), 200
+                return jsonify("Your login info has been successfully changed!"), 200
             else:
                 return jsonify(Error="This account doesn't exist. Please create it first!"), 404
         else:

@@ -193,7 +193,7 @@ def Check_Employeee(eid):
     response = requests.get(flask_url)
     return response
 
-def Put_Employee(eid, hid, position, salary, fname, lname, age, username, password):
+def Put_Employee(eid, hid, position, salary, fname, lname, age):
     flask_url = None
     if DatabaseOption() == 'd':
         flask_url = f"http://127.0.0.1:5000/db-beasts/employee/{eid}"
@@ -206,8 +206,6 @@ def Put_Employee(eid, hid, position, salary, fname, lname, age, username, passwo
         'fname': fname,
         'lname': lname,
         'age': age,
-        'username': username,
-        'password': password
     }
     response = requests.put(flask_url, json=data)
     return response
@@ -261,9 +259,9 @@ Region Login
 def Delete_Login(lid):
     flask_url = None
     if DatabaseOption() == 'd':
-        flask_url = f"http://127.0.0.1:5000/db-beasts/login/{lid}"
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{lid}"
     elif DatabaseOption() == 'h':
-        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/login/{lid}"
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{lid}"
     response = requests.delete(flask_url)
     return response
 
@@ -521,5 +519,17 @@ def handicap_room(hid, eid):
     elif DatabaseOption() == 'h':
         flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/handicaproom"
     data = {'eid': eid}
+    response = requests.post(flask_url, json=data)
+    return response
+
+############################ highest paid #####################################
+
+def see_highest_paid(hid, id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/highestpaid"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/highestpaid"
+    data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
