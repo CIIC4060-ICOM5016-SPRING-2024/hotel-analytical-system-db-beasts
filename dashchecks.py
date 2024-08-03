@@ -533,3 +533,16 @@ def see_highest_paid(hid, id):
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
+
+
+######################### most discounts ######################################
+
+def see_top_discount_clients(hid, id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/mostdiscount"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/mostdiscount"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
