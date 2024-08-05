@@ -469,6 +469,7 @@ def see_paymentmethod(id):
     return response
 
 
+# ###################### /most/reservation ##########################
 def seemostreservation(id):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -480,6 +481,7 @@ def seemostreservation(id):
     return response
 
 
+# ###################### /least/rooms ##########################
 def see_least_rooms_chains(id):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -491,6 +493,7 @@ def see_least_rooms_chains(id):
     return response
 
 
+# ###################### /most/capacity ##########################
 def see_most_capacity_per_chain(id):
     flask_url = None
     if DatabaseOption() == 'd':
