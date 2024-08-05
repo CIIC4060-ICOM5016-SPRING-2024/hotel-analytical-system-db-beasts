@@ -84,7 +84,7 @@ class LocalStatistics_Model_Dao:
             cur = self.db.docker_connection.cursor()
         elif DatabaseOption() == 'h':
             cur = self.dbh.heroku_connection.cursor()
-        query = ("SELECT hid, eid, fname, lname, salary, position "
+        query = ("SELECT eid, hid, fname, lname, age, position, salary "  
                  "FROM employee "
                  "WHERE position = 'Regular' and hid = %s "
                  "ORDER BY salary DESC "
