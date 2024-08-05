@@ -72,7 +72,7 @@ class Login_Controller_Handler:
                 result = self.Login_Build(login_id, eid, username, password)
                 return jsonify(Login=result, OK="Loin Posted Successfully"), 201
             else:
-                return jsonify("Unexpected attribute values."), 400
+                return jsonify(Error="Unexpected attribute values."), 400
         else:
             return jsonify(Error="Employee have login account"), 400
 

@@ -63,12 +63,13 @@ class LocalStatistics_Controller_Handler:
     # * LEASTRESERVE
     def Highest_Paid_Dict(self, emp):
         highestregpaid_dict = {
-            'hid': emp[0],
-            'eid': emp[1],
+            'eid': emp[0],
+            'hid': emp[1],
             'fname': emp[2],
             'lname': emp[3],
-            'position': emp[4],
-            'salary': emp[5]
+            'age': emp[4],
+            'position': emp[5],
+            'salary': emp[6]
         }
         return highestregpaid_dict
 

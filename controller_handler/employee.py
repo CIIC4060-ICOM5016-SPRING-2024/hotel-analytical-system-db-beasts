@@ -85,29 +85,34 @@ class Employee_Controller_Handler:
         # if position == "Administrator":
         #    hid = -1
 
-        error_messages = []
+        # error_messages = []
 
         # Check if hid is valid for the position
         if hid == -1 and position != "Administrator":
-            error_messages.append("Incorrect position for the hotel id.")
+            # error_messages.append("Incorrect position for the hotel id.")
+            return jsonify(Error="Incorrect position for the hotel id."), 400
         elif hid != -1 and position == "Administrator":
-            error_messages.append("Incorrect position for the hotel id.")
-
+            # error_messages.append("Incorrect position for the hotel id.")
+            return jsonify(Error="Incorrect position for the hotel id."), 400
             # ** Search hid if it's a valid hotel
         if not daoh.Get_Hotel(hid):
-            error_messages.append("Hotel not found")
+            # error_messages.append("Hotel not found")
+            return jsonify(Error="Hotel not found"), 400
 
         # Validate salary based on position
         if position == "Regular" and not (18000 <= salary <= 49999):
-            error_messages.append("Invalid salary range for Regular position")
+            # error_messages.append("Invalid salary range for Regular position")
+            return jsonify(Error="Invalid salary range for Regular position"), 400
         elif position == "Supervisor" and not (50000 <= salary <= 79999):
-            error_messages.append("Invalid salary range for Supervisor position")
+            # error_messages.append("Invalid salary range for Supervisor position")
+            return jsonify(Error="Invalid salary range for Supervisor position"), 400
         elif position == "Administrator" and not (80000 <= salary <= 120000):
-            error_messages.append("Invalid salary range for Administrator position")
+            # error_messages.append("Invalid salary range for Administrator position")
+            return jsonify(Error="Invalid salary range for Administrator position"), 400
 
         # Check if any errors occurred
-        if error_messages:
-            return jsonify(Error=error_messages), 400
+        # if error_messages:
+        #     return jsonify(Error=error_messages), 400
 
         # Create the employee entry
         employee_id = daoe.Post_Employee(hid, fname, lname, age, position, salary)
@@ -125,7 +130,7 @@ class Employee_Controller_Handler:
         result['username'] = username
         result['password'] = password
 
-        return jsonify(employee=result), 201
+        return jsonify(employee=result, message="Post Employee Successful"), 201
 
     # ** Method to update an existing employee
 
@@ -148,6 +153,15 @@ class Employee_Controller_Handler:
         # ** Search hid if it's a valid hotel
         if not daoh.Get_Hotel(hid):
             return jsonify(Error="Hotel not found"), 404
+
+        # Validate salary based on position
+        if position == "Regular" and not (18000 <= salary <= 49999):
+            return jsonify(Error="Invalid salary range for Regular position"), 400
+        elif position == "Supervisor" and not (50000 <= salary <= 79999):
+            return jsonify(Error="Invalid salary range for Supervisor position"), 400
+        elif position == "Administrator" and not (80000 <= salary <= 120000):
+            return jsonify(Error="Invalid salary range for Administrator position"), 400
+
         if (eid or hid == 0) and fname and lname and age and position and salary:
             count = daoe.Put_Employee(eid, hid, fname, lname, age, position, salary)
             if count > 0:
@@ -159,7 +173,6 @@ class Employee_Controller_Handler:
 
     # ** Method to fire an employee (Delete)
     def Delete_Employee(self, eid):
-
         daoe = Employee_Model_Dao()
         if daoe.Get_Employee(eid):
             daol = Login_Model_Dao()
