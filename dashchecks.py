@@ -497,9 +497,9 @@ def see_least_rooms_chains(id):
 def see_most_capacity_per_chain(id):
     flask_url = None
     if DatabaseOption() == 'd':
-        flask_url = "http://127.0.0.1:5000/db-beasts/most/profitmonth"
+        flask_url = f"http://127.0.0.1:5000/db-beasts/most/capacity"
     elif DatabaseOption() == 'h':
-        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/profitmonth"
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/capacity"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
