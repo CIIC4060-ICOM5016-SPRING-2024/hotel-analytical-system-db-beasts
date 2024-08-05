@@ -480,6 +480,17 @@ def seemostreservation(id):
     return response
 
 
+def see_least_rooms_chains(id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts//least/rooms"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts//least/rooms"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
 def see_most_capacity_per_chain(id):
     flask_url = None
     if DatabaseOption() == 'd':
