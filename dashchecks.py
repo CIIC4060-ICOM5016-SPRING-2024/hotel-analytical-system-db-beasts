@@ -193,6 +193,7 @@ def Check_Employeee(eid):
     response = requests.get(flask_url)
     return response
 
+
 def Put_Employee(eid, hid, position, salary, fname, lname, age):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -256,6 +257,7 @@ Region Login
 -----------------------------------------------------------------------------------------------------------------------
 """
 
+
 def Delete_Login(lid):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -264,8 +266,6 @@ def Delete_Login(lid):
         flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/login/{lid}"
     response = requests.delete(flask_url)
     return response
-
-
 
 
 def Put_Login(lid, username, password):
@@ -277,6 +277,7 @@ def Put_Login(lid, username, password):
     data = {'username': username, 'password': password}
     response = requests.put(flask_url, json=data)
     return response
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -468,12 +469,12 @@ def see_paymentmethod(id):
     return response
 
 
-def see_least_rooms_chains(id):
+def seemostreservation(id):
     flask_url = None
     if DatabaseOption() == 'd':
-        flask_url = f"http://127.0.0.1:5000/db-beasts//least/rooms"
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/reservation"
     elif DatabaseOption() == 'h':
-        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts//least/rooms"
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/reservation"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
@@ -482,12 +483,13 @@ def see_least_rooms_chains(id):
 def see_most_capacity_per_chain(id):
     flask_url = None
     if DatabaseOption() == 'd':
-        flask_url = f"http://127.0.0.1:5000/db-beasts/most/capacity"
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/profitmonth"
     elif DatabaseOption() == 'h':
-        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/capacity"
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/profitmonth"
     data = {'eid': id}
     response = requests.post(flask_url, json=data)
     return response
+
 
 """
 -----------------------------------------------------------------------------------------------------------------------
@@ -543,8 +545,20 @@ def handicap_room(hid, eid):
     response = requests.post(flask_url, json=data)
     return response
 
-############################ highest paid #####################################
 
+# ###################### leastreserved ##########################
+def see_leastreserved(hid, id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = f"http://127.0.0.1:5000/db-beasts/hotel/{hid}/leastreserve"
+    elif DatabaseOption() == 'h':
+        flask_url = f"https://db-beasts-7827ce232282.herokuapp.com/db-beasts/hotel/{hid}/leastreserve"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
+
+
+# ########################### highest paid #####################################
 def see_highest_paid(hid, id):
     flask_url = None
     if DatabaseOption() == 'd':
@@ -556,8 +570,7 @@ def see_highest_paid(hid, id):
     return response
 
 
-######################### most discounts ######################################
-
+# ######################## most discounts ######################################
 def see_top_discount_clients(hid, id):
     flask_url = None
     if DatabaseOption() == 'd':
