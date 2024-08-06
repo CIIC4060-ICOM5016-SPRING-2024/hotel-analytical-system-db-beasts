@@ -87,7 +87,7 @@ class Client_Controller_Handler:
             return jsonify(Error="Unexpected attribute values"), 400
         else:
             dao = Client_Model_Dao()
-            clid = dao.Post_Client(fname, lname, age, memberyear)
+            clid = dao.Put_Client(client_id, fname, lname, age, memberyear)
             client_result = self.Client_Build(clid, fname, lname, age, memberyear)
 
             return jsonify(client=client_result), 201
