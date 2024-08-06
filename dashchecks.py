@@ -480,6 +480,17 @@ def seemostreservation(id):
     response = requests.post(flask_url, json=data)
     return response
 
+# ###################### /most/profitmonth ##########################
+def seemostprofitmonth(id):
+    flask_url = None
+    if DatabaseOption() == 'd':
+        flask_url = "http://127.0.0.1:5000/db-beasts/most/profitmonth"
+    elif DatabaseOption() == 'h':
+        flask_url = "https://db-beasts-7827ce232282.herokuapp.com/db-beasts/most/profitmonth"
+    data = {'eid': id}
+    response = requests.post(flask_url, json=data)
+    return response
+
 
 # ###################### /least/rooms ##########################
 def see_least_rooms_chains(id):
