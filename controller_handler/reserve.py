@@ -274,7 +274,7 @@ class Reserve_Controller_Handler:
             result = daotemp.Get_Reserve(reserve_id)
 
             if result is None:
-                return jsonify("Not Found Reserve"), 404
+                return jsonify(Error="Not Found Reserve"), 404
 
             dao2 = Reserve_Model_Dao()
             ruid = dao2.Get_RUID(reserve_id)
@@ -286,10 +286,10 @@ class Reserve_Controller_Handler:
             dao2_result = daoroomunavailable.Delete_RoomUnavailable(ruid)
 
             if dao_result == 'Error deleting' or dao2_result == 'Error deleting':
-                return jsonify("Reserve is referenced"), 400
+                return jsonify(Error="Reserve is referenced"), 400
             elif dao_result and dao2_result:
-                return jsonify("Deleted"), 200
+                return jsonify(Done="Deleted"), 200
             else:
-                return jsonify("Not Found"), 404
+                return jsonify(Error="Not Found"), 404
         else:
-            return jsonify("Error deleting"), 400
+            return jsonify(Error="Error deleting"), 400
