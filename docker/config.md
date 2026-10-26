@@ -12,13 +12,14 @@ psql postgres
 > [!Warning]<br>
 > Don't forget the semicolon (;)
 ```
-create database database_name;
-create user user1 with encrypted password ‘user1’;
+create database test1;
+create user user1 with encrypted password 'user1';
 grant all privileges on database test1 to user1;
+alter database test1 owner to user1;
 ```
 ## Create User (Exec)
 ```
-create user user1 with encrypted password ‘user1’;
+create user user1 with encrypted password 'user1';
 ```
 ## Grant Privileges (Exec)
 ```
